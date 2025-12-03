@@ -54,21 +54,17 @@ levelMinimoParaAparecer (int)
 
 Pode ter personalidade (timido, agressivo, defensivo etc.)
 
-## 4. Classe Move
+## 4. Classe Golpe
 
 Atributos:
 
 nome (String)
 
-power (int)
-
-accuracy (int)
+tipo (fisico ou especial)
 
 categoria (Enum: FOGO, AGUA, ELETRICO)
 
-critChance (double)
-
-pp (int)
+danocritico (double)
 
 ## 5. Classe Item
 
@@ -100,7 +96,7 @@ iniciarBatalha()
 
 turno()
 
-calcularDano(Move, atacante, defensor) — com a fórmula que montamos
+calcularDano(golpe, atacante, defensor)
 
 ganharExperiencia()
 
