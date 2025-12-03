@@ -6,6 +6,8 @@ Fome (comer diferentes tipos de berries ou comidas Pokémon).
 
 Energia (dormir, cochilos, ciclos noturnos/diurnos).
 
+Casamento ? 
+
 ## Crescimento e Evolução
 
 Experiência acumulada não só por batalha, mas também por brincadeiras e cuidados.
