@@ -56,8 +56,6 @@ Pode ter personalidade (timido, agressivo, defensivo etc.)
 
 ## 4. Classe Move
 
-Equivalente às subclasses de Propriedade (mas faz mais sentido como uma classe independente).
-
 Atributos:
 
 nome (String)
