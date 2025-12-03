@@ -15,11 +15,35 @@ public class PokemonEscolhido extends Pokemon {
     private ArrayList<Golpes> listaDeGolpes;
     private ArrayList<Item> listaDeItens;
 
-    public PokemonEscolhido(TipoPokemon tipo, String nome, int level, int experiencia, int hpAtual, int hpMax, int nivelFome, int nivelEnergia, int ataque, int defesa, Status status, FormaEvolutiva formaAtual, int moedas) {
-        super(tipo, nome, level, experiencia, hpAtual, hpMax, nivelFome, nivelEnergia, ataque, defesa, status);
+    // Construtor Inteligente: Pega os stats da formaInicial e passa para o Super (Pokemon)
+    public PokemonEscolhido(TipoPokemon tipo, String nome, int level, int experiencia, int hpAtual, int hpMax, int nivelFome, int nivelEnergia, Status status, FormaEvolutiva formaAtual, int moedas) {
+
+        // Note aqui: Passamos formaAtual.getAtaqueBase() para o ataque do Pokemon
+        super(
+                tipo,
+                nome,
+                level,
+                experiencia,
+                hpAtual,
+                hpMax,
+                nivelFome,
+                nivelEnergia,
+                formaAtual.getAtaqueBase(), // ATAQUE VEM DA FORMA
+                formaAtual.getDefesaBase(), // DEFESA VEM DA FORMA
+                status
+        );
+
         this.formaAtual = formaAtual;
         this.moedas = moedas;
         this.listaDeItens = new ArrayList<Item>();
         this.listaDeGolpes = new ArrayList<Golpes>();
+    }
+
+    public int getMoedas() {
+        return moedas;
+    }
+
+    public FormaEvolutiva getFormaAtual() {
+        return formaAtual;
     }
 }
