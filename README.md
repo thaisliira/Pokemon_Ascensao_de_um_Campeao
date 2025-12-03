@@ -1,10 +1,6 @@
-## 1. Classe Abstrata: Pokemon
-
-Equivalente à classe “Pessoa”.
+## 1. Classe geral: Pokemon
 
 Atributos:
-
-nome (String)
 
 tipo (String ou Enum TipoPokemon)
 
@@ -38,7 +34,7 @@ Métodos para alterar necessidades: comer(), dormir().
 
 Métodos para danos/status.
 
-## 2. Subclasse: TIPO Pokemon (controlado pelo Jogador)
+## 2. Subclasse: TIPO Pokemon (controlado pelo Jogador) - agua, fogo, eletrico
 
 Atributos adicionais:
 
@@ -52,13 +48,13 @@ moedas (int)
 
 buffs (lista de modificadores temporários de batalha)
 
-3. Subclasse: NPCPokemon
+## 3. Subclasse: NPCPokemon
 
 levelMinimoParaAparecer (int)
 
 Pode ter personalidade (timido, agressivo, defensivo etc.)
 
-4. Classe Move
+## 4. Classe Move
 
 Equivalente às subclasses de Propriedade (mas faz mais sentido como uma classe independente).
 
@@ -76,7 +72,7 @@ critChance (double)
 
 pp (int)
 
-5. Classe Item
+## 5. Classe Item
 
 Atributos:
 
@@ -90,19 +86,7 @@ efeito (texto ou função executada)
 
 Possíveis subclasses: Pocao, armadura...
 
-6. Classe Habitat (equivalente à Propriedade)
-
-Atributos:
-
-nome
-
-bonusHumor
-
-bonusEnergia
-
-decorações (ArrayList<Item>)
-
-7. Classe Battle
+## 6. Classe Battle
 
 Atributos:
 
@@ -122,7 +106,7 @@ calcularDano(Move, atacante, defensor) — com a fórmula que montamos
 
 ganharExperiencia()
 
-8. Classe Loja (equivalente ao Shopping)
+## 7. Classe Loja (equivalente ao Shopping)
 
 Possui:
 
@@ -134,7 +118,7 @@ Métodos:
 
 listarItensAleatorios()
 
-9. Classe JogoTamagotchi
+## 8. Classe JogoTamagotchi
 
 Equivalente diretamente à “classe Sims”.
 
@@ -182,7 +166,7 @@ higiene −10
 
 Se qualquer um < 25 → ações bloqueadas até resolver.
 
-10. Eventos obrigatórios (equivalente à universidade/casar/filhos)
+# 9. Eventos obrigatórios (equivalente à universidade/casar/filhos)
 
 Adaptado para Pokémon:
 
@@ -240,7 +224,7 @@ Aprender 4 moves poderosos
 
 Vencer um número mínimo de batalhas
 
-11. ArrayLists que você vai precisar
+## 10. ArrayLists que você vai precisar
 
 Perfeito para espelhar o projeto original.
 
@@ -262,21 +246,13 @@ No Jogo:
 
 ArrayList<NPCPokemon> selvagens
 
-No Habitat:
+## 11. Sistema de Batalha adaptado
 
-ArrayList<Item> decoracoes
-
-12. Sistema de Batalha adaptado
-
-Para comparação de vida/dano (como você pediu):
+Para comparação de vida/dano:
 
 atributos: hpAtual, ataque, defesa
 
-fórmula de dano clássico que montamos
-
-componentes adicionais (crítico, efetividade, random) podem ser opcionalizados
-
-Exemplo de componentes obrigatórios:
+Componentes obrigatórios:
 
 hpAtual -= danoRecebido
 
@@ -284,7 +260,7 @@ if (hpAtual <= 0) -> derrota
 
 xp += xpGanhos
 
-
+_________________________________________________________________________________________________________________________________________________
 
 # tamagotchi_pokemon
 
