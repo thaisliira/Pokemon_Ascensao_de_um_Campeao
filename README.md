@@ -164,7 +164,7 @@ higiene −10
 
 Se qualquer um < 25 → ações bloqueadas até resolver.
 
-# 9. Eventos obrigatórios (equivalente à universidade/casar/filhos)
+# 9. Eventos obrigatórios
 
 Adaptado para Pokémon:
 
