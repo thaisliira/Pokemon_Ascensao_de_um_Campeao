@@ -1,4 +1,4 @@
-1. Classe Abstrata: Criatura
+## 1. Classe Abstrata: Pokemon
 
 Equivalente à classe “Pessoa”.
 
@@ -16,31 +16,29 @@ hpAtual (int)
 
 hpMax (int)
 
-Atributos de batalha:
+## Atributos de batalha:
 
 ataque (int)
 
 defesa (int)
 
-Necessidades (Tamagotchi):
+## Necessidades (Tamagotchi):
 
 fome (int)
 
 energia (int)
 
-status (Enum: NORMAL, POISON, BURN, PARALYSIS...)
+status (Enum: NORMAL, FOME, FELIZ, MACHUCADO...)
 
-Métodos:
+## Métodos:
 
 mostrarDetalhes()
 
-Métodos para alterar necessidades: comer(), dormir(), banho(), brincar().
+Métodos para alterar necessidades: comer(), dormir().
 
 Métodos para danos/status.
 
-2. Subclasse: Pokemon (controlado pelo Jogador)
-
-Equivalente à classe “Jogador”.
+## 2. Subclasse: TIPO Pokemon (controlado pelo Jogador)
 
 Atributos adicionais:
 
@@ -52,13 +50,9 @@ inventario (ArrayList<Item>)
 
 moedas (int)
 
-tipoSecundario (Opcional)
-
 buffs (lista de modificadores temporários de batalha)
 
 3. Subclasse: NPCPokemon
-
-Equivalente ao NPC.
 
 levelMinimoParaAparecer (int)
 
@@ -76,9 +70,7 @@ power (int)
 
 accuracy (int)
 
-categoria (Enum: FISICO, ESPECIAL)
-
-tipo (Enum TipoPokemon)
+categoria (Enum: FOGO, AGUA, ELETRICO)
 
 critChance (double)
 
@@ -86,23 +78,19 @@ pp (int)
 
 5. Classe Item
 
-Equivalente a “Propriedade”, mas funcional para cura, berries etc.
-
 Atributos:
 
 nome
 
-tipoItem (Enum: CURA, STATUS, BUFF, BERRY, DECORACAO)
+tipoItem (Enum: CURA, ARMA)
 
 preco
 
 efeito (texto ou função executada)
 
-Possíveis subclasses: Berry, Pocao, DecoracaoHabitat.
+Possíveis subclasses: Pocao, armadura...
 
 6. Classe Habitat (equivalente à Propriedade)
-
-Suas propriedades viram ambientes.
 
 Atributos:
 
@@ -115,8 +103,6 @@ bonusEnergia
 decorações (ArrayList<Item>)
 
 7. Classe Battle
-
-Equivalente à lógica de “evento” do Sims, agora um sistema central de confronto.
 
 Atributos:
 
@@ -134,11 +120,7 @@ turno()
 
 calcularDano(Move, atacante, defensor) — com a fórmula que montamos
 
-aplicarStatus()
-
 ganharExperiencia()
-
-dropItens()
 
 8. Classe Loja (equivalente ao Shopping)
 
@@ -146,11 +128,9 @@ Possui:
 
 ArrayList<Item> itensCura
 
-ArrayList<Item> berries
+ArrayList<Item> itensBatalha
 
 Métodos:
-
-vender(Pokemon jogador)
 
 listarItensAleatorios()
 
@@ -186,11 +166,9 @@ Treinar (aumenta ataque/defesa e diminui energia)
 
 Explorar (chance de batalha ou itens)
 
-Batalhar com selvagem
+Batalhar Torneio?
 
 Ir à loja
-
-Visitar Habitat
 
 Decaimento por ciclo:
 
