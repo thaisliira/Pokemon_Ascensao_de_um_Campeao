@@ -2,12 +2,11 @@ package Pokegotchi;
 
 import Pokegotchi.Enum.TipoItem;
 
+import java.util.ArrayList;
+
 public class Inventario {
 
-    private String nome;
-    private TipoItem item;
-    private Double preco;
-    private String efeito;
+    private ArrayList<Item> itens;
 
 
 }

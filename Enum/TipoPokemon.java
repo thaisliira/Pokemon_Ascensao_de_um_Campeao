@@ -1,5 +1,5 @@
 package Pokegotchi.Enum;
 
 public enum TipoPokemon {
-    AGUA, FOGO, ELETRICO
+    AGUA, FOGO, TERRA
 }

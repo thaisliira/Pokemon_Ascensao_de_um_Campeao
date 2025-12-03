@@ -1,17 +1,14 @@
 package Pokegotchi.Pokemons;
 
+import Pokegotchi.Enum.Status;
 import Pokegotchi.Enum.TipoPokemon;
 
 public class NPCPokemon extends Pokemon {
 
-    private String nome;
+    private int levelInicio;
 
-    public NPCPokemon(TipoPokemon tipo, int level, int experiencia, int hpAtual, int hpMax, String nome) {
-        super(tipo, level, experiencia, hpAtual, hpMax);
-        this.nome = nome;
-    }
 
-    public String getNome() {
-        return nome;
+    public NPCPokemon(TipoPokemon tipo, String nome, int level, int experiencia, int hpAtual, int hpMax, int nivelFome, int nivelEnergia, int ataque, int defesa, Status status) {
+        super(tipo, nome, level, experiencia, hpAtual, hpMax, nivelFome, nivelEnergia, ataque, defesa, status);
     }
 }
