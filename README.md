@@ -22,17 +22,11 @@ ataque (int)
 
 defesa (int)
 
-velocidade (int)
-
 Necessidades (Tamagotchi):
 
 fome (int)
 
 energia (int)
-
-humor (int)
-
-higiene (int)
 
 status (Enum: NORMAL, POISON, BURN, PARALYSIS...)
 
@@ -51,8 +45,6 @@ Equivalente à classe “Jogador”.
 Atributos adicionais:
 
 moveset (ArrayList<Move>)
-
-amizade (int)
 
 evolucaoDisponivel (boolean)
 
@@ -156,8 +148,6 @@ ArrayList<Item> itensCura
 
 ArrayList<Item> berries
 
-ArrayList<Item> decoracoes
-
 Métodos:
 
 vender(Pokemon jogador)
@@ -191,10 +181,6 @@ O jogador escolhe:
 Alimentar
 
 Dormir
-
-Brincar (aumenta humor)
-
-Dar banho (higiene)
 
 Treinar (aumenta ataque/defesa e diminui energia)
 
