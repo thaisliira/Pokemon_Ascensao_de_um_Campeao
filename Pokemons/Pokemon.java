@@ -161,10 +161,5 @@ public class Pokemon {
         }
     }
 
-    public void explorar(int opcao) {
-
-
-    }
-
 
 }
