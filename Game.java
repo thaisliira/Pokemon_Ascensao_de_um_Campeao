@@ -87,7 +87,12 @@ public class Game {
             case 2: // Fogo
                 tipoEscolhido = TipoPokemon.FOGO;
                 nomePokemon = "Charmander";
+<<<<<<< HEAD
                 FormaEvolutiva megaCharizard = new FormaEvolutiva("Mega Charizard", 130, 90, 100, TipoPokemon.FOGO, null);
+=======
+
+                FormaEvolutiva megaCharizard = new FormaEvolutiva("Mega Charizard X", 130, 90, 100, TipoPokemon.FOGO, null);
+>>>>>>> d8d6bef14dba8899325ba376c662e3ca65c6a7cb
                 FormaEvolutiva charizard = new FormaEvolutiva("Charizard", 110, 80, 36, TipoPokemon.FOGO, megaCharizard);
                 FormaEvolutiva charmeleon = new FormaEvolutiva("Charmeleon", 70, 50, 16, TipoPokemon.FOGO, charizard);
                 formaInicial = new FormaEvolutiva("Charmander", 40, 20, 1, TipoPokemon.FOGO, charmeleon);
@@ -102,9 +107,16 @@ public class Game {
 
             default:
                 System.out.println("Ops, opção inválida! Eu escolho por você!");
+<<<<<<< HEAD
                 tipoEscolhido = TipoPokemon.NORMAL;
                 nomePokemon = "Ditto";
                 formaInicial = new FormaEvolutiva("Pikachu", 10, 10, 1, TipoPokemon.ELETRICO);
+=======
+                tipoEscolhido = TipoPokemon.ELETRICO;
+                nomePokemon = "Ditto";
+                FormaEvolutiva r = new FormaEvolutiva("Raichu", 120, 70, 30, TipoPokemon.ELETRICO, null);
+                formaInicial = new FormaEvolutiva("Pikachu", 50, 30, 1, TipoPokemon.ELETRICO, r);
+>>>>>>> d8d6bef14dba8899325ba376c662e3ca65c6a7cb
                 break;
         }
 
