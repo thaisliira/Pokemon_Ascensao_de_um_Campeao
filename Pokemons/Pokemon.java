@@ -30,4 +30,5 @@ public class Pokemon {
         this.defesa = defesa;
         this.status = status;
     }
+
 }

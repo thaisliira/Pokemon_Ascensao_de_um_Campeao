@@ -15,6 +15,7 @@ public class Game {
     private ArrayList<NPCPokemon> selvagens;
     private ArrayList<NPCPokemon> pokemonTorneio;
     private int dia;
+    private final int diaFinal;
     private Scanner jogador;
 
     public Game() {
@@ -22,31 +23,31 @@ public class Game {
         this.selvagens = new ArrayList<>();
         this.pokemonTorneio = new ArrayList<>();
         this.dia = 1;
+        this.diaFinal = 50;
     }
 
     public void iniciar() {
         System.out.println("BEM-VINDO AO MUNDO POKÉGOTCHI!");
         System.out.println("1. Jogar");
         System.out.println("2. Sair");
-        System.out.print("Escolha: ");
+        System.out.print("Escolha uma opção: ");
 
-        // Tratamento simples para evitar crash se digitar letra
         if (jogador.hasNextInt()) {
             int opcao = jogador.nextInt();
-            jogador.nextLine(); // Limpar buffer
+            jogador.nextLine(); 
 
             if (opcao == 1) {
-                criarSave();
+                iniciarJogo();
             } else {
-                System.out.println("Saindo...");
+                System.out.println("Já vai? Que pena! Até a próxima, mestre!");
                 System.exit(0);
             }
         } else {
-            System.out.println("Entrada inválida. Reinicie.");
+            System.out.println("Entrada inválida. Tente outra opção.");
         }
     }
 
-    private void criarSave() {
+    private void iniciarJogo() {
         System.out.println("\n--------------------------------");
         System.out.println("Olá, jovem treinador!");
         System.out.print("Primeiro, me diz, qual é o seu nome? ");
@@ -78,7 +79,6 @@ public class Game {
             case 1: // Água
                 tipoEscolhido = TipoPokemon.AGUA;
                 nomePokemon = "Squirtle";
-
                 FormaEvolutiva blastoise = new FormaEvolutiva("Blastoise", 100, 100, 36, TipoPokemon.AGUA, null);
                 FormaEvolutiva wartortle = new FormaEvolutiva("Wartortle", 60, 60, 16, TipoPokemon.AGUA, blastoise);
                 formaInicial = new FormaEvolutiva("Squirtle", 30, 30, 1, TipoPokemon.AGUA, wartortle);
@@ -87,18 +87,14 @@ public class Game {
             case 2: // Fogo
                 tipoEscolhido = TipoPokemon.FOGO;
                 nomePokemon = "Charmander";
-
                 FormaEvolutiva megaCharizard = new FormaEvolutiva("Mega Charizard", 130, 90, 100, TipoPokemon.FOGO, null);
                 FormaEvolutiva charizard = new FormaEvolutiva("Charizard", 110, 80, 36, TipoPokemon.FOGO, megaCharizard);
                 FormaEvolutiva charmeleon = new FormaEvolutiva("Charmeleon", 70, 50, 16, TipoPokemon.FOGO, charizard);
                 formaInicial = new FormaEvolutiva("Charmander", 40, 20, 1, TipoPokemon.FOGO, charmeleon);
                 break;
-
             case 3: // Terra
                 tipoEscolhido = TipoPokemon.TERRA;
                 nomePokemon = "Bulbasaur";
-
-                // CORREÇÃO: Venusaur e Ivysaur são TERRA (ou GRASS), não FOGO.
                 FormaEvolutiva venusaur = new FormaEvolutiva("Venusaur", 110, 80, 36, TipoPokemon.TERRA, null);
                 FormaEvolutiva ivysaur = new FormaEvolutiva("Ivysaur", 80, 70, 16, TipoPokemon.TERRA, venusaur);
                 formaInicial = new FormaEvolutiva("Bulbasaur", 50, 30, 1, TipoPokemon.TERRA, ivysaur);
@@ -106,10 +102,9 @@ public class Game {
 
             default:
                 System.out.println("Ops, opção inválida! Eu escolho por você!");
-                tipoEscolhido = TipoPokemon.ELETRICO;
-                nomePokemon = "Pikachu";
-                FormaEvolutiva r = new FormaEvolutiva("Raichu", 120, 70, 30, TipoPokemon.ELETRICO, null);
-                formaInicial = new FormaEvolutiva("Pikachu", 50, 30, 1, TipoPokemon.ELETRICO, r);
+                tipoEscolhido = TipoPokemon.NORMAL;
+                nomePokemon = "Ditto";
+                formaInicial = new FormaEvolutiva("Pikachu", 10, 10, 1, TipoPokemon.ELETRICO);
                 break;
         }
 
@@ -129,7 +124,8 @@ public class Game {
 
         System.out.println("\nPARABÉNS!");
         System.out.println("Você escolheu o " + nomePokemon + "!");
-        System.out.println("Ataque inicial: " + this.pokemon.getFormaAtual().getAtaqueBase()); // Teste para ver se pegou certo
+        System.out.println("Ataque inicial: " + this.pokemon.getFormaAtual().getAtaqueBase());
+        System.out.println("XP Atual: " + this.pokemon.ge;
         System.out.println("Defesa inicial: " + this.pokemon.getFormaAtual().getDefesaBase());
         System.out.println("A jornada começa agora...");
     }
