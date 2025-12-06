@@ -7,14 +7,18 @@ public class FormaEvolutiva {
     private String nome;
     private int ataqueBase;
     private int defesaBase;
+    private int ataqueEspecial;
+    private int defesaEspecial;
     private int levelNecessario;
-    TipoPokemon tipo;
-    FormaEvolutiva proximaForma;
+    private TipoPokemon tipo;
+    private FormaEvolutiva proximaForma;
 
-    public FormaEvolutiva(String nome, int ataqueBase, int defesaBase, int levelNecessario, TipoPokemon tipo, FormaEvolutiva proximaForma) {
+    public FormaEvolutiva(String nome, int ataqueBase, int ataqueEspecial, int defesaBase, int defesaEspecial, int levelNecessario, TipoPokemon tipo, FormaEvolutiva proximaForma) {
         this.nome = nome;
         this.ataqueBase = ataqueBase;
+        this.ataqueEspecial = ataqueEspecial;
         this.defesaBase = defesaBase;
+        this.defesaEspecial = defesaEspecial;
         this.levelNecessario = levelNecessario;
         this.tipo = tipo;
         this.proximaForma = proximaForma;
@@ -28,8 +32,17 @@ public class FormaEvolutiva {
         return ataqueBase;
     }
 
+    // Renomeado para getAtaqueEspecialBase() para ficar claro que vem do "DNA"
+    public int getAtaqueEspecial() {
+        return ataqueEspecial;
+    }
+
     public int getDefesaBase() {
         return defesaBase;
+    }
+
+    public int getDefesaEspecial() {
+        return defesaEspecial;
     }
 
     public int getLevelNecessario() {
