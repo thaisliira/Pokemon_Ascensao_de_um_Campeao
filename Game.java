@@ -210,7 +210,7 @@ public class Game {
             System.out.println("\nO que você vai fazer?");
             System.out.println("1. Batalhar!");
             System.out.println("2. Tentar Fugir");
-            System.out.println("3. Verificar Status do Pokemon");
+            System.out.println("3. Verificar características do meu Pokemon");
             System.out.print("Faça sua escolha: ");
 
             int escolhaAcao = 0;
