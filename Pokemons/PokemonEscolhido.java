@@ -4,6 +4,7 @@ import Pokegotchi.Enum.Status;
 import Pokegotchi.Enum.TipoPokemon;
 import Pokegotchi.FormaEvolutiva;
 import Pokegotchi.Golpes;
+import Pokegotchi.Inventario;
 import Pokegotchi.Item;
 
 import java.util.ArrayList;
@@ -107,7 +108,7 @@ public class PokemonEscolhido extends Pokemon {
                     break;
 
                 case 3:
-                    System.out.println("🎒 Mochila vazia..."); // TODO buscar inventario do jogador
+                    Inventario.listarItens();
                     break;
 
                 default:
@@ -116,5 +117,54 @@ public class PokemonEscolhido extends Pokemon {
         }
 
         return inimigo.getHpAtual() <= 0;
+    }
+
+    @Override
+    public void receberDano(int dano) {
+        super.receberDano(dano);
+
+        if (this.hpAtual <= 0) {
+            System.out.println("Pokemon abatido, você perdeu! Tente salvar seu pokemon!");
+        } else {
+            System.out.println("Você sobreviveu a esse round mas não baixe a guarda!");
+            exibirDetalhesPoke();
+        }
+    }
+
+    public void ganharXP(int ganhoDeXP) {
+        this.experiencia += ganhoDeXP;
+        System.out.println("✨ " + this.nome + " ganhou " + ganhoDeXP + " experiência!");
+
+        while (this.experiencia >= 50) {
+            this.experiencia -= 50;
+            subirDeNivel();
+        }
+    }
+
+    private void subirDeNivel() {
+        this.level++;
+        // ... (bônus de status) ...
+
+        System.out.println("🎉 LEVEL UP! " + this.nome + " subiu para o nível " + this.level + "!");
+
+        if (formaAtual.getProximaForma() != null && this.level >= formaAtual.getProximaForma().getLevelNecessario()) {
+            evoluir();
+        }
+    }
+
+    public void evoluir () {
+
+
+    }
+
+    public void listarItens() {
+        if (listaDeItens.isEmpty()) {
+            System.out.println("Sua mochila está vazia.");
+        } else {
+            System.out.println("\n=== SEU INVENTÁRIO ===");
+            for (int i = 0; i < listaDeItens.size(); i++) {
+                System.out.println((i + 1) + ". " + listaDeItens.get(i).getNome());
+            }
+        }
     }
 }

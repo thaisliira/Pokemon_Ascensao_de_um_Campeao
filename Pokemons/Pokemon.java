@@ -87,6 +87,46 @@ public abstract class Pokemon {
         return status;
     }
 
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public void setExperiencia(int experiencia) {
+        this.experiencia = experiencia;
+    }
+
+    public void setHpAtual(int hpAtual) {
+        this.hpAtual = hpAtual;
+    }
+
+    public void setHpMax(int hpMax) {
+        this.hpMax = hpMax;
+    }
+
+    public void setNivelFome(int nivelFome) {
+        this.nivelFome = nivelFome;
+    }
+
+    public void setNivelEnergia(int nivelEnergia) {
+        this.nivelEnergia = nivelEnergia;
+    }
+
+    public void setAtaque(int ataque) {
+        this.ataque = ataque;
+    }
+
+    public void setAtaqueEspecial(int ataqueEspecial) {
+        this.ataqueEspecial = ataqueEspecial;
+    }
+
+    public void setDefesa(int defesa) {
+        this.defesa = defesa;
+    }
+
+    public void setDefesaEspecial(int defesaEspecial) {
+        this.defesaEspecial = defesaEspecial;
+    }
+
     public void verificarEstado() {
 
         if (this.nivelFome >= 50) {
@@ -163,5 +203,11 @@ public abstract class Pokemon {
 
     public abstract boolean atacar(Pokemon inimigo);
 
-
+    public void receberDano(int dano) {
+        this.hpAtual -= dano;
+        if (this.hpAtual < 0) {
+            this.hpAtual = 0;
+        }
+        System.out.println(this.nome + " perdeu " + dano + " HP! (Vida Restante: " + this.hpAtual + "/" + this.hpMax + ")");
+    }
 }

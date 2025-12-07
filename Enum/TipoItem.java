@@ -1,5 +1,5 @@
 package Pokegotchi.Enum;
 
 public enum TipoItem {
-    Cura, Arma
+    CURA, COMIDA, BATALHA
 }

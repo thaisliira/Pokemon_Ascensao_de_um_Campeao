@@ -133,16 +133,46 @@ public class Game {
         System.out.println("Quantidade de moedas: " + this.pokemon.getMoedas());
         System.out.println("A jornada começa agora...");
 
-        continuarJogo();
+        menuPrincipal();
     }
 
-    private void continuarJogo() {
+    private void menuPrincipal() {
         boolean jogando = true;
         while (jogando) {
-            menuExplorar();
-            break;
+            System.out.println("\n--- MENU PRINCIPAL ---");
+            System.out.println("O que deseja fazer?");
+            System.out.println("1. Explorar");
+            System.out.println("2. Treinar");
+            System.out.println("3. Comer");
+            System.out.println("4. Loja");
+            System.out.println("5. Sair");
         }
-    }
+
+            int escolha = 0;
+            if (jogador.hasNextInt()) {
+                escolha = jogador.nextInt();
+            }
+
+            switch (escolha) {
+                case 1:
+                    menuExplorar();
+                    break;
+                case 2:
+                    treinar();
+                    break;
+                case 3:
+                    pokemon.comer();
+                    break;
+                case 4:
+                    visitarLoja();
+                    break;
+                case 5:
+                    menuPrincipal();
+                default:
+                    System.out.println("⚠️ Opção inválida!");
+                    return;
+            }
+        }
 
     private void menuExplorar() {
         System.out.println("\n--- MAPA DE EXPLORAÇÃO ---");
@@ -151,6 +181,7 @@ public class Game {
         System.out.println("2. Vulcão em Chamas");
         System.out.println("3. Lago Sombrio");
         System.out.println("4. Usina Elétrica");
+        System.out.println("5. Voltar");
         System.out.print("Escolha sua rota (1-4): ");
 
         int escolha = 0;
@@ -173,6 +204,8 @@ public class Game {
             case 4:
                 mapaEscolhido = Mapa.USINA;
                 break;
+            case 5:
+                menuPrincipal();
             default:
                 System.out.println("⚠️ Esse local não existe no mapa!");
                 return;
@@ -237,6 +270,7 @@ public class Game {
             System.out.println("HP: " + inimigo.getHpMax() + " | Atk: " + inimigo.getAtaque() + " | Def: " + inimigo.getDefesa());
 
             boolean decisaoTomada = false;
+            pokemon.ganharXP(30);
 
             while (!decisaoTomada) {
                 System.out.println("\nO que você vai fazer?");
@@ -308,6 +342,64 @@ public class Game {
                 }
             }
         }
+    }
+
+    private void treinar() {
+        System.out.println("\n--- CAMPO DE TREINAMENTO ---");
+        System.out.println("Escolha seu parceiro de treino");
+        System.out.println("1. Cinderace");
+        System.out.println("2. Lapras");
+        System.out.println("3. Pikachu");
+        System.out.print("Sua escolha: ");
+
+        int escolha = 0;
+        if (jogador.hasNextInt()) {
+            escolha = jogador.nextInt();
+        }
+
+        int nivelTreino = pokemon.getLevel();
+        if (nivelTreino < 1) {
+            nivelTreino = 1;
+        }
+
+        String parceiroTreino = "Psyduck";
+        TipoPokemon tipoParceiro = TipoPokemon.PSIQUICO;
+
+        switch (escolha) {
+            case 1:
+                parceiroTreino = "Cinderace";
+                tipoParceiro = TipoPokemon.FOGO;
+                break;
+            case 2:
+                parceiroTreino = "Lapras";
+                tipoParceiro = TipoPokemon.AGUA;
+                break;
+            case 3:
+                parceiroTreino = "Pikachu";
+                tipoParceiro = TipoPokemon.ELETRICO;
+                break;
+            default:
+                System.out.println("Escolha inválida! Não se preocupe, eu escolhi seu parceiro!");
+                break;
+        }
+
+        System.out.println("Iniciando treino contra " + parceiroTreino + "...");
+
+        NPCPokemon bonecoTreino = new NPCPokemon(
+                tipoParceiro,
+                parceiroTreino,
+                nivelTreino,
+                50 + (nivelTreino * 10),
+                5 + nivelTreino,
+                5 + nivelTreino,
+                2 + (nivelTreino / 2),
+                2 + (nivelTreino / 2)
+        );
+
+        batalhar(bonecoTreino);
+
+        System.out.println("O treino acabou! Seu Pokémon se sente mais experiente.");
+        // pokemon.ganharXp(20); // Pode dar mais XP que batalha selvagem
     }
 
     private void tentarFugir(NPCPokemon inimigo) {
