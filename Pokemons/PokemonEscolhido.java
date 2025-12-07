@@ -16,8 +16,6 @@ public class PokemonEscolhido extends Pokemon {
     private ArrayList<Golpes> listaDeGolpes;
     private ArrayList<Item> listaDeItens;
 
-    // CONSTRUTOR CORRIGIDO
-    // Agora passa os atributos Físicos E Especiais para o super
     public PokemonEscolhido(TipoPokemon tipo, String nome, int level, int experiencia, int hpAtual, int hpMax, int nivelFome, int nivelEnergia, Status status, FormaEvolutiva formaAtual, int moedas) {
 
         super(
@@ -29,10 +27,10 @@ public class PokemonEscolhido extends Pokemon {
                 hpMax,
                 nivelFome,
                 nivelEnergia,
-                formaAtual.getAtaqueBase(),          // 9. Ataque Físico (Vem da Forma)
-                formaAtual.getAtaqueEspecial(),  // 10. Ataque Especial (Vem da Forma)
-                formaAtual.getDefesaBase(),          // 11. Defesa Física (Vem da Forma)
-                formaAtual.getDefesaEspecial(),  // 12. Defesa Especial (Vem da Forma)
+                formaAtual.getAtaqueBase(),
+                formaAtual.getAtaqueEspecial(),
+                formaAtual.getDefesaBase(),
+                formaAtual.getDefesaEspecial(),
                 status
         );
 
@@ -61,5 +59,62 @@ public class PokemonEscolhido extends Pokemon {
         System.out.println("Fome: " + this.nivelFome + "% | Energia: " + this.nivelEnergia + "%");
         System.out.println("Atk: " + this.ataque + " | Def: " + this.defesa);
         System.out.println("Status: " + this.status);
+    }
+
+    @Override
+    public boolean atacar(Pokemon inimigo) {
+        Scanner jogador = new Scanner(System.in);
+        boolean roundEncerrado = false;
+
+        while (!roundEncerrado) {
+            System.out.println("\n--- SEU ROUND (" + this.nome + ") ---");
+            System.out.println("1. Ataque Físico");
+            System.out.println("2. Ataque Especial");
+            System.out.println("3. Inventário");
+            System.out.print("Escolha: ");
+
+            int escolha = 0;
+            if(jogador.hasNextInt()) {
+                escolha = jogador.nextInt();
+                jogador.nextLine();
+            }
+
+            int dano = 0;
+
+            switch (escolha) {
+                case 1:
+                    dano = this.ataque - inimigo.getDefesa();
+
+                    if (dano <= 0) dano = 1;
+
+                    System.out.println("👊 " + this.nome + " usou um ataque físico!");
+                    System.out.println("💥 Causou " + dano + " de dano!");
+
+                    inimigo.receberDano(dano); // TODO aqui subtraio o hp do inimigo
+                    roundEncerrado = true;
+                    break;
+
+                case 2:
+                    dano = this.ataqueEspecial - inimigo.getDefesaEspecial();
+
+                    if (dano <= 0) dano = 1;
+
+                    System.out.println("⚡ " + this.nome + " usou um Ataque Especial!");
+                    System.out.println("💥 Causou " + dano + " de dano!");
+
+                    inimigo.receberDano(dano);
+                    roundEncerrado = true;
+                    break;
+
+                case 3:
+                    System.out.println("🎒 Mochila vazia..."); // TODO buscar inventario do jogador
+                    break;
+
+                default:
+                    System.out.println("Opção inválida!");
+            }
+        }
+
+        return inimigo.getHpAtual() <= 0;
     }
 }

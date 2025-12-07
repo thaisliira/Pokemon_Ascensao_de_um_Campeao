@@ -103,10 +103,9 @@ public class Game {
 
             default:
                 System.out.println("Ops, opção inválida! Eu escolho por você!");
-
                 tipoEscolhido = TipoPokemon.NORMAL;
                 nomePokemon = "Ditto";
-                formaInicial = new FormaEvolutiva("Ditto", 10, 10, 10, 10, 1, TipoPokemon.NORMAL, null);
+                formaInicial = new FormaEvolutiva("Ditto", 20, 25, 10, 15, 1, TipoPokemon.NORMAL, null);
                 break;
         }
 
@@ -128,7 +127,7 @@ public class Game {
         System.out.println("Você escolheu o " + nomePokemon + "!");
         System.out.println("Dia atual: " + this.dia);
         System.out.println("HP atual: " + this.pokemon.getHpAtual());
-        System.out.println("XP Atual: " + this.pokemon.getHpAtual());
+        System.out.println("XP Atual: " + this.pokemon.getExperiencia());
         System.out.println("Ataque Básico: " + this.pokemon.getFormaAtual().getAtaqueBase());
         System.out.println("Defesa Básica: " + this.pokemon.getFormaAtual().getDefesaBase());
         System.out.println("Quantidade de moedas: " + this.pokemon.getMoedas());
@@ -192,50 +191,122 @@ public class Game {
 
             TipoPokemon tipoDoLocal = mapa.getTipoInimigo();
             int nivelInimigo = (this.dia / 5) + 1;
+            String nomeInimigo = "";
+            int hpBase = 0;
+            int atkBase = 0;
+            int defBase = 0;
+
+            switch (tipoDoLocal) {
+                case FOGO:
+                    nomeInimigo = "Scorbunny";
+                    hpBase = 70; atkBase = 25; defBase = 5; // Ajustei atk para ser maior que defesa inicial do jogador
+                    break;
+                case AGUA:
+                    nomeInimigo = "Totodile";
+                    hpBase = 80; atkBase = 20; defBase = 8;
+                    break;
+                case TERRA:
+                    nomeInimigo = "Diglett";
+                    hpBase = 75; atkBase = 18; defBase = 10;
+                    break;
+                case ELETRICO:
+                    nomeInimigo = "Pichu";
+                    hpBase = 85; atkBase = 15; defBase = 6;
+                    break;
+                default:
+                    nomeInimigo = "Ditto Perdido";
+                    hpBase = 50; atkBase = 15; defBase = 5;
+                    break;
+            }
+
+            int ataqueFinal = atkBase + nivelInimigo;
+            int defesaFinal = defBase + (nivelInimigo / 2);
 
             NPCPokemon inimigo = new NPCPokemon(
                     tipoDoLocal,
-                    "Selvagem do " + mapa.getNome(),
+                    nomeInimigo,
                     nivelInimigo,
-                    30 + (nivelInimigo * 5), // HP Max
-                    5 + nivelInimigo,        // Ataque Físico
-                    6 + nivelInimigo,        // Ataque Especial (NOVO)
-                    2,                       // Defesa Física
-                    3                       // Defesa Especial (NOVO)
+                    hpBase + (nivelInimigo * 5),     // HP Max
+                    ataqueFinal,                     // Ataque Físico
+                    ataqueFinal,                     // Ataque Especial (Placeholder)
+                    defesaFinal,                     // Defesa Física
+                    defesaFinal                      // Defesa Especial (Placeholder)
             );
 
             System.out.println("\n⚔️ CUIDADO! Um " + inimigo.getNome() + " (Nvl " + nivelInimigo + ") apareceu!");
-            System.out.println("HP do Inimigo: " + inimigo.getHpMax());
+            System.out.println("HP: " + inimigo.getHpMax() + " | Atk: " + inimigo.getAtaque() + " | Def: " + inimigo.getDefesa());
 
-            System.out.println("\nO que você vai fazer?");
-            System.out.println("1. Batalhar!");
-            System.out.println("2. Tentar Fugir");
-            System.out.println("3. Verificar características do meu Pokemon");
-            System.out.print("Faça sua escolha: ");
+            boolean decisaoTomada = false;
 
-            int escolhaAcao = 0;
-            if (jogador.hasNextInt()) {
-                escolhaAcao = jogador.nextInt();
-                jogador.nextLine();
-            }
+            while (!decisaoTomada) {
+                System.out.println("\nO que você vai fazer?");
+                System.out.println("1. Batalhar!");
+                System.out.println("2. Tentar Fugir");
+                System.out.println("3. Verificar características do meu Pokemon");
+                System.out.print("Faça sua escolha: ");
 
-            if (escolhaAcao == 1) {
-                System.out.println("Você assumiu postura de combate!");
-                batalhar(inimigo);
-            }
-            else if (escolhaAcao == 2) {
-                tentarFugir(inimigo);
-            }
-            else if (escolhaAcao == 3) {
-                pokemon.exibirDetalhesPoke();
-            }
-            else {
-                System.out.println("Você ficou paralisado de medo... A batalha começou!");
-                batalhar(inimigo);
+                int escolhaAcao = 0;
+                if (jogador.hasNextInt()) {
+                    escolhaAcao = jogador.nextInt();
+                    jogador.nextLine();
+                }
+
+                if (escolhaAcao == 1) {
+                    System.out.println("Você assumiu postura de combate!");
+                    batalhar(inimigo);
+                    decisaoTomada = true;
+                }
+                else if (escolhaAcao == 2) {
+                    tentarFugir(inimigo);
+                    decisaoTomada = true;
+                }
+                else if (escolhaAcao == 3) {
+                    pokemon.exibirDetalhesPoke();
+                }
+                else {
+                    System.out.println("Você ficou paralisado de medo... A batalha começou!");
+                    batalhar(inimigo);
+                    decisaoTomada = true;
+                }
             }
 
         } else {
             System.out.println("🍃 Você caminhou pelo " + mapa.getNome() + " e estava tudo tranquilo.");
+        }
+    }
+
+    private void batalhar(NPCPokemon inimigo) {
+        System.out.println("--- Batalha Iniciada ---");
+
+        while(pokemon.getHpAtual() > 0 && inimigo.getHpAtual() > 0) {
+
+            boolean vitoria = pokemon.atacar(inimigo);
+
+            if(vitoria) {
+                System.out.println("🏆 Você venceu o " + inimigo.getNome() + "!");
+                return;
+            }
+
+            if (inimigo.getHpAtual() > 0) {
+                System.out.println("\n🔻 " + inimigo.getNome() + " contra-ataca!");
+
+                int danoInimigo = inimigo.getAtaque() - pokemon.getDefesa();
+
+                // Garante que o dano é pelo menos 0 (não cura se a defesa for alta)
+                if (danoInimigo < 0) danoInimigo = 0;
+
+                if (danoInimigo == 0) {
+                    System.out.println("Sua defesa absorveu quase todo o impacto!");
+                    danoInimigo = 3;
+                }
+
+                System.out.println("O inimigo causou " + danoInimigo + " de dano!");
+                pokemon.receberDano(danoInimigo);
+
+                if (pokemon.getHpAtual() <= 0) {
+                    System.out.println("☠️ Seu Pokémon desmaiou...");
+                }
+            }
         }
     }
 
@@ -252,16 +323,4 @@ public class Game {
         }
     }
 
-    private void batalhar(NPCPokemon inimigo) {
-        System.out.println("--- Batalha Iniciada ---");
-        while(pokemon.getHpAtual() > 0 && inimigo.getHpAtual() > 0) {
-            // Seu turno
-//            boolean vitoria = pokemon.atacar(inimigo);
-//            if(vitoria) {
-//                System.out.println("Você venceu!");
-//                return;
-//            }
-//            inimigo.atacar(pokemon);
-        }
-    }
 }

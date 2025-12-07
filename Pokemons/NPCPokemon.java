@@ -25,4 +25,9 @@ public class NPCPokemon extends Pokemon {
                 Status.NORMAL   // 13. Status
         );
     }
+
+    @Override
+    public boolean atacar(Pokemon inimigo) {
+        return false;
+    }
 }

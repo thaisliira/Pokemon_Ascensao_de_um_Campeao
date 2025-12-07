@@ -3,7 +3,7 @@ package Pokegotchi.Pokemons;
 import Pokegotchi.Enum.Status;
 import Pokegotchi.Enum.TipoPokemon;
 
-public class Pokemon {
+public abstract class Pokemon {
 
     protected TipoPokemon tipo;
     protected String nome;
@@ -160,6 +160,8 @@ public class Pokemon {
             System.out.println("✨ " + this.nome + " acordou!");
         }
     }
+
+    public abstract boolean atacar(Pokemon inimigo);
 
 
 }
