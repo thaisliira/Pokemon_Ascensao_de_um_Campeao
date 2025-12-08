@@ -1,12 +1,9 @@
 package Pokegotchi.Pokemons;
 
+import Pokegotchi.*;
 import Pokegotchi.Enum.Status;
 import Pokegotchi.Enum.TipoPokemon;
-import Pokegotchi.FormaEvolutiva;
-import Pokegotchi.Golpes;
-import Pokegotchi.Inventario;
-import Pokegotchi.Item;
-
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -108,7 +105,7 @@ public class PokemonEscolhido extends Pokemon {
                     break;
 
                 case 3:
-                    Inventario.listarItens();
+                    listarItens();
                     break;
 
                 default:
@@ -131,7 +128,7 @@ public class PokemonEscolhido extends Pokemon {
         }
     }
 
-    public void ganharXP(int ganhoDeXP) {
+    public void ganharXP(int ganhoDeXP) throws FileNotFoundException {
         this.experiencia += ganhoDeXP;
         System.out.println("✨ " + this.nome + " ganhou " + ganhoDeXP + " experiência!");
 
@@ -141,10 +138,8 @@ public class PokemonEscolhido extends Pokemon {
         }
     }
 
-    private void subirDeNivel() {
+    private void subirDeNivel() throws FileNotFoundException {
         this.level++;
-        // ... (bônus de status) ...
-
         System.out.println("🎉 LEVEL UP! " + this.nome + " subiu para o nível " + this.level + "!");
 
         if (formaAtual.getProximaForma() != null && this.level >= formaAtual.getProximaForma().getLevelNecessario()) {
@@ -152,9 +147,35 @@ public class PokemonEscolhido extends Pokemon {
         }
     }
 
-    public void evoluir () {
+    private void evoluir() throws FileNotFoundException {
+        FormaEvolutiva novaForma = formaAtual.getProximaForma();
 
+        System.out.println("\n------------------------------------------------");
+        System.out.println("✨ O quê? " + this.nome + " está evoluindo!");
+        System.out.println("...... (luz brilhante) ......");
+        System.out.println("......... (forma mudando) .........");
 
+        this.formaAtual = novaForma;
+        this.setNome(novaForma.getNome());
+
+        this.setAtaque(novaForma.getAtaqueBase());
+        this.setAtaqueEspecial(novaForma.getAtaqueEspecial());
+        this.setDefesa(novaForma.getDefesaBase());
+        this.setDefesaEspecial(novaForma.getDefesaEspecial());
+
+        System.out.println("\n🌟 PARABÉNS! Seu Pokémon evoluiu para " + this.nome + "!");
+        System.out.println("Seus atributos aumentaram drasticamente!");
+        System.out.println("------------------------------------------------\n");
+
+        // 4. Gerar Arquivo de Texto com a Imagem
+        imprimirArtePokemon();
+    }
+
+    public void imprimirArtePokemon() throws FileNotFoundException {
+        String nomeArquivo = "Artes/" + this.nome.toLowerCase() + ".txt";
+        System.out.println("\n");
+        FileTools.printFile(nomeArquivo);
+        System.out.println("\n");
     }
 
     public void listarItens() {

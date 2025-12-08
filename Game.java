@@ -5,6 +5,8 @@ import Pokegotchi.Pokemons.NPCPokemon;
 import Pokegotchi.Pokemons.PokemonEscolhido;
 import Pokegotchi.Enum.TipoPokemon;
 import Pokegotchi.Enum.Status;
+
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -26,7 +28,7 @@ public class Game {
         this.diaFinal = 50;
     }
 
-    public void iniciar() {
+    public void iniciar() throws FileNotFoundException {
         System.out.println("BEM-VINDO AO MUNDO POKÉGOTCHI!");
         System.out.println("1. Jogar");
         System.out.println("2. Sair");
@@ -34,7 +36,7 @@ public class Game {
 
         if (jogador.hasNextInt()) {
             int opcao = jogador.nextInt();
-            jogador.nextLine(); 
+            jogador.nextLine();
 
             if (opcao == 1) {
                 iniciarJogo();
@@ -47,7 +49,7 @@ public class Game {
         }
     }
 
-    private void iniciarJogo() {
+    private void iniciarJogo() throws FileNotFoundException {
         System.out.println("\n--------------------------------");
         System.out.println("Olá, jovem treinador!");
         System.out.print("Primeiro, me diz, qual é o seu nome? ");
@@ -70,7 +72,7 @@ public class Game {
         iniciarPokemon(escolha);
     }
 
-    private void iniciarPokemon(int escolha) {
+    private void iniciarPokemon(int escolha) throws FileNotFoundException {
         TipoPokemon tipoEscolhido = null;
         String nomePokemon = "";
         FormaEvolutiva formaInicial = null;
@@ -79,7 +81,7 @@ public class Game {
             case 1: // Água
                 tipoEscolhido = TipoPokemon.AGUA;
                 nomePokemon = "Squirtle";
-                FormaEvolutiva blastoise = new FormaEvolutiva("Blastoise", 80, 90, 85, 96, 13, TipoPokemon.AGUA, null);
+                FormaEvolutiva blastoise = new FormaEvolutiva("Blastoise", 80, 90, 70, 96, 13, TipoPokemon.AGUA, null);
                 FormaEvolutiva wartortle = new FormaEvolutiva("Wartortle", 60, 90, 60,80, 6, TipoPokemon.AGUA, blastoise);
                 formaInicial = new FormaEvolutiva("Squirtle", 30, 50, 30,60, 1, TipoPokemon.AGUA, wartortle);
                 break;
@@ -88,16 +90,16 @@ public class Game {
                 tipoEscolhido = TipoPokemon.FOGO;
                 nomePokemon = "Charmander";
 
-                FormaEvolutiva megaCharizard = new FormaEvolutiva("Mega Charizard", 120, 130, 100, 110, 13, TipoPokemon.FOGO, null);
-                FormaEvolutiva charizard = new FormaEvolutiva("Charizard", 100, 110, 80, 90, 10, TipoPokemon.FOGO, megaCharizard);
-                FormaEvolutiva charmeleon = new FormaEvolutiva("Charmeleon", 80, 90, 60, 70, 6, TipoPokemon.FOGO, charizard);
-                formaInicial = new FormaEvolutiva("Charmander", 40, 60, 30, 50, 1, TipoPokemon.FOGO, charmeleon);
+                FormaEvolutiva megaCharizard = new FormaEvolutiva("Mega Charizard", 120, 130, 70, 110, 13, TipoPokemon.FOGO, null);
+                FormaEvolutiva charizard = new FormaEvolutiva("Charizard", 80, 110, 50, 90, 10, TipoPokemon.FOGO, megaCharizard);
+                FormaEvolutiva charmeleon = new FormaEvolutiva("Charmeleon", 50, 90, 40, 70, 6, TipoPokemon.FOGO, charizard);
+                formaInicial = new FormaEvolutiva("Charmander", 40, 60, 25, 50, 1, TipoPokemon.FOGO, charmeleon);
                 break;
             case 3: // Terra
                 tipoEscolhido = TipoPokemon.TERRA;
                 nomePokemon = "Bulbasaur";
-                FormaEvolutiva venusaur = new FormaEvolutiva("Venusaur", 90, 100, 90, 100, 10, TipoPokemon.TERRA, null);
-                FormaEvolutiva ivysaur = new FormaEvolutiva("Ivysaur", 70, 90, 70, 90, 6, TipoPokemon.TERRA, venusaur);
+                FormaEvolutiva venusaur = new FormaEvolutiva("Venusaur", 90, 100, 60, 100, 10, TipoPokemon.TERRA, null);
+                FormaEvolutiva ivysaur = new FormaEvolutiva("Ivysaur", 60, 90, 50, 90, 6, TipoPokemon.TERRA, venusaur);
                 formaInicial = new FormaEvolutiva("Bulbasaur", 30, 40, 30,40, 1, TipoPokemon.TERRA,  ivysaur);
                 break;
 
@@ -109,7 +111,7 @@ public class Game {
                 break;
         }
 
-            this.pokemon = new PokemonEscolhido(
+        this.pokemon = new PokemonEscolhido(
                 tipoEscolhido,
                 nomePokemon,
                 1,   // Level
@@ -125,6 +127,7 @@ public class Game {
 
         System.out.println("\nPARABÉNS!");
         System.out.println("Você escolheu o " + nomePokemon + "!");
+        this.pokemon.imprimirArtePokemon();
         System.out.println("Dia atual: " + this.dia);
         System.out.println("HP atual: " + this.pokemon.getHpAtual());
         System.out.println("XP Atual: " + this.pokemon.getExperiencia());
@@ -136,7 +139,7 @@ public class Game {
         menuPrincipal();
     }
 
-    private void menuPrincipal() {
+    private void menuPrincipal() throws FileNotFoundException {
         boolean jogando = true;
         while (jogando) {
             System.out.println("\n--- MENU PRINCIPAL ---");
@@ -146,11 +149,12 @@ public class Game {
             System.out.println("3. Comer");
             System.out.println("4. Loja");
             System.out.println("5. Sair");
-        }
+            System.out.print("Escolha: ");
 
             int escolha = 0;
             if (jogador.hasNextInt()) {
                 escolha = jogador.nextInt();
+                jogador.nextLine();
             }
 
             switch (escolha) {
@@ -164,17 +168,25 @@ public class Game {
                     pokemon.comer();
                     break;
                 case 4:
-                    visitarLoja();
+                    visitarLoja(); // Método criado abaixo para corrigir o erro
                     break;
                 case 5:
-                    menuPrincipal();
+                    System.out.println("Até a próxima!");
+                    jogando = false;
+                    break;
                 default:
                     System.out.println("⚠️ Opção inválida!");
-                    return;
             }
         }
+    }
 
-    private void menuExplorar() {
+    // ADICIONADO: Método visitarLoja() que faltava
+    private void visitarLoja() {
+        System.out.println("A loja está fechada para reforma! (Em construção...)");
+        // Aqui você chamaria a lógica da sua classe Loja
+    }
+
+    private void menuExplorar() throws FileNotFoundException {
         System.out.println("\n--- MAPA DE EXPLORAÇÃO ---");
         System.out.println("Para onde deseja viajar?");
         System.out.println("1. Floresta Viridian");
@@ -187,6 +199,7 @@ public class Game {
         int escolha = 0;
         if (jogador.hasNextInt()) {
             escolha = jogador.nextInt();
+            jogador.nextLine();
         }
 
         Mapa mapaEscolhido = null;
@@ -205,7 +218,7 @@ public class Game {
                 mapaEscolhido = Mapa.USINA;
                 break;
             case 5:
-                menuPrincipal();
+                return; // Volta para o menu principal
             default:
                 System.out.println("⚠️ Esse local não existe no mapa!");
                 return;
@@ -217,7 +230,7 @@ public class Game {
         }
     }
 
-    private void iniciarExploracao(Mapa mapa) {
+    private void iniciarExploracao(Mapa mapa) throws FileNotFoundException {
         int encontrarInimigo = new java.util.Random().nextInt(100);
 
         if (encontrarInimigo < 60) {
@@ -232,23 +245,23 @@ public class Game {
             switch (tipoDoLocal) {
                 case FOGO:
                     nomeInimigo = "Scorbunny";
-                    hpBase = 70; atkBase = 25; defBase = 5; // Ajustei atk para ser maior que defesa inicial do jogador
+                    hpBase = 70; atkBase = 40; defBase = 30;
                     break;
                 case AGUA:
                     nomeInimigo = "Totodile";
-                    hpBase = 80; atkBase = 20; defBase = 8;
+                    hpBase = 80; atkBase = 50; defBase = 40;
                     break;
                 case TERRA:
                     nomeInimigo = "Diglett";
-                    hpBase = 75; atkBase = 18; defBase = 10;
+                    hpBase = 75; atkBase = 30; defBase = 30;
                     break;
                 case ELETRICO:
                     nomeInimigo = "Pichu";
-                    hpBase = 85; atkBase = 15; defBase = 6;
+                    hpBase = 85; atkBase = 55; defBase = 50;
                     break;
                 default:
                     nomeInimigo = "Ditto Perdido";
-                    hpBase = 50; atkBase = 15; defBase = 5;
+                    hpBase = 50; atkBase = 20; defBase = 30;
                     break;
             }
 
@@ -259,11 +272,11 @@ public class Game {
                     tipoDoLocal,
                     nomeInimigo,
                     nivelInimigo,
-                    hpBase + (nivelInimigo * 5),     // HP Max
-                    ataqueFinal,                     // Ataque Físico
-                    ataqueFinal,                     // Ataque Especial (Placeholder)
-                    defesaFinal,                     // Defesa Física
-                    defesaFinal                      // Defesa Especial (Placeholder)
+                    hpBase + (nivelInimigo * 5),
+                    ataqueFinal,
+                    ataqueFinal,
+                    defesaFinal,
+                    defesaFinal
             );
 
             System.out.println("\n⚔️ CUIDADO! Um " + inimigo.getNome() + " (Nvl " + nivelInimigo + ") apareceu!");
@@ -309,7 +322,7 @@ public class Game {
         }
     }
 
-    private void batalhar(NPCPokemon inimigo) {
+    private void batalhar(NPCPokemon inimigo) throws FileNotFoundException {
         System.out.println("--- Batalha Iniciada ---");
 
         while(pokemon.getHpAtual() > 0 && inimigo.getHpAtual() > 0) {
@@ -318,6 +331,8 @@ public class Game {
 
             if(vitoria) {
                 System.out.println("🏆 Você venceu o " + inimigo.getNome() + "!");
+                // Ganha XP ao vencer
+                pokemon.ganharXP(50);
                 return;
             }
 
@@ -326,7 +341,6 @@ public class Game {
 
                 int danoInimigo = inimigo.getAtaque() - pokemon.getDefesa();
 
-                // Garante que o dano é pelo menos 0 (não cura se a defesa for alta)
                 if (danoInimigo < 0) danoInimigo = 0;
 
                 if (danoInimigo == 0) {
@@ -344,7 +358,7 @@ public class Game {
         }
     }
 
-    private void treinar() {
+    private void treinar() throws FileNotFoundException {
         System.out.println("\n--- CAMPO DE TREINAMENTO ---");
         System.out.println("Escolha seu parceiro de treino");
         System.out.println("1. Cinderace");
@@ -355,6 +369,7 @@ public class Game {
         int escolha = 0;
         if (jogador.hasNextInt()) {
             escolha = jogador.nextInt();
+            jogador.nextLine();
         }
 
         int nivelTreino = pokemon.getLevel();
@@ -399,10 +414,9 @@ public class Game {
         batalhar(bonecoTreino);
 
         System.out.println("O treino acabou! Seu Pokémon se sente mais experiente.");
-        // pokemon.ganharXp(20); // Pode dar mais XP que batalha selvagem
     }
 
-    private void tentarFugir(NPCPokemon inimigo) {
+    private void tentarFugir(NPCPokemon inimigo) throws FileNotFoundException {
         System.out.println("Tentando escapar...");
         int sorteFuga = new java.util.Random().nextInt(100);
 
@@ -414,5 +428,4 @@ public class Game {
             batalhar(inimigo);
         }
     }
-
 }

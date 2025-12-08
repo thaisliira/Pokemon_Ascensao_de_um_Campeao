@@ -91,6 +91,10 @@ public abstract class Pokemon {
         this.level = level;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public void setExperiencia(int experiencia) {
         this.experiencia = experiencia;
     }
