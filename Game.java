@@ -89,6 +89,7 @@ public class Game {
             case 1:
                 tipoEscolhido = TipoPokemon.AGUA;
                 nomePokemon = "Squirtle";
+
                 FormaEvolutiva blastoise = new FormaEvolutiva("Blastoise", 80, 90, 70, 96, 13, TipoPokemon.AGUA, null);
                 FormaEvolutiva wartortle = new FormaEvolutiva("Wartortle", 60, 90, 60,80, 6, TipoPokemon.AGUA, blastoise);
                 formaInicial = new FormaEvolutiva("Squirtle", 30, 50, 30,60, 1, TipoPokemon.AGUA, wartortle);
@@ -105,6 +106,7 @@ public class Game {
             case 3:
                 tipoEscolhido = TipoPokemon.TERRA;
                 nomePokemon = "Bulbasaur";
+
                 FormaEvolutiva venusaur = new FormaEvolutiva("Venusaur", 90, 100, 60, 100, 10, TipoPokemon.TERRA, null);
                 FormaEvolutiva ivysaur = new FormaEvolutiva("Ivysaur", 60, 90, 50, 90, 6, TipoPokemon.TERRA, venusaur);
                 formaInicial = new FormaEvolutiva("Bulbasaur", 30, 40, 30,40, 1, TipoPokemon.TERRA,  ivysaur);
@@ -266,16 +268,7 @@ public class Game {
             int ataqueFinal = atkBase + nivelInimigo;
             int defesaFinal = defBase + (nivelInimigo / 2);
 
-            NPCPokemon inimigo = new NPCPokemon(
-                    tipoDoLocal,
-                    nomeInimigo,
-                    nivelInimigo,
-                    hpBase + (nivelInimigo * 5),
-                    ataqueFinal,
-                    ataqueFinal,
-                    defesaFinal,
-                    defesaFinal
-            );
+            NPCPokemon inimigo = new NPCPokemon(tipoDoLocal,nomeInimigo,nivelInimigo,hpBase + (nivelInimigo * 5), ataqueFinal, ataqueFinal, defesaFinal, defesaFinal);
 
             System.out.println("\n⚔️ CUIDADO! Um " + inimigo.getNome() + " (Nvl " + nivelInimigo + ") apareceu!");
             System.out.println("HP: " + inimigo.getHpMax() + " | Atk: " + inimigo.getAtaque() + " | Def: " + inimigo.getDefesa());
@@ -287,7 +280,7 @@ public class Game {
                 System.out.println("\nO que você vai fazer?");
                 System.out.println("1. Batalhar!");
                 System.out.println("2. Tentar Fugir");
-                System.out.println("3. Verificar características do meu Pokemon");
+                System.out.println("3. Verificar Status do meu Pokemon");
                 System.out.print("Faça sua escolha: ");
 
                 int decisao = 0;
@@ -362,6 +355,8 @@ public class Game {
         System.out.println("1. Cinderace");
         System.out.println("2. Lapras");
         System.out.println("3. Pikachu");
+        System.out.println("4. Psyduck");
+        System.out.println("5. Voltar");
         System.out.print("Sua escolha: ");
 
         int escolha = 0;
@@ -395,6 +390,8 @@ public class Game {
                 parceiroTreino = "Psyduck";
                 tipoParceiro = TipoPokemon.PSIQUICO;
                 break;
+            case 5:
+                menuPrincipal();
             default:
                 System.out.println("Escolha inválida! Não se preocupe, eu escolhi seu parceiro!");
                 break;

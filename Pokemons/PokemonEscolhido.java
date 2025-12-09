@@ -11,27 +11,15 @@ public class PokemonEscolhido extends Pokemon {
 
     private FormaEvolutiva formaAtual;
     private int moedas;
-    private ArrayList<Item> listaDeItens;
+    private ArrayList<Item> Inventario;
 
     public PokemonEscolhido(TipoPokemon tipo, String nome, int level, int experiencia, int hpAtual, int hpMax, Status status, FormaEvolutiva formaAtual, int moedas) {
 
-        super(
-                tipo,
-                nome,
-                level,
-                experiencia,
-                hpAtual,
-                hpMax,
-                formaAtual.getAtaqueBase(),
-                formaAtual.getAtaqueEspecial(),
-                formaAtual.getDefesaBase(),
-                formaAtual.getDefesaEspecial(),
-                status
-        );
+        super(tipo,nome,level,experiencia,hpAtual,hpMax,formaAtual.getAtaqueBase(),formaAtual.getAtaqueEspecial(),formaAtual.getDefesaBase(),formaAtual.getDefesaEspecial(), status);
 
         this.formaAtual = formaAtual;
         this.moedas = moedas;
-        this.listaDeItens = new ArrayList<>();
+        this.Inventario = new ArrayList<>();
     }
 
     public int getMoedas() {
@@ -118,8 +106,10 @@ public class PokemonEscolhido extends Pokemon {
 
         if (this.hpAtual <= 0) {
             System.out.println("Pokemon abatido, você perdeu! Tente salvar seu pokemon!");
+            this.status = Status.MORTO;
         } else {
             System.out.println("Você sobreviveu a esse round mas não baixe a guarda!");
+            this.status = Status.MACHUCADO;
         }
     }
 
@@ -152,7 +142,6 @@ public class PokemonEscolhido extends Pokemon {
 
         this.formaAtual = novaForma;
         this.setNome(novaForma.getNome());
-
         this.setAtaque(novaForma.getAtaqueBase());
         this.setAtaqueEspecial(novaForma.getAtaqueEspecial());
         this.setDefesa(novaForma.getDefesaBase());
@@ -161,8 +150,6 @@ public class PokemonEscolhido extends Pokemon {
         System.out.println("\n🌟 PARABÉNS! Seu Pokémon evoluiu para " + this.nome + "!");
         System.out.println("Seus atributos aumentaram drasticamente!");
         System.out.println("------------------------------------------------\n");
-
-        // 4. Gerar Arquivo de Texto com a Imagem
         imprimirArtePokemon();
     }
 
@@ -174,13 +161,19 @@ public class PokemonEscolhido extends Pokemon {
     }
 
     public void listarItens() {
-        if (listaDeItens.isEmpty()) {
+        if (Inventario.isEmpty()) {
             System.out.println("Sua mochila está vazia.");
         } else {
             System.out.println("\n=== SEU INVENTÁRIO ===");
-            for (int i = 0; i < listaDeItens.size(); i++) {
-                System.out.println((i + 1) + ". " + listaDeItens.get(i).getNome());
+            for (int i = 0; i < Inventario.size(); i++) {
+                System.out.println((i + 1) + ". " + Inventario.get(i).getNome());
             }
+        }
+    }
+
+    public void adicionarItem(Item item) {
+        Inventario.add(item);
+        System.out.println(item.getNome() + " foi adicionado à mochila!");
         }
     }
 }

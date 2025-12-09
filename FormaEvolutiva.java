@@ -25,43 +25,34 @@ public class FormaEvolutiva {
     }
 
     public String getNome() {
-
         return nome;
     }
 
     public int getAtaqueBase() {
-
         return ataqueBase;
     }
 
-    // Renomeado para getAtaqueEspecialBase() para ficar claro que vem do "DNA"
     public int getAtaqueEspecial() {
-
         return ataqueEspecial;
     }
 
     public int getDefesaBase() {
-
         return defesaBase;
     }
 
     public int getDefesaEspecial() {
-
         return defesaEspecial;
     }
 
     public int getLevelNecessario() {
-
         return levelNecessario;
     }
 
     public TipoPokemon getTipo() {
-
         return tipo;
     }
 
     public FormaEvolutiva getProximaForma() {
-
         return proximaForma;
     }
 }
