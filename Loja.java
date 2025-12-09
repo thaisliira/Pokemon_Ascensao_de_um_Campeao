@@ -16,8 +16,8 @@ public class Loja {
         estoque.add(new Item("Super Poção ", TipoItem.CURA, 35.0, "Recupera 100% do HP"));
         estoque.add(new Item("Poção ", TipoItem.CURA, 15.0, "Recupera 30 do HP"));
         estoque.add(new Item("Antídoto ", TipoItem.CURA, 30.0, "Remove veneno e permite atacar o inimigo"));
-        estoque.add(new Item("Berries ", TipoItem.COMIDA, 30.0, "Sacia em 35 a fome do Pokemon"));
-        estoque.add(new Item("Inseto ", TipoItem.COMIDA, 15.0, "Sacia em 15 a fome do Pokemon"));
+        estoque.add(new Item("Berries ", TipoItem.BATALHA, 30.0, "Aumenta o ataque do Pokemon em 15!"));
+        estoque.add(new Item("Inseto ", TipoItem.BATALHA, 15.0, "Aumenta a defesa do Pokemon em 20!"));
     }
 
     public void exibirEstoque() {

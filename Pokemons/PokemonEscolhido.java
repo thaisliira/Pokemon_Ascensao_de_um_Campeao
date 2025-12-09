@@ -13,7 +13,7 @@ public class PokemonEscolhido extends Pokemon {
     private int moedas;
     private ArrayList<Item> listaDeItens;
 
-    public PokemonEscolhido(TipoPokemon tipo, String nome, int level, int experiencia, int hpAtual, int hpMax, int nivelFome, int nivelEnergia, Status status, FormaEvolutiva formaAtual, int moedas) {
+    public PokemonEscolhido(TipoPokemon tipo, String nome, int level, int experiencia, int hpAtual, int hpMax, Status status, FormaEvolutiva formaAtual, int moedas) {
 
         super(
                 tipo,
@@ -22,8 +22,6 @@ public class PokemonEscolhido extends Pokemon {
                 experiencia,
                 hpAtual,
                 hpMax,
-                nivelFome,
-                nivelEnergia,
                 formaAtual.getAtaqueBase(),
                 formaAtual.getAtaqueEspecial(),
                 formaAtual.getDefesaBase(),
@@ -52,7 +50,6 @@ public class PokemonEscolhido extends Pokemon {
     public void exibirDetalhesPoke() {
         System.out.println("\n--- " + this.nome.toUpperCase() + " (Lvl " + this.level + ") ---");
         System.out.println("HP: " + this.hpAtual + "/" + this.hpMax);
-        System.out.println("Fome: " + this.nivelFome + "% | Energia: " + this.nivelEnergia + "%");
         System.out.println("Atk: " + this.ataque + " | Def: " + this.defesa);
         System.out.println("Status: " + this.status);
     }
@@ -67,6 +64,7 @@ public class PokemonEscolhido extends Pokemon {
             System.out.println("1. Ataque Físico");
             System.out.println("2. Ataque Especial");
             System.out.println("3. Inventário");
+            System.out.println("4. Exibir Status do meu Pokemon");
             System.out.print("Escolha: ");
 
             int escolha = 0;
@@ -89,7 +87,6 @@ public class PokemonEscolhido extends Pokemon {
                     inimigo.receberDano(dano); // TODO aqui subtraio o hp do inimigo
                     roundEncerrado = true;
                     break;
-
                 case 2:
                     dano = this.ataqueEspecial - inimigo.getDefesaEspecial();
 
@@ -101,11 +98,12 @@ public class PokemonEscolhido extends Pokemon {
                     inimigo.receberDano(dano);
                     roundEncerrado = true;
                     break;
-
                 case 3:
                     listarItens();
                     break;
-
+                case 4:
+                    exibirDetalhesPoke();
+                    break;
                 default:
                     System.out.println("Opção inválida!");
             }
@@ -122,7 +120,6 @@ public class PokemonEscolhido extends Pokemon {
             System.out.println("Pokemon abatido, você perdeu! Tente salvar seu pokemon!");
         } else {
             System.out.println("Você sobreviveu a esse round mas não baixe a guarda!");
-            exibirDetalhesPoke();
         }
     }
 
