@@ -11,7 +11,6 @@ public class PokemonEscolhido extends Pokemon {
 
     private FormaEvolutiva formaAtual;
     private int moedas;
-    private ArrayList<Golpes> listaDeGolpes;
     private ArrayList<Item> listaDeItens;
 
     public PokemonEscolhido(TipoPokemon tipo, String nome, int level, int experiencia, int hpAtual, int hpMax, int nivelFome, int nivelEnergia, Status status, FormaEvolutiva formaAtual, int moedas) {
@@ -34,7 +33,6 @@ public class PokemonEscolhido extends Pokemon {
 
         this.formaAtual = formaAtual;
         this.moedas = moedas;
-        this.listaDeGolpes = new ArrayList<>();
         this.listaDeItens = new ArrayList<>();
     }
 
