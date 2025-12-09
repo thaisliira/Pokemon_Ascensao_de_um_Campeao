@@ -171,9 +171,25 @@ public class PokemonEscolhido extends Pokemon {
         }
     }
 
-    public void adicionarItem(Item item) {
+    public void adcItemInventario(Item item) {
         Inventario.add(item);
         System.out.println(item.getNome() + " foi adicionado à mochila!");
+    }
+
+    public void adicionarMoedas(int quantidade) {
+        this.moedas += quantidade;
+        System.out.println("💰 Ganhou " + quantidade + " moedas! Saldo atual: " + this.moedas);
+    }
+
+    public void comprarItem(Item itemComprado) {
+
+        if(this.moedas > itemComprado.getPreco()) {
+            this.moedas -= itemComprado.getPreco();
+            System.out.println("Você comprou 1un do item " + itemComprado.getNome());
+            this.Inventario.add(itemComprado);
+            System.out.println("Saldo restante: " + this.moedas);
+        } else {
+            System.out.println("Você não tem moedas suficientes para realizar a compra");
         }
     }
 }

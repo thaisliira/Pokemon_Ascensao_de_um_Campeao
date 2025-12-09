@@ -11,16 +11,22 @@ import java.util.Scanner;
 
 public class Game {
 
-    private String nomeJogador;
+    protected String nomeJogador;
     private PokemonEscolhido pokemon;
     private ArrayList<NPCPokemon> selvagens;
     private ArrayList<NPCPokemon> pokemonTorneio;
     private Scanner jogador;
+    private Loja loja;
 
     public Game() {
         this.jogador = new Scanner(System.in);
         this.selvagens = new ArrayList<>();
         this.pokemonTorneio = new ArrayList<>();
+        this.loja = new Loja();
+    }
+
+    public String getNomeJogador() {
+        return nomeJogador;
     }
 
     /**
@@ -69,7 +75,6 @@ public class Game {
         int escolha = 0;
         if (jogador.hasNextInt()) {
             escolha = jogador.nextInt();
-            jogador.nextLine();
         }
 
         iniciarPokemon(escolha);
@@ -150,6 +155,7 @@ public class Game {
             System.out.print("Escolha: ");
 
             int escolha = 0;
+
             if (jogador.hasNextInt()) {
                 escolha = jogador.nextInt();
             }
@@ -175,13 +181,6 @@ public class Game {
     }
 
     /**
-     * Funcao para visitar a loja e comprar itens
-     */
-    private void visitarLoja() {
-        System.out.println("A loja está fechada para reforma! (Em construção...)");
-    }
-
-    /**
      * Funçao com menu de exploraçao
      * @throws FileNotFoundException
      */
@@ -198,7 +197,6 @@ public class Game {
 
         if (jogador.hasNextInt()) {
             escolha = jogador.nextInt();
-            jogador.nextLine();
         }
 
         Mapa mapaEscolhido = null;
@@ -233,7 +231,7 @@ public class Game {
 
         int encontrarInimigo = new java.util.Random().nextInt(100);
 
-        if (encontrarInimigo < 60) {
+        if (encontrarInimigo < 70) {
 
             TipoPokemon tipoDoLocal = mapa.getTipoInimigo();
             int nivelInimigo = (this.pokemon.getLevel() / 2) + 1;
@@ -274,7 +272,6 @@ public class Game {
             System.out.println("HP: " + inimigo.getHpMax() + " | Atk: " + inimigo.getAtaque() + " | Def: " + inimigo.getDefesa());
 
             boolean decisaoTomada = false;
-            pokemon.ganharXP(30);
 
             while (!decisaoTomada) {
                 System.out.println("\nO que você vai fazer?");
@@ -286,7 +283,6 @@ public class Game {
                 int decisao = 0;
                 if (jogador.hasNextInt()) {
                     decisao = jogador.nextInt();
-                    jogador.nextLine();
                 }
 
                 if (decisao == 1) {
@@ -304,12 +300,19 @@ public class Game {
                 else {
                     System.out.println("Você ficou paralisado de medo... A batalha começou!");
                     batalhar(inimigo);
+                    pokemon.ganharXP(10);
                     decisaoTomada = true;
                 }
             }
 
+        }
+        else if (encontrarInimigo < 90){
+            System.out.println("🍃 Você caminhou pelo " + mapa.getNome() + " e encontrou um item");
+            Item pocaoEncontrada = new Item("Poção da Floresta", Pokegotchi.Enum.TipoItem.CURA, 0.0, "Recupera 20 HP");
+            System.out.println("Você obteve: " + pocaoEncontrada.getNome());
+            pokemon.adcItemInventario(pocaoEncontrada);
         } else {
-            System.out.println("🍃 Você caminhou pelo " + mapa.getNome() + " e estava tudo tranquilo.");
+            System.out.println(" 🍃 Você caminhou pelo " + mapa.getNome() + " e estava tudo tranquilo.");
         }
     }
 
@@ -324,6 +327,7 @@ public class Game {
             if(vitoria) {
                 System.out.println("🏆 Você venceu o " + inimigo.getNome() + "!");
                 pokemon.ganharXP(50);
+                pokemon.adicionarMoedas(30);
                 return;
             }
 
@@ -399,7 +403,7 @@ public class Game {
 
         System.out.println("Iniciando treino contra " + parceiroTreino + "...");
 
-        NPCPokemon poketreino = new NPCPokemon( tipoParceiro, parceiroTreino, nivelTreino, 50 + (nivelTreino * 10), 5 + nivelTreino, 5 + nivelTreino, 2 + (nivelTreino / 2), 2 + (nivelTreino / 2));
+        NPCPokemon poketreino = new NPCPokemon( tipoParceiro, parceiroTreino, nivelTreino, 50 + (nivelTreino * 5), 10 + nivelTreino, 15 + nivelTreino, 5 + (nivelTreino / 2), 10 + (nivelTreino / 2));
 
         batalhar(poketreino);
 
@@ -413,9 +417,34 @@ public class Game {
         if (sorteFuga < 50) {
             System.out.println("💨 SUCESSO! Você fugiu com o rabo entre as pernas.");
         } else {
-            System.out.println("🚫 FALHA! O " + inimigo.getNome() + " bloqueou sua passagem!");
-            System.out.println("Você foi forçado a lutar!");
+            System.out.println("🚫 FALHOU! O " + inimigo.getNome() + " bloqueou sua passagem e agora terá que lutar!");
             batalhar(inimigo);
+        }
+    }
+
+    private void visitarLoja() {
+        System.out.println("\n--- BEM-VINDO À POKÉLOJA ---");
+        System.out.println("Saldo Atual: " + pokemon.getMoedas() + "$");
+
+        loja.exibirEstoque();
+
+        System.out.println("0. Sair da Loja");
+        System.out.print("Digite o número do item que quer comprar: ");
+
+        int escolha = -1;
+        if (jogador.hasNextInt()) {
+            escolha = jogador.nextInt();
+        }
+
+        if (escolha > 0) {
+            Item itemDesejado = loja.getEstoque().get(escolha-1);
+            if (itemDesejado != null) {
+                pokemon.comprarItem(itemDesejado);
+            } else {
+                System.out.println("Item não encontrado!");
+            }
+        } else {
+            System.out.println("Saindo da loja...");
         }
     }
 }
