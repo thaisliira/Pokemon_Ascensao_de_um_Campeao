@@ -7,7 +7,10 @@ import Pokegotchi.Enum.TipoPokemon;
 import Pokegotchi.Enum.Status;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
+
+import static java.lang.Thread.sleep;
 
 public class Game {
 
@@ -23,7 +26,7 @@ public class Game {
         pokemonTorneio.add(new NPCPokemon(TipoPokemon.PSIQUICO, "Mewtwo X", 10, 100, 70, 75, 60, 65));
         pokemonTorneio.add(new NPCPokemon(TipoPokemon.AGUA, "Suicune", 10, 100, 50, 60, 40, 50));
         pokemonTorneio.add(new NPCPokemon(TipoPokemon.LUTA, "Mega Lucario", 10, 100, 45, 55, 40, 45));
-        pokemonTorneio.add(new NPCPokemon(TipoPokemon.LUTA, "Articuno", 10, 100, 55, 65, 45, 55));
+        pokemonTorneio.add(new NPCPokemon(TipoPokemon.GELO, "Articuno", 10, 100, 55, 65, 45, 55));
         this.loja = new Loja();
     }
 
@@ -32,7 +35,9 @@ public class Game {
      * @throws FileNotFoundException
      */
     public void iniciar() throws FileNotFoundException {
-        System.out.println("                                   ,'\\\n" +
+        Audio.playMusic("AudioFiles/pokemon_theme.wav");
+
+        System.out.println(ConsoleColors.YELLOW_BRIGHT + "                                   ,'\\\n" +
                 "    _.----.        ____         ,'  _\\   ___    ___     ____\n" +
                 "_,-'       `.     |    |  /`.   \\,-'    |   \\  /   |   |    \\  |`.\n" +
                 "\\      __    \\    '-.  | /   `.  ___    |    \\/    |   '-.   \\ |  |\n" +
@@ -44,7 +49,7 @@ public class Game {
                 "       \\    \\ `.__,'|  |`-._    `|      |__| \\/ |  `.__,'|  | |   |\n" +
                 "        \\_.-'       |__|    `-._ |              '-.|     '-.| |   |\n" +
                 "                                `'                            '-._|  \n" +
-                "\n" +
+                "\n" + ConsoleColors.RESET +
                 "                        POKÉMON: ASCENSÃO DE UM CAMPEÃO\n");
         System.out.println("1. Jogar");
         System.out.println("2. Sair");
@@ -55,9 +60,20 @@ public class Game {
             jogador.nextLine();
 
             if (opcao == 1) {
+                Audio.stopMusic();
                 iniciarJogo();
             } else {
-                System.out.println("Já vai? Que pena! Até a próxima!");
+                System.out.println("Já vai? Que pena! Até a próxima!\n" + ConsoleColors.YELLOW_BRIGHT + "⡏⠉⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣿\n" +
+                        "⣿⠀⠀⠀⠈⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠉⠁⠀⣿\n" +
+                        "⣿⣧⡀⠀⠀⠀⠀⠙⠿⠿⠿⠻⠿⠿⠟⠿⠛⠉⠀⠀⠀⠀⠀⣸⣿\n" +
+                        "⣿⣿⣷⣄⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿\n" +
+                        "⣿⣿⣿⣿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⣴⣿⣿⣿⣿\n" +
+                        "⣿⣿⣿⡟⠀⠀⢰⣹⡆⠀⠀⠀⠀⠀⠀⣭⣷⠀⠀⠀⠸⣿⣿⣿⣿\n" +
+                        "⣿⣿⣿⠃⠀⠀⠈⠉⠀⠀⠤⠄⠀⠀⠀⠉⠁⠀⠀⠀⠀⢿⣿⣿⣿\n" +
+                        "⣿⣿⣿⢾⣿⣷⠀⠀⠀⠀⡠⠤⢄⠀⠀⠀⠠⣿⣿⣷⠀⢸⣿⣿⣿\n" +
+                        "⣿⣿⣿⡀⠉⠀⠀⠀⠀⠀⢄⠀⢀⠀⠀⠀⠀⠉⠉⠁⠀⠀⣿⣿⣿\n" +
+                        "⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⣿\n" +
+                        "⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿");
             }
         } else {
             System.out.println("Entrada inválida. Tente outra opção.");
@@ -79,9 +95,9 @@ public class Game {
 
         System.out.println("\nPrazer em te conhecer, " + this.nomeJogador + "!" +"\n");
         System.out.println("Agora é a hora de escolher seu parceiro:");
-        System.out.println("1. Pokebola (Elemento Água)");
-        System.out.println("2. Pokebola (Elemento Fogo)");
-        System.out.println("3. Pokebola (Elemento Terra)");
+        System.out.println("1. Pokébola (Elemento Água)");
+        System.out.println("2. Pokébola (Elemento Fogo)");
+        System.out.println("3. Pokébola (Elemento Terra)");
         System.out.print("Qual elemento você prefere? (1-3): ");
 
         int escolha = 0;
@@ -103,6 +119,7 @@ public class Game {
 
         switch (escolha) {
             case 1:
+                Audio.playMusic("AudioFiles/squirtle.wav");
                 tipoEscolhido = TipoPokemon.AGUA;
                 nomePokemon = "Squirtle";
 
@@ -111,6 +128,7 @@ public class Game {
                 formaInicial = new FormaEvolutiva("Squirtle", 30, 50, 30,60, 1, TipoPokemon.AGUA, wartortle);
                 break;
             case 2:
+                Audio.playMusic("AudioFiles/charmander.wav");
                 tipoEscolhido = TipoPokemon.FOGO;
                 nomePokemon = "Charmander";
 
@@ -120,6 +138,7 @@ public class Game {
                 formaInicial = new FormaEvolutiva("Charmander", 40, 60, 25, 50, 1, TipoPokemon.FOGO, charmeleon);
                 break;
             case 3:
+                Audio.playMusic("AudioFiles/bulbasaur.wav");
                 tipoEscolhido = TipoPokemon.TERRA;
                 nomePokemon = "Bulbasaur";
 
@@ -129,6 +148,7 @@ public class Game {
                 break;
             default:
                 System.out.println("Ops, opção inválida! Eu escolho por você!");
+                Audio.playMusic("AudioFiles/ditto.wav");
                 tipoEscolhido = TipoPokemon.NORMAL;
                 nomePokemon = "Ditto";
                 formaInicial = new FormaEvolutiva("Ditto", 20, 25, 10, 15, 1, TipoPokemon.NORMAL, null);
@@ -155,14 +175,13 @@ public class Game {
     public void menuPrincipal() throws FileNotFoundException {
         boolean jogando = true;
         while (jogando) {
-            System.out.println("\n--- MENU PRINCIPAL ---");
-            System.out.println("O que deseja fazer?");
+            System.out.println("\n-------- MENU PRINCIPAL --------");
+            System.out.println("Por onde começamos?");
             System.out.println("1. Explorar");
             System.out.println("2. Treinar");
-            System.out.println("3. Loja");
+            System.out.println("3. Ir à Loja");
             System.out.println("4. Sair");
             System.out.print("Escolha: ");
-
             int escolha = 0;
 
             if (jogador.hasNextInt()) {
@@ -194,11 +213,11 @@ public class Game {
      * @throws FileNotFoundException
      */
     public void menuExplorar() throws FileNotFoundException {
-        System.out.println("\n--- MAPA DE EXPLORAÇÃO ---");
+        System.out.println("\n------- MAPA DE EXPLORAÇÃO -------");
         System.out.println("Para onde deseja viajar?");
         System.out.println("1. Floresta Viridian");
-        System.out.println("2. Vulcão em Chamas");
-        System.out.println("3. Lago Sombrio");
+        System.out.println("2. Vulcão Cinnabar");
+        System.out.println("3. Lago da Fúria");
         System.out.println("4. Usina Elétrica");
         System.out.println("5. Voltar");
         System.out.print("Escolha sua rota (1-4): ");
@@ -236,7 +255,8 @@ public class Game {
 
     public void iniciarExploracao(Mapa mapa) throws FileNotFoundException {
 
-        int encontrarInimigo = new java.util.Random().nextInt(100);
+        Random rd = new Random();
+        int encontrarInimigo = rd.nextInt(100);
 
         if (encontrarInimigo < 70) {
 
@@ -249,11 +269,11 @@ public class Game {
 
             switch (tipoDoLocal) {
                 case FOGO:
-                    nomeInimigo = "Scorbunny";
+                    nomeInimigo = "Ponyta";
                     hpBase = 70; atkBase = 40; defBase = 30;
                     break;
                 case AGUA:
-                    nomeInimigo = "Totodile";
+                    nomeInimigo = "Gyarados";
                     hpBase = 80; atkBase = 50; defBase = 40;
                     break;
                 case TERRA:
@@ -313,7 +333,7 @@ public class Game {
         }
         else if (encontrarInimigo < 90){
             System.out.println("🍃 Você caminhou pelo " + mapa.getNome() + " e encontrou um item");
-            Item pocaoEncontrada = new Item("Poção de cura", Pokegotchi.Enum.TipoItem.CURA, 0.0, "Recupera 20 HP");
+            Item pocaoEncontrada = new Item("Poção de cura", Pokegotchi.Enum.TipoItem.CURA, 0.0, "Recupera 20 HP",20);
             System.out.println("Você obteve: " + pocaoEncontrada.getNome());
             pokemon.adcItemInventario(pocaoEncontrada);
         } else {
@@ -415,7 +435,8 @@ public class Game {
 
     public void tentarFugir(NPCPokemon inimigo) throws FileNotFoundException {
         System.out.println("Tentando escapar...");
-        int sorteFuga = new java.util.Random().nextInt(100);
+        Random rd = new Random();
+        int sorteFuga = rd.nextInt(100);
 
         if (sorteFuga < 50) {
             System.out.println("💨 SUCESSO! Você fugiu com o rabo entre as pernas.");

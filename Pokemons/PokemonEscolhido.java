@@ -2,6 +2,7 @@ package Pokegotchi.Pokemons;
 
 import Pokegotchi.*;
 import Pokegotchi.Enum.Status;
+import Pokegotchi.Enum.TipoItem;
 import Pokegotchi.Enum.TipoPokemon;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -25,10 +26,6 @@ public class PokemonEscolhido extends Pokemon {
         return moedas;
     }
 
-    public void setMoedas(int moedas) {
-        this.moedas = moedas;
-    }
-
     public FormaEvolutiva getFormaAtual() {
         return formaAtual;
     }
@@ -46,7 +43,7 @@ public class PokemonEscolhido extends Pokemon {
         boolean roundEncerrado = false;
 
         while (!roundEncerrado) {
-            System.out.println("\n--- SEU ROUND (" + this.nome + ") ---");
+            System.out.println("\n------ ROUND (" + this.nome + ") ------");
             System.out.println("1. Ataque Físico");
             System.out.println("2. Ataque Especial");
             System.out.println("3. Inventário");
@@ -128,6 +125,9 @@ public class PokemonEscolhido extends Pokemon {
         if (formaAtual.getProximaForma() != null && this.level >= formaAtual.getProximaForma().getLevelNecessario()) {
             evoluir();
         }
+        if (this.level == 9) {
+            System.out.println("Seu Pokemon está quase pronto para participar do Torneio!");
+        }
     }
 
     public void evoluir() throws FileNotFoundException {
@@ -189,5 +189,38 @@ public class PokemonEscolhido extends Pokemon {
         } else {
             System.out.println("Você não tem moedas suficientes para realizar a compra");
         }
+    }
+
+    public void usarItem(Item itemUsado) throws FileNotFoundException {
+
+        if (!this.Inventario.contains(itemUsado)) {
+            System.out.println("Você não possui este item no inventário!");
+            return;
+        }
+
+        System.out.println("Você usou " + itemUsado.getNome() + "!");
+
+        if (itemUsado.getItem() == TipoItem.CURA) {
+
+            int curaReal = Math.min(itemUsado.getEfeito(), this.hpMax - this.hpAtual);
+            this.hpAtual += curaReal;
+            System.out.println("💖 " + this.nome + " recuperou " + curaReal + " HP! (" + this.hpAtual + "/" + this.hpMax + ")");
+
+        } else if (itemUsado.getItem() == TipoItem.ATAQUE) { // Ou ATAQUE/DEFESA dependendo do seu Enum
+                this.ataque += itemUsado.getEfeito();
+                System.out.println("⚔️ Ataque aumentado em " + itemUsado.getEfeito() + "!");
+
+        } else if (itemUsado.getItem() == TipoItem.DEFESA) {
+                this.defesa += itemUsado.getEfeito();
+                System.out.println("🛡️ Defesa aumentada em " + itemUsado.getEfeito() + "!");
+
+        } else if (itemUsado.getItem() == TipoItem.NIVEL) {
+            subirDeNivel();
+
+        } else {
+            System.out.println("Item desconhecido ou sem efeito.");
+        }
+
+        this.Inventario.remove(itemUsado);
     }
 }

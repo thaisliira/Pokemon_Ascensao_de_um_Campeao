@@ -2,7 +2,6 @@ package Pokegotchi.Pokemons;
 
 import Pokegotchi.Enum.Status;
 import Pokegotchi.Enum.TipoPokemon;
-import Pokegotchi.Pokemons.Pokemon;
 
 public class NPCPokemon extends Pokemon {
 

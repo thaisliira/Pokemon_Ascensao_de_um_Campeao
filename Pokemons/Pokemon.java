@@ -31,10 +31,6 @@ public abstract class Pokemon {
         this.status = status;
     }
 
-    public TipoPokemon getTipo() {
-        return tipo;
-    }
-
     public String getNome() {
         return nome;
     }
@@ -59,20 +55,12 @@ public abstract class Pokemon {
         return ataque;
     }
 
-    public int getAtaqueEspecial() {
-        return ataqueEspecial;
-    }
-
     public int getDefesa() {
         return defesa;
     }
 
     public int getDefesaEspecial() {
         return defesaEspecial;
-    }
-
-    public Status getStatus() {
-        return status;
     }
 
     public void setNome(String nome) {

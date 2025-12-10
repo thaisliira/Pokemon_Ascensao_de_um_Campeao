@@ -7,12 +7,14 @@ public class Item {
     private String nome;
     private TipoItem item;
     private Double preco;
-    private String efeito;
+    private String descEfeito;
+    private int efeito;
 
-    public Item(String nome, TipoItem item, Double preco, String efeito) {
+    public Item(String nome, TipoItem item, Double preco, String descEfeito, int efeito) {
         this.nome = nome;
         this.item = item;
         this.preco = preco;
+        this.descEfeito = descEfeito;
         this.efeito = efeito;
     }
 
@@ -28,11 +30,15 @@ public class Item {
         return preco;
     }
 
-    public String getEfeito() {
+    public String getDescEfeito() {
+        return descEfeito;
+    }
+
+    public int getEfeito() {
         return efeito;
     }
 
     public void mostrarItem() {
-        System.out.println("- " + nome + " (" + preco + "$): " + efeito);
+        System.out.println("- " + nome + " (" + preco + "$): " + descEfeito);
     }
 }

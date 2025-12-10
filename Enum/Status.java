@@ -1,5 +1,5 @@
 package Pokegotchi.Enum;
 
 public enum Status {
-    NORMAL, MACHUCADO, FELIZ, DESMAIADO, MORTO
+    NORMAL, MACHUCADO, FELIZ, MORTO
 }
