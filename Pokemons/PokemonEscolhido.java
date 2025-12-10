@@ -14,7 +14,6 @@ public class PokemonEscolhido extends Pokemon {
     private ArrayList<Item> Inventario;
 
     public PokemonEscolhido(TipoPokemon tipo, String nome, int level, int experiencia, int hpAtual, int hpMax, Status status, FormaEvolutiva formaAtual, int moedas) {
-
         super(tipo,nome,level,experiencia,hpAtual,hpMax,formaAtual.getAtaqueBase(),formaAtual.getAtaqueEspecial(),formaAtual.getDefesaBase(),formaAtual.getDefesaEspecial(), status);
 
         this.formaAtual = formaAtual;
@@ -31,7 +30,6 @@ public class PokemonEscolhido extends Pokemon {
     }
 
     public FormaEvolutiva getFormaAtual() {
-
         return formaAtual;
     }
 
@@ -56,9 +54,9 @@ public class PokemonEscolhido extends Pokemon {
             System.out.print("Escolha: ");
 
             int escolha = 0;
+
             if(jogador.hasNextInt()) {
                 escolha = jogador.nextInt();
-                jogador.nextLine();
             }
 
             int dano = 0;
@@ -72,7 +70,7 @@ public class PokemonEscolhido extends Pokemon {
                     System.out.println("👊 " + this.nome + " usou um ataque físico!");
                     System.out.println("💥 Causou " + dano + " de dano!");
 
-                    inimigo.receberDano(dano); // TODO aqui subtraio o hp do inimigo
+                    inimigo.receberDano(dano);
                     roundEncerrado = true;
                     break;
                 case 2:
@@ -123,7 +121,7 @@ public class PokemonEscolhido extends Pokemon {
         }
     }
 
-    private void subirDeNivel() throws FileNotFoundException {
+    public void subirDeNivel() throws FileNotFoundException {
         this.level++;
         System.out.println("🎉 LEVEL UP! " + this.nome + " subiu para o nível " + this.level + "!");
 
@@ -132,11 +130,11 @@ public class PokemonEscolhido extends Pokemon {
         }
     }
 
-    private void evoluir() throws FileNotFoundException {
+    public void evoluir() throws FileNotFoundException {
         FormaEvolutiva novaForma = formaAtual.getProximaForma();
 
         System.out.println("\n------------------------------------------------");
-        System.out.println("✨ O quê? " + this.nome + " está evoluindo!");
+        System.out.println("✨ O quê? O que está acontecendo? " + this.nome + " está evoluindo!");
         System.out.println("...... (luz brilhante) ......");
         System.out.println("......... (forma mudando) .........");
 

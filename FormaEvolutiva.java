@@ -48,10 +48,6 @@ public class FormaEvolutiva {
         return levelNecessario;
     }
 
-    public TipoPokemon getTipo() {
-        return tipo;
-    }
-
     public FormaEvolutiva getProximaForma() {
         return proximaForma;
     }

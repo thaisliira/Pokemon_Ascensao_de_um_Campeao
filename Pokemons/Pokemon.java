@@ -75,24 +75,8 @@ public abstract class Pokemon {
         return status;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public void setExperiencia(int experiencia) {
-        this.experiencia = experiencia;
-    }
-
-    public void setHpAtual(int hpAtual) {
-        this.hpAtual = hpAtual;
-    }
-
-    public void setHpMax(int hpMax) {
-        this.hpMax = hpMax;
     }
 
     public void setAtaque(int ataque) {
