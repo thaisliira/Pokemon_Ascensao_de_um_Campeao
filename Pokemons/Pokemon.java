@@ -87,6 +87,10 @@ public abstract class Pokemon {
 
     public abstract boolean atacar(Pokemon inimigo) throws FileNotFoundException;
 
+    /**
+     * Função comum para receber dano de ambos os pokemons (pokemon herói e inimigo)
+     * @param dano subtrai do valor do HP
+     */
     public void receberDano(int dano) {
         this.hpAtual -= dano;
         if (this.hpAtual < 0) {
@@ -94,5 +98,4 @@ public abstract class Pokemon {
         }
         System.out.println(this.nome + " perdeu " + dano + " HP! (Vida Restante: " + this.hpAtual + "/" + this.hpMax + ")");
     }
-
 }

@@ -38,6 +38,9 @@ public class Item {
         return efeito;
     }
 
+    /**
+     * Função que exibe o nome do item, preço e descrição do efeito
+     */
     public void mostrarItem() {
         System.out.println("- " + nome + " (" + preco + "$): " + descEfeito);
     }

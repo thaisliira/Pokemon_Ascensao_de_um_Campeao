@@ -2,7 +2,6 @@ package Pokegotchi;
 
 import Pokegotchi.Enum.Mapa;
 import Pokegotchi.Pokemons.NPCPokemon;
-import Pokegotchi.Pokemons.Pokemon;
 import Pokegotchi.Pokemons.PokemonEscolhido;
 import Pokegotchi.Enum.TipoPokemon;
 import Pokegotchi.Enum.Status;
@@ -10,8 +9,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-
-import static java.lang.Thread.sleep;
 
 public class Game {
 
@@ -87,7 +84,7 @@ public class Game {
     }
 
     /**
-     * Função com menu de Nome do jogador e escolha do pokemon
+     * Função com menu de escolha do nome do jogador e escolher pokemon
      *
      * @throws FileNotFoundException
      */
@@ -167,8 +164,7 @@ public class Game {
         System.out.println("PARABÉNS!");
         System.out.println("Você escolheu o " + nomePokemon + "!");
         this.pokemon.imprimirArtePokemon();
-        System.out.println("HP atual: " + this.pokemon.getHpAtual() + " | " + "XP Atual: " + this.pokemon.getExperiencia());
-        System.out.println("Ataque Básico: " + this.pokemon.getFormaAtual().getAtaqueBase() + " | " + "Defesa Básica: " + this.pokemon.getFormaAtual().getDefesaBase());
+        this.pokemon.exibirDetalhesPoke();
         System.out.println("Quantidade de moedas: " + this.pokemon.getMoedas());
         System.out.println("Sua jornada começa agora...");
 
@@ -269,10 +265,8 @@ public class Game {
                     return;
                 default:
                     System.out.println("⚠️ Esse local não existe no mapa!");
-                    continue; // volta para o início do loop
+                    break;
             }
-
-            // Garantido que mapaEscolhido não é null
             System.out.println("Viajando para " + mapaEscolhido.getNome());
             iniciarExploracao(mapaEscolhido);
         }
@@ -285,6 +279,7 @@ public class Game {
      */
     public void iniciarExploracao(Mapa mapa) throws FileNotFoundException {
 
+        // Função de probalidade de encontro com pokemon selvagem
         Random rd = new Random();
         int encontrarInimigo = rd.nextInt(100);
 
@@ -338,7 +333,7 @@ public class Game {
                 }
 
                 if (decisao == 1) {
-                    System.out.println("Você decidiu batalhar, boa sorte!");
+                    System.out.println("\nVocê decidiu batalhar, boa sorte!");
                     batalhar(inimigo);
                     break;
                 }
@@ -355,28 +350,26 @@ public class Game {
                     break;
                 }
             }
-        }
-        else if (encontrarInimigo < 90){
-            System.out.println("🍃 Você caminhou pelo " + mapa.getNome() + " e encontrou um item");
+        } else if (encontrarInimigo < 90){
+            System.out.println("\n🍃 Você caminhou pelo " + mapa.getNome() + " e encontrou um item");
             Item pocaoEncontrada = new Item("Poção de cura", Pokegotchi.Enum.TipoItem.CURA, 0.0, "Recupera 20 HP",20);
-            System.out.println("Você obteve: " + pocaoEncontrada.getNome());
+            System.out.println("Obteve: " + pocaoEncontrada.getNome());
             pokemon.adcItemInventario(pocaoEncontrada);
         } else {
-            System.out.println(" 🍃 Você caminhou pelo " + mapa.getNome() + " e estava tudo tranquilo.");
+            System.out.println("\n🍃 Você caminhou pelo " + mapa.getNome() + " e estava tudo tranquilo.");
         }
     }
 
     public void batalhar(NPCPokemon inimigo) throws FileNotFoundException {
 
-        System.out.println("------ Batalha Iniciada -------");
-
         while(pokemon.getHpAtual() > 0 && inimigo.getHpAtual() > 0) {
 
+            // condição para saber se derrotou o NPC inimigo
             boolean vitoria = pokemon.atacar(inimigo);
 
             if(vitoria) {
                 System.out.println("🏆 Você venceu o " + inimigo.getNome() + "!");
-                boolean pronto = pokemon.ganharXP(50);
+                boolean pronto = pokemon.ganharXP(40);
 
                 if (pronto) {
                     torneioPokemon();

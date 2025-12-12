@@ -23,11 +23,14 @@ public class Loja {
         return estoque;
     }
 
+    /**
+     * Função que permite exibir o estoque da loja
+     */
     public void exibirEstoque() {
         for (int i = 0; i < estoque.size(); i++) {
-            Item item = estoque.get(i);
+            Item itemLoja = estoque.get(i);
             System.out.print((i + 1) + ". ");
-            item.mostrarItem();
+            itemLoja.mostrarItem();
         }
     }
 }
