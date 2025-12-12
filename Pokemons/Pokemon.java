@@ -3,6 +3,8 @@ package Pokegotchi.Pokemons;
 import Pokegotchi.Enum.Status;
 import Pokegotchi.Enum.TipoPokemon;
 
+import java.io.FileNotFoundException;
+
 public abstract class Pokemon {
 
     protected TipoPokemon tipo;
@@ -83,7 +85,7 @@ public abstract class Pokemon {
         this.defesaEspecial = defesaEspecial;
     }
 
-    public abstract boolean atacar(Pokemon inimigo);
+    public abstract boolean atacar(Pokemon inimigo) throws FileNotFoundException;
 
     public void receberDano(int dano) {
         this.hpAtual -= dano;
@@ -92,4 +94,5 @@ public abstract class Pokemon {
         }
         System.out.println(this.nome + " perdeu " + dano + " HP! (Vida Restante: " + this.hpAtual + "/" + this.hpMax + ")");
     }
+
 }

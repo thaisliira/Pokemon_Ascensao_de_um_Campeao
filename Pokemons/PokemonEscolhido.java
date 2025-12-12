@@ -38,7 +38,7 @@ public class PokemonEscolhido extends Pokemon {
     }
 
     @Override
-    public boolean atacar(Pokemon inimigo) {
+    public boolean atacar(Pokemon inimigo) throws FileNotFoundException {
         Scanner jogador = new Scanner(System.in);
         boolean roundEncerrado = false;
 
@@ -102,7 +102,7 @@ public class PokemonEscolhido extends Pokemon {
         if (this.hpAtual <= 0) {
             System.out.println("Pokemon abatido, você perdeu! Tente salvar seu pokemon!");
             this.status = Status.MORTO;
-        } else {
+        } else if (this.hpAtual != 100){
             System.out.println("Você sobreviveu a esse round mas não baixe a guarda!");
             this.status = Status.MACHUCADO;
         }
@@ -110,7 +110,7 @@ public class PokemonEscolhido extends Pokemon {
 
     public boolean ganharXP(int ganhoDeXP) throws FileNotFoundException {
         this.experiencia += ganhoDeXP;
-        System.out.println("✨ " + this.nome + " ganhou " + ganhoDeXP + " experiência!");
+        System.out.println("\n✨ " + this.nome + " ganhou " + ganhoDeXP + " experiência!");
 
         boolean prontoParaTorneio = false;
 
@@ -171,13 +171,38 @@ public class PokemonEscolhido extends Pokemon {
         System.out.println("\n");
     }
 
-    public void listarItens() {
-        if (Inventario.isEmpty()) {
-            System.out.println("Sua mochila está vazia.");
-        } else {
+    public void listarItens() throws FileNotFoundException {
+        while (true) {
+            if (this.Inventario.isEmpty()) {
+                System.out.println("🎒 Sua mochila está vazia.");
+                return;
+            }
+
             System.out.println("\n=== SEU INVENTÁRIO ===");
-            for (int i = 0; i < Inventario.size(); i++) {
-                System.out.println((i + 1) + ". " + Inventario.get(i).getNome());
+            int i = 1;
+            for (Item item : this.Inventario) {
+                System.out.println(i + ". " + item.getNome());
+                i++;
+            }
+            System.out.println("0. Voltar");
+
+            System.out.print("Escolha o número do item para usar (ou 0 para voltar): ");
+            Scanner sc = new Scanner(System.in);
+            int escolha = -1;
+
+            if (sc.hasNextInt()) {
+                escolha = sc.nextInt();
+            }
+
+            if (escolha == 0) {
+                return;
+            }
+            else if (escolha > 0 && escolha <= this.Inventario.size()) {
+                Item itemEscolhido = this.Inventario.get(escolha - 1);
+                usarItem(itemEscolhido);
+
+            } else {
+                System.out.println("⚠️ Escolha inválida!");
             }
         }
     }

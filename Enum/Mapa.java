@@ -3,9 +3,9 @@ package Pokegotchi.Enum;
 public enum Mapa {
 
     FLORESTA("Floresta Viridian", TipoPokemon.TERRA),
-    VULCAO("Parque do Vulcão Wela", TipoPokemon.FOGO),
+    VULCAO("Parque do Vulcão Cinnabar", TipoPokemon.FOGO),
     LAGO("Lago da Fúria", TipoPokemon.AGUA),
-    USINA("Usina Nova Mauville", TipoPokemon.ELETRICO);
+    USINA("Usina de Choque", TipoPokemon.ELETRICO);
 
     private String nome;
     private TipoPokemon tipoInimigo;

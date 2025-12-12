@@ -31,8 +31,13 @@ public class Game {
         this.loja = new Loja();
     }
 
+    public String getNomeJogador() {
+        return nomeJogador;
+    }
+
     /**
      * Função que tem o menu iniciar o jogo
+     *
      * @throws FileNotFoundException
      */
     public void iniciar() throws FileNotFoundException {
@@ -83,6 +88,7 @@ public class Game {
 
     /**
      * Função com menu de Nome do jogador e escolha do pokemon
+     *
      * @throws FileNotFoundException
      */
     public void iniciarJogo() throws FileNotFoundException {
@@ -93,7 +99,7 @@ public class Game {
                 Seu objetivo inicial é simples: escolher o elemento que definirá sua rota de evolução — água, fogo ou terra.""");
         System.out.print("Primeiro, me diz, qual é o seu nome? ");
         this.nomeJogador = jogador.nextLine();
-        System.out.println("Prazer em te conhecer, " + this.nomeJogador + "!" +"\n");
+        System.out.println("Prazer em te conhecer, " + this.nomeJogador + "!" + "\n");
         System.out.println("Agora é a hora de escolher seu parceiro:");
         System.out.println("1. Pokébola (Elemento Água)");
         System.out.println("2. Pokébola (Elemento Fogo)");
@@ -109,6 +115,7 @@ public class Game {
 
     /**
      * Funcao que determina as caracteristicas do pokemon escolhido de acordo com o tipo
+     *
      * @param escolha
      * @throws FileNotFoundException
      */
@@ -124,8 +131,8 @@ public class Game {
                 nomePokemon = "Squirtle";
 
                 FormaEvolutiva blastoise = new FormaEvolutiva("Blastoise", 80, 90, 70, 96, 13, TipoPokemon.AGUA, null);
-                FormaEvolutiva wartortle = new FormaEvolutiva("Wartortle", 60, 90, 60,80, 6, TipoPokemon.AGUA, blastoise);
-                formaInicial = new FormaEvolutiva("Squirtle", 30, 50, 30,60, 1, TipoPokemon.AGUA, wartortle);
+                FormaEvolutiva wartortle = new FormaEvolutiva("Wartortle", 60, 90, 60, 80, 6, TipoPokemon.AGUA, blastoise);
+                formaInicial = new FormaEvolutiva("Squirtle", 40, 50, 30, 60, 1, TipoPokemon.AGUA, wartortle);
                 break;
             case 2:
                 Audio.playMusic("AudioFiles/charmander.wav");
@@ -135,7 +142,7 @@ public class Game {
                 FormaEvolutiva megaCharizard = new FormaEvolutiva("Mega Charizard", 120, 130, 70, 110, 13, TipoPokemon.FOGO, null);
                 FormaEvolutiva charizard = new FormaEvolutiva("Charizard", 80, 110, 50, 90, 10, TipoPokemon.FOGO, megaCharizard);
                 FormaEvolutiva charmeleon = new FormaEvolutiva("Charmeleon", 50, 90, 40, 70, 6, TipoPokemon.FOGO, charizard);
-                formaInicial = new FormaEvolutiva("Charmander", 40, 60, 25, 50, 1, TipoPokemon.FOGO, charmeleon);
+                formaInicial = new FormaEvolutiva("Charmander", 45, 60, 25, 50, 1, TipoPokemon.FOGO, charmeleon);
                 break;
             case 3:
                 Audio.playMusic("AudioFiles/bulbasaur.wav");
@@ -144,7 +151,7 @@ public class Game {
 
                 FormaEvolutiva venusaur = new FormaEvolutiva("Venusaur", 90, 100, 60, 100, 10, TipoPokemon.TERRA, null);
                 FormaEvolutiva ivysaur = new FormaEvolutiva("Ivysaur", 60, 90, 50, 90, 6, TipoPokemon.TERRA, venusaur);
-                formaInicial = new FormaEvolutiva("Bulbasaur", 30, 40, 30,40, 1, TipoPokemon.TERRA,  ivysaur);
+                formaInicial = new FormaEvolutiva("Bulbasaur", 35, 40, 30, 40, 1, TipoPokemon.TERRA, ivysaur);
                 break;
             default:
                 System.out.println("Ops, opção inválida! Eu escolho por você!");
@@ -155,7 +162,7 @@ public class Game {
                 break;
         }
 
-        this.pokemon = new PokemonEscolhido( tipoEscolhido,  nomePokemon, 1, 0, 100, 100, Status.FELIZ,  formaInicial,  100);
+        this.pokemon = new PokemonEscolhido(tipoEscolhido, nomePokemon, 1, 0, 100, 100, Status.FELIZ, formaInicial, 100);
 
         System.out.println("PARABÉNS!");
         System.out.println("Você escolheu o " + nomePokemon + "!");
@@ -170,17 +177,18 @@ public class Game {
 
     /**
      * Função com menu principal de açoes: explorar, treinar, loja ou sair
+     *
      * @throws FileNotFoundException
      */
     public void menuPrincipal() throws FileNotFoundException {
-        boolean jogando = true;
-        while (jogando) {
+        while (true) {
             System.out.println("\n-------- MENU PRINCIPAL --------");
             System.out.println("Por onde começamos?");
             System.out.println("1. Explorar");
             System.out.println("2. Treinar");
             System.out.println("3. Ir à Loja");
-            System.out.println("4. Sair");
+            System.out.println("4. Inventário");
+            System.out.println("5. Sair");
             System.out.print("Escolha: ");
             int escolha = 0;
 
@@ -199,9 +207,21 @@ public class Game {
                     visitarLoja();
                     break;
                 case 4:
-                    System.out.println("Até a próxima!");
-                    jogando = false;
+                    pokemon.listarItens();
                     break;
+                case 5:
+                    System.out.println("Já vai? Que pena! Até a próxima!\n" + ConsoleColors.YELLOW_BRIGHT + "⡏⠉⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣿\n" +
+                            "⣿⠀⠀⠀⠈⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠉⠁⠀⣿\n" +
+                            "⣿⣧⡀⠀⠀⠀⠀⠙⠿⠿⠿⠻⠿⠿⠟⠿⠛⠉⠀⠀⠀⠀⠀⣸⣿\n" +
+                            "⣿⣿⣷⣄⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿\n" +
+                            "⣿⣿⣿⣿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⣴⣿⣿⣿⣿\n" +
+                            "⣿⣿⣿⡟⠀⠀⢰⣹⡆⠀⠀⠀⠀⠀⠀⣭⣷⠀⠀⠀⠸⣿⣿⣿⣿\n" +
+                            "⣿⣿⣿⠃⠀⠀⠈⠉⠀⠀⠤⠄⠀⠀⠀⠉⠁⠀⠀⠀⠀⢿⣿⣿⣿\n" +
+                            "⣿⣿⣿⢾⣿⣷⠀⠀⠀⠀⡠⠤⢄⠀⠀⠀⠠⣿⣿⣷⠀⢸⣿⣿⣿\n" +
+                            "⣿⣿⣿⡀⠉⠀⠀⠀⠀⠀⢄⠀⢀⠀⠀⠀⠀⠉⠉⠁⠀⠀⣿⣿⣿\n" +
+                            "⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⣿\n" +
+                            "⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿");
+                    return;
                 default:
                     System.out.println("⚠️ Opção inválida!");
             }
@@ -209,50 +229,60 @@ public class Game {
     }
 
     /**
-     * Funçao com menu de exploraçao
+     * Funçao com menu de exploraçao para Floresta, Vulcão, Lago ou Usina
+     *
      * @throws FileNotFoundException
      */
     public void menuExplorar() throws FileNotFoundException {
-        System.out.println("\n------- MAPA DE EXPLORAÇÃO -------");
-        System.out.println("Para onde deseja viajar?");
-        System.out.println("1. Floresta Viridian");
-        System.out.println("2. Vulcão Cinnabar");
-        System.out.println("3. Lago da Fúria");
-        System.out.println("4. Usina Elétrica");
-        System.out.println("5. Voltar");
-        System.out.print("Escolha sua rota (1-4): ");
-        int escolha = 0;
+        while (true) {
+            System.out.println("\n------- MAPA DE EXPLORAÇÃO -------");
+            System.out.println("Para onde deseja viajar?");
+            System.out.println("1. Floresta Viridian");
+            System.out.println("2. Vulcão Cinnabar");
+            System.out.println("3. Lago da Fúria");
+            System.out.println("4. Usina de Choque");
+            System.out.println("5. Voltar");
+            System.out.print("Escolha sua rota (1-5): ");
 
-        if (jogador.hasNextInt()) {
-            escolha = jogador.nextInt();
+            int escolha = 0;
+
+            if (jogador.hasNextInt()) {
+                escolha = jogador.nextInt();
+            }
+
+            Mapa mapaEscolhido = null;
+
+            switch (escolha) {
+                case 1:
+                    mapaEscolhido = Mapa.FLORESTA;
+                    break;
+                case 2:
+                    mapaEscolhido = Mapa.VULCAO;
+                    break;
+                case 3:
+                    mapaEscolhido = Mapa.LAGO;
+                    break;
+                case 4:
+                    mapaEscolhido = Mapa.USINA;
+                    break;
+                case 5:
+                    return;
+                default:
+                    System.out.println("⚠️ Esse local não existe no mapa!");
+                    continue; // volta para o início do loop
+            }
+
+            // Garantido que mapaEscolhido não é null
+            System.out.println("Viajando para " + mapaEscolhido.getNome());
+            iniciarExploracao(mapaEscolhido);
         }
-
-        Mapa mapaEscolhido = null;
-
-        switch (escolha) {
-            case 1:
-                mapaEscolhido = Mapa.FLORESTA;
-                break;
-            case 2:
-                mapaEscolhido = Mapa.VULCAO;
-                break;
-            case 3:
-                mapaEscolhido = Mapa.LAGO;
-                break;
-            case 4:
-                mapaEscolhido = Mapa.USINA;
-                break;
-            case 5:
-                return;
-            default:
-                System.out.println("⚠️ Esse local não existe no mapa!");
-                return;
-        }
-
-        System.out.println("Viajando para " + mapaEscolhido.getNome());
-        iniciarExploracao(mapaEscolhido);
     }
 
+    /**
+     * Menu que de acordo com o mapa escolhido pode encontrar pokemons selvagens, pocoes ou nada acontece.
+     * @param mapa escolhido no menu anterior
+     * @throws FileNotFoundException
+     */
     public void iniciarExploracao(Mapa mapa) throws FileNotFoundException {
 
         Random rd = new Random();
@@ -261,7 +291,7 @@ public class Game {
         if (encontrarInimigo < 70) {
 
             TipoPokemon tipoDoLocal = mapa.getTipoInimigo();
-            int nivelInimigo = (this.pokemon.getLevel() / 2) + 1;
+            int nivelInimigo = pokemon.getLevel();
             String nomeInimigo = "";
             int hpBase = 0;
             int atkBase = 0;
@@ -270,37 +300,32 @@ public class Game {
             switch (tipoDoLocal) {
                 case FOGO:
                     nomeInimigo = "Ponyta";
-                    hpBase = 70; atkBase = 40; defBase = 30;
+                    hpBase = 100; atkBase = 40; defBase = 30;
                     break;
                 case AGUA:
                     nomeInimigo = "Gyarados";
-                    hpBase = 80; atkBase = 50; defBase = 40;
+                    hpBase = 100; atkBase = 35; defBase = 25;
                     break;
                 case TERRA:
                     nomeInimigo = "Diglett";
-                    hpBase = 75; atkBase = 45; defBase = 30;
+                    hpBase = 100; atkBase = 35; defBase = 30;
                     break;
                 case ELETRICO:
                     nomeInimigo = "Pichu";
-                    hpBase = 85; atkBase = 55; defBase = 50;
+                    hpBase = 100; atkBase = 40; defBase = 35;
                     break;
                 default:
                     nomeInimigo = "Ditto Perdido";
-                    hpBase = 50; atkBase = 30; defBase = 30;
+                    hpBase = 100; atkBase = 30; defBase = 20;
                     break;
             }
 
-            int ataqueFinal = atkBase + nivelInimigo;
-            int defesaFinal = defBase + (nivelInimigo / 2);
-
-            NPCPokemon inimigo = new NPCPokemon(tipoDoLocal,nomeInimigo,nivelInimigo,hpBase + (nivelInimigo * 5), ataqueFinal, ataqueFinal, defesaFinal, defesaFinal);
+            NPCPokemon inimigo = new NPCPokemon(tipoDoLocal,nomeInimigo,nivelInimigo, hpBase,atkBase +(2*nivelInimigo),atkBase +2 + (2*nivelInimigo), defBase + (2*nivelInimigo), defBase + +2 + (2*nivelInimigo));
 
             System.out.println("\n⚔️ CUIDADO! Um " + inimigo.getNome() + " (Nvl " + nivelInimigo + ") apareceu!");
             System.out.println("HP: " + inimigo.getHpMax() + " | Atk: " + inimigo.getAtaque() + " | Def: " + inimigo.getDefesa());
 
-            boolean decisaoTomada = false;
-
-            while (!decisaoTomada) {
+            while (true) {
                 System.out.println("\nO que você vai fazer?");
                 System.out.println("1. Batalhar!");
                 System.out.println("2. Tentar Fugir");
@@ -315,11 +340,11 @@ public class Game {
                 if (decisao == 1) {
                     System.out.println("Você decidiu batalhar, boa sorte!");
                     batalhar(inimigo);
-                    decisaoTomada = true;
+                    break;
                 }
                 else if (decisao == 2) {
                     tentarFugir(inimigo);
-                    decisaoTomada = true;
+                    break;
                 }
                 else if (decisao == 3) {
                     pokemon.exibirDetalhesPoke();
@@ -327,7 +352,7 @@ public class Game {
                 else {
                     System.out.println("Você ficou paralisado de medo... A batalha começou!");
                     batalhar(inimigo);
-                    decisaoTomada = true;
+                    break;
                 }
             }
         }
@@ -379,6 +404,7 @@ public class Game {
                 }
             }
         }
+        System.out.println("Seu pokemon nao pode batalhar, recupere a saúde dele, urgentemente!");
     }
 
     public void treinar() throws FileNotFoundException {
@@ -398,9 +424,6 @@ public class Game {
         }
 
         int nivelTreino = pokemon.getLevel();
-        if (nivelTreino < 1) {
-            nivelTreino = 1;
-        }
 
         String parceiroTreino = "Gardevoir";
         TipoPokemon tipoParceiro = TipoPokemon.PSIQUICO;
@@ -430,10 +453,10 @@ public class Game {
 
         System.out.println("Iniciando treino contra " + parceiroTreino + "...");
 
-        NPCPokemon poketreino = new NPCPokemon( tipoParceiro, parceiroTreino, nivelTreino, 50 + (nivelTreino * 5), 10 + nivelTreino, 15 + nivelTreino, 5 + (nivelTreino / 2), 10 + (nivelTreino / 2));
+        NPCPokemon poketreino = new NPCPokemon( tipoParceiro, parceiroTreino, nivelTreino, 100, 30 + (nivelTreino * 2), 40 + (nivelTreino * 2), 30, 35 + (nivelTreino * 2));
 
         batalhar(poketreino);
-
+        pokemon.adicionarMoedas(30);
         System.out.println("O treino acabou! Seu Pokémon ganhou mais experiencia(XP).");
     }
 
