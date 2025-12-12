@@ -13,10 +13,9 @@ public class Loja {
 
         estoque.add(new Item("Super Poção", TipoItem.CURA, 35.0, "Recupera 100% do HP", 100));
         estoque.add(new Item("Poção Pequena", TipoItem.CURA, 15.0, "Recupera 30 HP", 30));
-        estoque.add(new Item("Antídoto", TipoItem.CURA, 30.0, "Remove veneno",0));
         estoque.add(new Item("Pílula de Força", TipoItem.ATAQUE, 30.0, "Aumenta Ataque em 15",15));
         estoque.add(new Item("Goma de Defesa", TipoItem.DEFESA, 30.0, "Aumenta Defesa em 20",20));
-        estoque.add(new Item("Doce Raro", TipoItem.NIVEL, 100.0, "Sobe 1 Nível instantaneamente",1));
+        estoque.add(new Item("Doce Raro", TipoItem.NIVEL, 50.0, "Sobe 1 Nível instantaneamente",1));
     }
 
     public ArrayList<Item> getEstoque() {

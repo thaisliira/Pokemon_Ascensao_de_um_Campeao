@@ -28,10 +28,6 @@ public class Game {
         this.loja = new Loja();
     }
 
-    public String getNomeJogador() {
-        return nomeJogador;
-    }
-
     /**
      * Função que tem o menu iniciar o jogo
      *
@@ -63,7 +59,6 @@ public class Game {
             jogador.nextLine();
 
             if (opcao == 1) {
-                Audio.stopMusic();
                 iniciarJogo();
             } else {
                 System.out.println("Já vai? Que pena! Até a próxima!\n" + ConsoleColors.YELLOW_BRIGHT + "⡏⠉⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣿\n" +
@@ -117,6 +112,7 @@ public class Game {
      * @throws FileNotFoundException
      */
     public void iniciarPokemon(int escolha) throws FileNotFoundException {
+        Audio.stopMusic();
         TipoPokemon tipoEscolhido = null;
         String nomePokemon = "";
         FormaEvolutiva formaInicial = null;
@@ -127,8 +123,8 @@ public class Game {
                 tipoEscolhido = TipoPokemon.AGUA;
                 nomePokemon = "Squirtle";
 
-                FormaEvolutiva blastoise = new FormaEvolutiva("Blastoise", 80, 90, 70, 96, 13, TipoPokemon.AGUA, null);
-                FormaEvolutiva wartortle = new FormaEvolutiva("Wartortle", 60, 90, 60, 80, 6, TipoPokemon.AGUA, blastoise);
+                FormaEvolutiva blastoise = new FormaEvolutiva("Blastoise", 80, 90, 70, 96, 8, TipoPokemon.AGUA, null);
+                FormaEvolutiva wartortle = new FormaEvolutiva("Wartortle", 60, 90, 60, 80, 4, TipoPokemon.AGUA, blastoise);
                 formaInicial = new FormaEvolutiva("Squirtle", 40, 50, 30, 60, 1, TipoPokemon.AGUA, wartortle);
                 break;
             case 2:
@@ -136,9 +132,9 @@ public class Game {
                 tipoEscolhido = TipoPokemon.FOGO;
                 nomePokemon = "Charmander";
 
-                FormaEvolutiva megaCharizard = new FormaEvolutiva("Mega Charizard", 120, 130, 70, 110, 13, TipoPokemon.FOGO, null);
-                FormaEvolutiva charizard = new FormaEvolutiva("Charizard", 80, 110, 50, 90, 10, TipoPokemon.FOGO, megaCharizard);
-                FormaEvolutiva charmeleon = new FormaEvolutiva("Charmeleon", 50, 90, 40, 70, 6, TipoPokemon.FOGO, charizard);
+                FormaEvolutiva megaCharizard = new FormaEvolutiva("Mega Charizard", 120, 130, 70, 110, 10, TipoPokemon.FOGO, null);
+                FormaEvolutiva charizard = new FormaEvolutiva("Charizard", 80, 110, 50, 90, 8, TipoPokemon.FOGO, megaCharizard);
+                FormaEvolutiva charmeleon = new FormaEvolutiva("Charmeleon", 50, 90, 40, 70, 4, TipoPokemon.FOGO, charizard);
                 formaInicial = new FormaEvolutiva("Charmander", 45, 60, 25, 50, 1, TipoPokemon.FOGO, charmeleon);
                 break;
             case 3:
@@ -146,8 +142,8 @@ public class Game {
                 tipoEscolhido = TipoPokemon.TERRA;
                 nomePokemon = "Bulbasaur";
 
-                FormaEvolutiva venusaur = new FormaEvolutiva("Venusaur", 90, 100, 60, 100, 10, TipoPokemon.TERRA, null);
-                FormaEvolutiva ivysaur = new FormaEvolutiva("Ivysaur", 60, 90, 50, 90, 6, TipoPokemon.TERRA, venusaur);
+                FormaEvolutiva venusaur = new FormaEvolutiva("Venusaur", 90, 100, 60, 100, 8, TipoPokemon.TERRA, null);
+                FormaEvolutiva ivysaur = new FormaEvolutiva("Ivysaur", 60, 90, 50, 90, 4, TipoPokemon.TERRA, venusaur);
                 formaInicial = new FormaEvolutiva("Bulbasaur", 35, 40, 30, 40, 1, TipoPokemon.TERRA, ivysaur);
                 break;
             default:
@@ -184,7 +180,8 @@ public class Game {
             System.out.println("2. Treinar");
             System.out.println("3. Ir à Loja");
             System.out.println("4. Inventário");
-            System.out.println("5. Sair");
+            System.out.println("5. Exibir Status do meu Pokémon");
+            System.out.println("6. Sair");
             System.out.print("Escolha: ");
             int escolha = 0;
 
@@ -206,6 +203,9 @@ public class Game {
                     pokemon.listarItens();
                     break;
                 case 5:
+                    pokemon.exibirDetalhesPoke();
+                    break;
+                case 6:
                     System.out.println("Já vai? Que pena! Até a próxima!\n" + ConsoleColors.YELLOW_BRIGHT + "⡏⠉⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣿\n" +
                             "⣿⠀⠀⠀⠈⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠉⠁⠀⣿\n" +
                             "⣿⣧⡀⠀⠀⠀⠀⠙⠿⠿⠿⠻⠿⠿⠟⠿⠛⠉⠀⠀⠀⠀⠀⣸⣿\n" +
@@ -391,13 +391,8 @@ public class Game {
 
                 System.out.println("O inimigo causou " + danoInimigo + " de dano!");
                 pokemon.receberDano(danoInimigo);
-
-                if (pokemon.getHpAtual() <= 0) {
-                    System.out.println("☠️ Seu Pokémon desmaiou...");
-                }
             }
         }
-        System.out.println("Seu pokemon nao pode batalhar, recupere a saúde dele, urgentemente!");
     }
 
     public void treinar() throws FileNotFoundException {
@@ -449,7 +444,7 @@ public class Game {
         NPCPokemon poketreino = new NPCPokemon( tipoParceiro, parceiroTreino, nivelTreino, 100, 30 + (nivelTreino * 2), 40 + (nivelTreino * 2), 30, 35 + (nivelTreino * 2));
 
         batalhar(poketreino);
-        pokemon.adicionarMoedas(30);
+        pokemon.adicionarMoedas(35);
         System.out.println("O treino acabou! Seu Pokémon ganhou mais experiencia(XP).");
     }
 
@@ -493,9 +488,27 @@ public class Game {
     }
 
     public void torneioPokemon() throws FileNotFoundException {
-        NPCPokemon primeiroAdversario = pokemonTorneio.get(3);
+        System.out.println("""
+                Após jornadas árduas, treinamentos incansáveis e batalhas que moldaram seu espírito, 
+                você finalmente alcança o ponto máximo de sua trajetória: o grande Torneio de Aurorium.
 
+                A arena colossal ergue-se diante de você, cercada por arquibancadas vibrantes e iluminada por cristais ancestrais.
+                Aqui, apenas os mais fortes, dedicados e dignos têm o direito de competir.
+
+                Treinadores de todos os cantos se reúnem, cada um trazendo sua própria história,
+                seus desafios, suas vitórias — e agora, você está entre eles.
+
+                Este é o palco onde campeões são forjados.
+                A partir deste momento, cada escolha e cada comando o aproximam da glória máxima.
+
+                Seja bem-vindo ao Torneio de Aurorium.
+                Que sua força brilhe mais do que qualquer cristal desta arena.
+                O mundo inteiro está prestes a ver do que você é capaz.
+                """);
+        NPCPokemon primeiroAdversario = pokemonTorneio.get(3);
         System.out.println("Seu primeiro adversário será: " + primeiroAdversario);
         batalhar(primeiroAdversario);
+
+
     }
 }

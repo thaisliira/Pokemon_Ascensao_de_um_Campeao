@@ -110,8 +110,9 @@ public class PokemonEscolhido extends Pokemon {
         // chama a função receber dano do super e aplica
         super.receberDano(dano);
         if (this.hpAtual <= 0) {
-            System.out.println("Pokemon abatido, você perdeu! Tente salvar seu pokemon!");
-            this.status = Status.MORTO;
+            System.out.println("☠️☠️☠️ Game over ☠️☠️☠️");
+            System.out.println("Seu Pokémon não resistiu e morreu...⚰️");
+            System.exit(0);
         } else if (this.hpAtual != 100){
             System.out.println("Você sobreviveu a esse round mas não baixe a guarda!");
             this.status = Status.MACHUCADO;
@@ -202,10 +203,12 @@ public class PokemonEscolhido extends Pokemon {
         while (true) {
             if (this.Inventario.isEmpty()) {
                 System.out.println("🎒 Sua mochila está vazia. Passe na loja!");
+                System.out.println("\uD83D\uDCB0 Quantidade de moedas: " + this.moedas);
                 return;
             }
             // Menu do inventário
             System.out.println("\n======== SEU INVENTÁRIO ========");
+            System.out.println("Quantidade de moedas: " + this.moedas);
             int i = 1;
             for (Item item : this.Inventario) {
                 System.out.println(i + ". " + item.getNome() + item.getDescEfeito());
@@ -282,6 +285,7 @@ public class PokemonEscolhido extends Pokemon {
                 int curaReal = this.hpMax - this.hpAtual;
                 this.hpAtual = this.hpMax;
                 System.out.println("💖 " + this.nome + " recuperou " + curaReal + " HP (Vida Cheia!)");
+                this.status = Status.FELIZ;
             } else {
                 this.hpAtual += valorCura;
                 System.out.println("💖 " + this.nome + " recuperou " + valorCura + " HP!");
