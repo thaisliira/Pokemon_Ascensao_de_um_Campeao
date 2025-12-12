@@ -2,6 +2,7 @@ package Pokegotchi;
 
 import Pokegotchi.Enum.Mapa;
 import Pokegotchi.Pokemons.NPCPokemon;
+import Pokegotchi.Pokemons.Pokemon;
 import Pokegotchi.Pokemons.PokemonEscolhido;
 import Pokegotchi.Enum.TipoPokemon;
 import Pokegotchi.Enum.Status;
@@ -16,7 +17,7 @@ public class Game {
 
     private String nomeJogador;
     private PokemonEscolhido pokemon;
-    private ArrayList<NPCPokemon> pokemonTorneio;
+    private static ArrayList<NPCPokemon> pokemonTorneio;
     private Scanner jogador;
     private Loja loja;
 
@@ -92,8 +93,7 @@ public class Game {
                 Seu objetivo inicial é simples: escolher o elemento que definirá sua rota de evolução — água, fogo ou terra.""");
         System.out.print("Primeiro, me diz, qual é o seu nome? ");
         this.nomeJogador = jogador.nextLine();
-
-        System.out.println("\nPrazer em te conhecer, " + this.nomeJogador + "!" +"\n");
+        System.out.println("Prazer em te conhecer, " + this.nomeJogador + "!" +"\n");
         System.out.println("Agora é a hora de escolher seu parceiro:");
         System.out.println("1. Pokébola (Elemento Água)");
         System.out.println("2. Pokébola (Elemento Fogo)");
@@ -343,7 +343,7 @@ public class Game {
 
     public void batalhar(NPCPokemon inimigo) throws FileNotFoundException {
 
-        System.out.println("--- Batalha Iniciada ---");
+        System.out.println("------ Batalha Iniciada -------");
 
         while(pokemon.getHpAtual() > 0 && inimigo.getHpAtual() > 0) {
 
@@ -351,7 +351,11 @@ public class Game {
 
             if(vitoria) {
                 System.out.println("🏆 Você venceu o " + inimigo.getNome() + "!");
-                pokemon.ganharXP(50);
+                boolean pronto = pokemon.ganharXP(50);
+
+                if (pronto) {
+                    torneioPokemon();
+                }
                 return;
             }
 
@@ -472,7 +476,7 @@ public class Game {
         }
     }
 
-    public void torneioPokemon () throws FileNotFoundException {
+    public void torneioPokemon() throws FileNotFoundException {
         NPCPokemon primeiroAdversario = pokemonTorneio.get(3);
 
         System.out.println("Seu primeiro adversário será: " + primeiroAdversario);

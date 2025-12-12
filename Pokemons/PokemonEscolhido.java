@@ -108,26 +108,38 @@ public class PokemonEscolhido extends Pokemon {
         }
     }
 
-    public void ganharXP(int ganhoDeXP) throws FileNotFoundException {
+    public boolean ganharXP(int ganhoDeXP) throws FileNotFoundException {
         this.experiencia += ganhoDeXP;
         System.out.println("✨ " + this.nome + " ganhou " + ganhoDeXP + " experiência!");
 
+        boolean prontoParaTorneio = false;
+
         while (this.experiencia >= 50) {
             this.experiencia -= 50;
-            subirDeNivel();
-        }
+
+            boolean atingiuNivel10 = subirDeNivel();
+            if (atingiuNivel10) {
+                prontoParaTorneio = true;
+            }
+        }return prontoParaTorneio;
     }
 
-    public void subirDeNivel() throws FileNotFoundException {
+    public boolean subirDeNivel() throws FileNotFoundException {
         this.level++;
         System.out.println("🎉 LEVEL UP! " + this.nome + " subiu para o nível " + this.level + "!");
 
         if (formaAtual.getProximaForma() != null && this.level >= formaAtual.getProximaForma().getLevelNecessario()) {
             evoluir();
         }
-        if (this.level == 9) {
+        if (this.level == 8) {
             System.out.println("Seu Pokemon está quase pronto para participar do Torneio!");
         }
+
+        if (this.level >= 10) {
+            System.out.println("Seu pokemon está pronto para participar do torneio! Vamos nessa?");
+            return true;
+        }
+        return false;
     }
 
     public void evoluir() throws FileNotFoundException {
@@ -149,6 +161,7 @@ public class PokemonEscolhido extends Pokemon {
         System.out.println("Seus atributos aumentaram drasticamente!");
         System.out.println("------------------------------------------------\n");
         imprimirArtePokemon();
+
     }
 
     public void imprimirArtePokemon() throws FileNotFoundException {
@@ -194,19 +207,25 @@ public class PokemonEscolhido extends Pokemon {
     public void usarItem(Item itemUsado) throws FileNotFoundException {
 
         if (!this.Inventario.contains(itemUsado)) {
-            System.out.println("Você não possui este item no inventário!");
+            System.out.println("Ops, você não possui esse item :(");
             return;
         }
 
-        System.out.println("Você usou " + itemUsado.getNome() + "!");
-
         if (itemUsado.getItem() == TipoItem.CURA) {
 
-            int curaReal = Math.min(itemUsado.getEfeito(), this.hpMax - this.hpAtual);
-            this.hpAtual += curaReal;
-            System.out.println("💖 " + this.nome + " recuperou " + curaReal + " HP! (" + this.hpAtual + "/" + this.hpMax + ")");
+            int valorCura = itemUsado.getEfeito();
 
-        } else if (itemUsado.getItem() == TipoItem.ATAQUE) { // Ou ATAQUE/DEFESA dependendo do seu Enum
+            if (this.hpAtual + valorCura > this.hpMax) {
+
+                int curaReal = this.hpMax - this.hpAtual;
+                this.hpAtual = this.hpMax;
+                System.out.println("💖 " + this.nome + " recuperou " + curaReal + " HP (Vida Cheia!)");
+            } else {
+                this.hpAtual += valorCura;
+                System.out.println("💖 " + this.nome + " recuperou " + valorCura + " HP!");
+            }
+
+        } else if (itemUsado.getItem() == TipoItem.ATAQUE) {
                 this.ataque += itemUsado.getEfeito();
                 System.out.println("⚔️ Ataque aumentado em " + itemUsado.getEfeito() + "!");
 
