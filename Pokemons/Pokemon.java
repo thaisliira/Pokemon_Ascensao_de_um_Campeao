@@ -2,7 +2,6 @@ package Pokegotchi.Pokemons;
 
 import Pokegotchi.Enum.Status;
 import Pokegotchi.Enum.TipoPokemon;
-
 import java.io.FileNotFoundException;
 
 public abstract class Pokemon {
@@ -39,10 +38,6 @@ public abstract class Pokemon {
 
     public int getLevel() {
         return level;
-    }
-
-    public int getExperiencia() {
-        return experiencia;
     }
 
     public int getHpAtual() {
