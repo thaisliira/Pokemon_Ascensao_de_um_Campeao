@@ -21,10 +21,10 @@ public class Game {
     public Game() {
         this.jogador = new Scanner(System.in);
         this.pokemonTorneio = new ArrayList<>();
-        pokemonTorneio.add(new NPCPokemon(TipoPokemon.PSIQUICO, "Mewtwo X", 10, 100, 70, 75, 60, 65));
-        pokemonTorneio.add(new NPCPokemon(TipoPokemon.AGUA, "Suicune", 10, 100, 50, 60, 40, 50));
         pokemonTorneio.add(new NPCPokemon(TipoPokemon.LUTA, "Mega Lucario", 10, 100, 45, 55, 40, 45));
+        pokemonTorneio.add(new NPCPokemon(TipoPokemon.AGUA, "Suicune", 10, 100, 50, 60, 40, 50));
         pokemonTorneio.add(new NPCPokemon(TipoPokemon.GELO, "Articuno", 10, 100, 55, 65, 45, 55));
+        pokemonTorneio.add(new NPCPokemon(TipoPokemon.PSIQUICO, "Mewtwo X", 10, 100, 70, 75, 60, 65));
         this.loja = new Loja();
     }
 
@@ -220,6 +220,7 @@ public class Game {
                     return;
                 default:
                     System.out.println("⚠️ Opção inválida!");
+                    break;
             }
         }
     }
@@ -369,12 +370,20 @@ public class Game {
 
             if(vitoria) {
                 System.out.println("🏆 Você venceu o " + inimigo.getNome() + "!");
-                boolean pronto = pokemon.ganharXP(40);
+                pokemon.ganharXP(40);
 
-                if (pronto) {
-                    torneioPokemon();
+                if (pokemon.getLevel() >= 9) {
+                    System.out.println("\n🏟️ Você se qualificou para o Torneio!");
+                    System.out.println("1. Ir agora");
+                    System.out.println("2. Ir depois");
+
+                    int escolha = jogador.nextInt();
+
+                    if (escolha == 1) {
+                        menuTorneio();
+                        return;
+                    }
                 }
-                return;
             }
 
             if (inimigo.getHpAtual() > 0) {
@@ -487,7 +496,7 @@ public class Game {
         }
     }
 
-    public void torneioPokemon() throws FileNotFoundException {
+    public void menuTorneio() throws FileNotFoundException {
         System.out.println("""
                 Após jornadas árduas, treinamentos incansáveis e batalhas que moldaram seu espírito, 
                 você finalmente alcança o ponto máximo de sua trajetória: o grande Torneio de Aurorium.
@@ -505,10 +514,158 @@ public class Game {
                 Que sua força brilhe mais do que qualquer cristal desta arena.
                 O mundo inteiro está prestes a ver do que você é capaz.
                 """);
-        NPCPokemon primeiroAdversario = pokemonTorneio.get(3);
-        System.out.println("Seu primeiro adversário será: " + primeiroAdversario);
-        batalhar(primeiroAdversario);
 
+        System.out.println("1. Iniciar Torneio");
+        System.out.println("2. Abrir inventário");
+        System.out.println("3. Ver status do Pokémon");
 
+        int escolha = jogador.nextInt();
+
+        switch (escolha) {
+            case 1:
+                torneioPokemon();
+                return;
+            case 2:
+                pokemon.listarItens();
+                return;
+            case 3:
+                pokemon.exibirDetalhesPoke();
+                return;
+            default:
+                System.out.println("⚠️ Opção inválida!");
+                break;
+        }
+    }
+
+    public void torneioPokemon() throws FileNotFoundException {
+
+        for (int i = 0; i < pokemonTorneio.size(); i++) {
+            NPCPokemon adversario = pokemonTorneio.get(i);
+            System.out.println("\n⚔️ PRÓXIMO OPONENTE: " + adversario.getNome());
+
+            batalhar(adversario);
+
+            if (pokemon.getHpAtual() <= 0) {
+                System.out.println("❌ O teu Pokémon não resistiu. Foste eliminado do torneio.");
+                return;
+            } else {
+                System.out.println("✅ Vitória contra " + adversario.getNome() + "!");
+            }
+
+            if (i < pokemonTorneio.size() - 1) {
+                System.out.println("\n🛠️ Aproveita para recuperar teu Pokémon antes da próxima batalha.");
+                System.out.println("1. Abrir inventário");
+                System.out.println("2. Ver status do Pokémon");
+
+                int escolha = jogador.nextInt();
+
+                switch (escolha) {
+                    case 1:
+                        pokemon.listarItens();
+                        break;
+                    case 2:
+                        pokemon.exibirDetalhesPoke();
+                        break;
+                }
+            }
+        }
+
+        System.out.println("\n🏆 PARABÉNS! ÉS O NOVO CAMPEÃO DE AURORIUM!");
+        System.out.println("🏆 Agora como recompensa, podes ir ao laboratório da Dra. Thais, ela tem uma surpresa pra você!");
+        criarPokemon();
+    }
+
+    public void criarPokemon() throws FileNotFoundException {
+
+        System.out.println("\n------------------------------------------------");
+        System.out.println("Olá, " + nomeJogador + "! Como prêmio do Torneio, você pode criar um novo parceiro!");
+
+        TipoPokemon tipoEscolhido = null;
+
+        while (tipoEscolhido == null) {
+            System.out.println("\nEscolha o Tipo do Pokémon:");
+            System.out.println("1. Água");
+            System.out.println("2. Fogo");
+            System.out.println("3. Terra");
+            System.out.println("4. Elétrico");
+            System.out.println("5. Psíquico");
+            System.out.println("6. Luta");
+            System.out.print("Sua escolha: ");
+
+            int escolha = 0;
+            escolha = jogador.nextInt();
+
+            switch (escolha) {
+                case 1 -> tipoEscolhido = TipoPokemon.AGUA;
+                case 2 -> tipoEscolhido = TipoPokemon.FOGO;
+                case 3 -> tipoEscolhido = TipoPokemon.TERRA;
+                case 4 -> tipoEscolhido = TipoPokemon.ELETRICO;
+                case 5 -> tipoEscolhido = TipoPokemon.PSIQUICO;
+                case 6 -> tipoEscolhido = TipoPokemon.LUTA;
+                default -> System.out.println("⚠️ Tipo inválido!");
+            }
+        }
+
+        int atkBasico, atkEspecial, defBasica, defEspecial;
+
+        do {
+            System.out.println("\nDistribua os atributos (valores entre 10 e 60):");
+            System.out.print("Ataque básico: ");
+            atkBasico = jogador.nextInt();
+
+            System.out.print("Ataque especial: ");
+            atkEspecial = jogador.nextInt();
+
+            System.out.print("Defesa básica: ");
+            defBasica = jogador.nextInt();
+
+            System.out.print("Defesa especial: ");
+            defEspecial = jogador.nextInt();
+
+            if (atkBasico < 10 || atkBasico > 80 ||
+                    atkEspecial < 10 || atkEspecial > 80 ||
+                    defBasica < 10 || defBasica > 80 ||
+                    defEspecial < 10 || defEspecial > 80) {
+
+                System.out.println("⚠️ Todos os atributos devem estar entre 10 e 60.");
+            }
+
+        } while (
+                atkBasico < 10 || atkBasico > 60
+                        || atkEspecial < 10 || atkEspecial > 60
+                        || defBasica < 10 || defBasica > 60 ||
+                        defEspecial < 10 || defEspecial > 60
+        );
+
+        System.out.print("\nNome do Pokémon: ");
+        String nomeNovo = jogador.nextLine();
+
+        FormaEvolutiva formaInicial = new FormaEvolutiva(
+                nomeNovo,
+                atkBasico,
+                atkEspecial,
+                defBasica,
+                defEspecial,
+                1,
+                tipoEscolhido,
+                null
+        );
+
+        this.pokemon = new PokemonEscolhido(
+                tipoEscolhido,
+                nomeNovo,
+                1,
+                0,
+                100,
+                100,
+                Status.FELIZ,
+                formaInicial,
+                100
+        );
+
+        System.out.println("\n✅ Pokémon " + nomeNovo + " criado com sucesso!");
+        System.out.println("Uma nova jornada começa agora!");
+
+        menuPrincipal();
     }
 }

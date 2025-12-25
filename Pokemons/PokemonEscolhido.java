@@ -125,19 +125,14 @@ public class PokemonEscolhido extends Pokemon {
      * @return se o pokemon ganhou experiencia suficiente e atingiu o nivel 10, está pronto para o torneio
      * @throws FileNotFoundException
      */
-    public boolean ganharXP(int ganhoDeXP) throws FileNotFoundException {
+    public void ganharXP(int ganhoDeXP) throws FileNotFoundException {
         this.experiencia += ganhoDeXP;
         System.out.println("\n✨ " + this.nome + " ganhou " + ganhoDeXP + " de experiência!");
-
-        boolean prontoParaTorneio = false;
 
         while (this.experiencia >= 50) {
             this.experiencia -= 50;
             subirDeNivel();
-            if (this.level == 10) {
-                prontoParaTorneio = true;
-            }
-        }return prontoParaTorneio;
+        }
     }
 
     /**
@@ -206,7 +201,7 @@ public class PokemonEscolhido extends Pokemon {
                 System.out.println("\uD83D\uDCB0 Quantidade de moedas: " + this.moedas);
                 return;
             }
-            // Menu do inventário
+
             System.out.println("\n======== SEU INVENTÁRIO ========");
             System.out.println("Quantidade de moedas: " + this.moedas);
             int i = 1;
