@@ -1,288 +1,54 @@
-## 1. Classe geral: Pokemon
+🏆 Pokémon — Ascensão de um Campeão
 
-Atributos:
+Projeto desenvolvido em Java, executado em ambiente de consola, com foco na programação orientada a objetos e na construção de um sistema de jogo estruturado, legível e extensível.
 
-tipo (String ou Enum TipoPokemon)
+O projeto simula a jornada de um treinador Pokémon, incluindo criação de personagem, batalhas por turnos, gestão de inventário e progressão através de um torneio.
 
-level (int)
+🔧 Competências Demonstradas
 
-experiencia (int)
+Programação Orientada a Objetos (classes, métodos, encapsulamento)
 
-hpAtual (int)
+Controlo de fluxo e estados de jogo
 
-hpMax (int)
+Interação com o utilizador via consola
 
-## Atributos de batalha:
+Organização de código e separação de responsabilidades
 
-ataque (int)
+Uso de coleções (ArrayList) para dados dinâmicos
 
-defesa (int)
+Validação básica de entradas e controlo de exceções
 
-## Necessidades (Tamagotchi):
+✨ Funcionalidades
 
-fome (int)
+Criação de Pokémon personalizado
 
-energia (int)
+Sistema de batalha por turnos com cálculo de dano
 
-status (Enum: NORMAL, FOME, FELIZ, MACHUCADO...)
+Torneio com adversários sequenciais
 
-## Métodos:
+Sistema de inventário para recuperação de HP
 
-mostrarDetalhes()
+Narrativa simples para contextualização do jogo
 
-Métodos para alterar necessidades: comer(), dormir().
+🛠️ Tecnologias Utilizadas
 
-Métodos para danos/status.
+Java
 
-## 2. Subclasse: TIPO Pokemon (controlado pelo Jogador) - agua, fogo, eletrico
+Scanner para input do utilizador
 
-Atributos adicionais:
+Estruturas de controlo (if, switch, loops)
 
-moveset (ArrayList<Move>)
+Coleções (ArrayList)
 
-evolucaoDisponivel (boolean)
+Tratamento de exceções
 
-inventario (ArrayList<Item>)
+🔮 Possíveis Melhorias
 
-moedas (int)
 
-buffs (lista de modificadores temporários de batalha)
 
-## 3. Subclasse: NPCPokemon
+Interface gráfica
 
-levelMinimoParaAparecer (int)
+👨‍💻 Autor
 
-Pode ter personalidade (timido, agressivo, defensivo etc.)
-
-## 4. Classe Golpe
-
-Atributos:
-
-nome (String)
-
-tipo (fisico ou especial)
-
-categoria (Enum: FOGO, AGUA, ELETRICO)
-
-danocritico (double)
-
-## 5. Classe Item
-
-Atributos:
-
-nome
-
-tipoItem (Enum: CURA, ARMA)
-
-preco
-
-efeito (texto ou função executada)
-
-Possíveis subclasses: Pocao, armadura...
-
-## 6. Classe Battle
-
-Atributos:
-
-pokemonA (Pokemon)
-
-pokemonB (NPCPokemon ou outro jogador)
-
-turnoAtual (int)
-
-Métodos essenciais:
-
-iniciarBatalha()
-
-turno()
-
-calcularDano(golpe, atacante, defensor)
-
-ganharExperiencia()
-
-## 7. Classe Loja (equivalente ao Shopping)
-
-Possui:
-
-ArrayList<Item> itensCura
-
-ArrayList<Item> itensBatalha
-
-Métodos:
-
-listarItensAleatorios()
-
-## 8. Classe JogoTamagotchi
-
-Equivalente diretamente à “classe Sims”.
-
-Responsável pelo ciclo diário (turnos do Tamagotchi).
-
-Atributos:
-
-Pokemon jogador
-
-ArrayList<NPCPokemon> selvagens
-
-Loja loja
-
-int dia
-
-Método principal:
-
-jogo()
-
-Fluxo por ciclo (manhã, tarde, noite):
-
-O jogador escolhe:
-
-Alimentar
-
-Dormir
-
-Treinar (aumenta ataque/defesa e diminui energia)
-
-Explorar (chance de batalha ou itens)
-
-Batalhar Torneio?
-
-Ir à loja
-
-Decaimento por ciclo:
-
-fome −20
-
-energia −25
-
-humor −15
-
-higiene −10
-
-Se qualquer um < 25 → ações bloqueadas até resolver.
-
-# 9. Eventos obrigatórios
-
-Adaptado para Pokémon:
-
-Dia 5 — “Treinamento Especial”
-
-Escolher participar:
-
-+50 XP
-
-Pequena chance de aprender novo move
-
-−30 energia
-
-Dia 20 — “Tournament Mini”
-
-Se quiser participar:
-
-batalha obrigatória
-
-recompensa: moedas + item raro
-
-Dia 40 — “Amizade Máxima”
-
-O Pokémon pode evoluir se requisitos forem cumpridos
-
-Boost nos atributos
-
-Dia 60 — “Evento climático”
-
-Clima aleatório com efeitos por 5 dias
-
-chuva aumenta moves Water
-
-sol aumenta moves Fire
-
-tempestade diminui humor
-
-Dia 80 — “Teste de Resistência”
-
-Pokémon passa por dias de necessidades caindo mais rápido
-
-Recompensa final se sobreviver
-
-Dia 100 — Checagem de Objetivo
-
-Objetivos possíveis:
-
-Evoluir totalmente
-
-Atingir Level X
-
-Ter um habitat completo
-
-Aprender 4 moves poderosos
-
-Vencer um número mínimo de batalhas
-
-## 10. ArrayLists que você vai precisar
-
-Perfeito para espelhar o projeto original.
-
-No Pokémon:
-
-ArrayList<Move> moveset
-
-ArrayList<Item> inventario
-
-Na Loja:
-
-ArrayList<Item> itensCura
-
-ArrayList<Item> berries
-
-ArrayList<Item> decoracoes
-
-No Jogo:
-
-ArrayList<NPCPokemon> selvagens
-
-## 11. Sistema de Batalha adaptado
-
-Para comparação de vida/dano:
-
-atributos: hpAtual, ataque, defesa
-
-Componentes obrigatórios:
-
-hpAtual -= danoRecebido
-
-if (hpAtual <= 0) -> derrota
-
-xp += xpGanhos
-
-_________________________________________________________________________________________________________________________________________________
-
-# tamagotchi_pokemon
-
-## Necessidades Fisiológicas
-
-Fome (comer diferentes tipos de berries ou comidas Pokémon).
-
-Energia (dormir, cochilos, ciclos noturnos/diurnos).
-
-Casamento ? 
-
-## Crescimento e Evolução
-
-Experiência acumulada não só por batalha, mas também por brincadeiras e cuidados.
-
-Exercícios para aumentar atributos específicos: força, velocidade, foco, defesa.
-
-Transformações temporárias (Mega, Dynamax, etc.) dependendo de decisões do jogo.
-
-## Batalha
-
-Level — nível do Pokémon.
-
-HP (current) e MaxHP.
-
-Attack, Defense (para dano físico)
-
-Dano recebido
-
-
-
+Desenvolvido por [Thais Lira]
+Projeto académico com foco em lógica, estrutura e boas práticas em Java.
