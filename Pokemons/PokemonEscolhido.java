@@ -149,9 +149,6 @@ public class PokemonEscolhido extends Pokemon {
         if (this.level == 8) {
             System.out.println("\nSeu Pokemon está quase pronto para participar do Torneio!");
         }
-        if (this.level >= 10) {
-            System.out.println("\nSeu pokemon está pronto para participar do torneio! Vamos nessa?");
-        }
     }
 
     /**
@@ -195,6 +192,41 @@ public class PokemonEscolhido extends Pokemon {
      * @throws FileNotFoundException
      */
     public void listarItens() throws FileNotFoundException {
+        while (true) {
+            if (this.Inventario.isEmpty()) {
+                System.out.println("🎒 Sua mochila está vazia. Passe na loja!");
+                System.out.println("\uD83D\uDCB0 Quantidade de moedas: " + this.moedas);
+                return;
+            }
+
+            System.out.println("\n======== SEU INVENTÁRIO ========");
+            System.out.println("Quantidade de moedas: " + this.moedas);
+            int i = 1;
+            for (Item item : this.Inventario) {
+                System.out.println(i + ". " + item.getNome() + item.getDescEfeito());
+                i++;
+            }
+            System.out.println("0. Voltar"); // porque não sei quantos itens o usuário vai ter
+            System.out.print("Escolha o número do item para usar (ou 0 para voltar): ");
+
+            Scanner jogador = new Scanner(System.in);
+            int escolha = -1;
+
+            if (jogador.hasNextInt()) {
+                escolha = jogador.nextInt();
+            }
+            if (escolha == 0) {
+                return;
+            }  else if (escolha > 0 && escolha <= this.Inventario.size()) {
+                Item itemEscolhido = this.Inventario.get(escolha - 1); // porque no ArrayList o item 1 está no índice 0
+                usarItem(itemEscolhido);
+            } else {
+                System.out.println("⚠️ Escolha inválida!");
+            }
+        }
+    }
+
+    public void inventarioTorneio() throws FileNotFoundException {
         while (true) {
             if (this.Inventario.isEmpty()) {
                 System.out.println("🎒 Sua mochila está vazia. Passe na loja!");
