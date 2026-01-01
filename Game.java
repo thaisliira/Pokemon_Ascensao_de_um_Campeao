@@ -265,8 +265,8 @@ public class Game {
                 case 5:
                     return;
                 default:
-                    System.out.println("⚠️ Esse local não existe no mapa!");
-                    break;
+                    System.out.println("⚠️ Esse local não existe no mapa! Tente de novo.");
+                    continue; // Volta para o início do loop
             }
             System.out.println("Viajando para " + mapaEscolhido.getNome());
             iniciarExploracao(mapaEscolhido);
@@ -361,6 +361,11 @@ public class Game {
         }
     }
 
+    /**
+     * Funçao principal da batalha para verificar vitória ou derrota baseado no HP
+     * @param inimigo
+     * @throws FileNotFoundException
+     */
     public void batalhar(NPCPokemon inimigo) throws FileNotFoundException {
 
         while(pokemon.getHpAtual() > 0 && inimigo.getHpAtual() > 0) {
@@ -372,7 +377,7 @@ public class Game {
                 System.out.println("🏆 Você venceu o " + inimigo.getNome() + "!");
                 pokemon.ganharXP(40);
 
-                if (pokemon.getLevel() == 1) {
+                if (pokemon.getLevel() == 9) {
                     System.out.println("\n🏟️ Você se qualificou para o Torneio!");
                     menuTorneio();
                 }
@@ -389,13 +394,16 @@ public class Game {
                     System.out.println("Sua defesa absorveu quase todo o impacto!");
                     danoInimigo = 3;
                 }
-
                 System.out.println("O inimigo causou " + danoInimigo + " de dano!");
                 pokemon.receberDano(danoInimigo);
             }
         }
     }
 
+    /**
+     * Funçao que possibilita treinar com pokemons específicos e ganhar moedas se vencer
+     * @throws FileNotFoundException
+     */
     public void treinar() throws FileNotFoundException {
         System.out.println("\n--- CAMPO DE TREINAMENTO ---");
         System.out.println("Escolha seu parceiro de treino");
@@ -449,6 +457,11 @@ public class Game {
         System.out.println("O treino acabou! Seu Pokémon ganhou mais experiencia(XP).");
     }
 
+    /**
+     * Função que determina 50% de probabilidade de escapar de uma batalha
+     * @param inimigo
+     * @throws FileNotFoundException
+     */
     public void tentarFugir(NPCPokemon inimigo) throws FileNotFoundException {
         System.out.println("Tentando escapar...");
         Random rd = new Random();
@@ -462,6 +475,9 @@ public class Game {
         }
     }
 
+    /**
+     * Função para ir à loja comprar itens
+     */
     public void visitarLoja() {
         System.out.println("\n--- BEM-VINDO À POKÉLOJA ---");
         System.out.println("Saldo Atual: " + pokemon.getMoedas() + "$");
@@ -488,6 +504,10 @@ public class Game {
         }
     }
 
+    /**
+     * Função com menu pré-batalha no torneio
+     * @throws FileNotFoundException
+     */
     public void menuTorneio() throws FileNotFoundException {
         System.out.println("""
                 Após jornadas árduas, treinamentos incansáveis e batalhas que moldaram seu espírito, 
@@ -529,6 +549,10 @@ public class Game {
         }
     }
 
+    /**
+     * Função que determina as rodadas e adversários do torneio
+     * @throws FileNotFoundException
+     */
     public void torneioPokemon() throws FileNotFoundException {
 
         for (int i = 0; i < pokemonTorneio.size(); i++) {
@@ -557,6 +581,10 @@ public class Game {
         }
     }
 
+    /**
+     * Função com menu de intervalo entre as rodadas do torneio
+     * @throws FileNotFoundException
+     */
     private void menuIntervaloTorneio() throws FileNotFoundException {
         boolean continuarBatalha = false;
         while (!continuarBatalha) {
@@ -588,6 +616,10 @@ public class Game {
         }
     }
 
+    /**
+     * Função que possibilita a criação de pokemon a escolha do jogador e reiniciar o jogo com o pokemon novo
+     * @throws FileNotFoundException
+     */
     public void criarPokemon() throws FileNotFoundException {
 
         System.out.println("\n------------------------------------------------");
