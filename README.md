@@ -1,54 +1,60 @@
-🏆 Pokémon — Ascensão de um Campeão
+# 🏆 Pokémon: Ascensão de um Campeão
 
-Projeto desenvolvido em Java, executado em ambiente de consola, com foco na programação orientada a objetos e na construção de um sistema de jogo estruturado, legível e extensível.
+> Projeto educacional inspirado em jogos de batalha por turnos, desenvolvido em Java.
 
-O projeto simula a jornada de um treinador Pokémon, incluindo criação de personagem, batalhas por turnos, gestão de inventário e progressão através de um torneio.
+## 📌 Aviso Legal Importante
 
-🔧 Competências Demonstradas
+Este projeto **não é afiliado ou patrocinado pela Nintendo, Game Freak ou The Pokémon Company**.
 
-Programação Orientada a Objetos (classes, métodos, encapsulamento)
+* Pokémon é uma marca registrada da Nintendo / Game Freak / The Pokémon Company.
+* Todos os nomes, criaturas, conceitos e termos relacionados a Pokémon são utilizados **apenas como referência temática**, sem qualquer finalidade comercial.
+* Este projeto foi desenvolvido **exclusivamente para fins educacionais**, como prática de programação, lógica de jogos e orientação a objetos.
 
-Controlo de fluxo e estados de jogo
+---
 
-Interação com o utilizador via consola
+## 🎮 Sobre o Projeto
 
-Organização de código e separação de responsabilidades
+**Ascensão de um Campeão** é um jogo de terminal desenvolvido em Java, inspirado em mecânicas clássicas de jogos de RPG e batalhas por turnos. O jogador escolhe um pokémon inicial, participa de batalhas sequenciais em um torneio e gerencia recursos como vida, itens e moedas.
 
-Uso de coleções (ArrayList) para dados dinâmicos
+O foco principal do projeto é:
 
-Validação básica de entradas e controlo de exceções
+* Aplicar conceitos de **Programação Orientada a Objetos (POO)**
+* Trabalhar com **fluxo de controle**, **listas**, **arquivos**, e **validação de entrada**
+* Estruturar um jogo de forma modular e extensível
 
-✨ Funcionalidades
+---
 
-Criação de Pokémon personalizado
+## 🧠 Funcionalidades
 
-Sistema de batalha por turnos com cálculo de dano
+* Escolha de pokémon inicial
+* Sistema de batalhas por turnos
+* Torneio com múltiplos oponentes
+* Sistema de inventário (itens de cura)
+* Gerenciamento de HP e status
+* Sistema de moedas
+* Menus interativos no terminal
 
-Torneio com adversários sequenciais
+---
 
-Sistema de inventário para recuperação de HP
+## 🛠️ Tecnologias Utilizadas
 
-Narrativa simples para contextualização do jogo
+* **Java** (JDK 17 ou superior recomendado)
+* Execução via terminal
+* Estrutura orientada a objetos
 
-🛠️ Tecnologias Utilizadas
+---
 
-Java
+## 📚 Objetivo Educacional
 
-Scanner para input do utilizador
+Este projeto foi criado como parte de estudos em programação e **não possui qualquer intenção de distribuição comercial**. Ele serve como laboratório prático para:
 
-Estruturas de controlo (if, switch, loops)
+* Estruturação de jogos simples
+* Simulação de batalhas
+* Boas práticas de código
+* Organização de projetos Java
 
-Coleções (ArrayList)
+---
 
-Tratamento de exceções
+## ✍️ Autor
 
-🔮 Possíveis Melhorias
-
-
-
-Interface gráfica
-
-👨‍💻 Autor
-
-Desenvolvido por [Thais Lira]
-Projeto académico com foco em lógica, estrutura e boas práticas em Java.
+Desenvolvido por **Thais Lira**
