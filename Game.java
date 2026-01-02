@@ -24,7 +24,7 @@ public class Game {
         pokemonTorneio.add(new NPCPokemon(TipoPokemon.LUTA, "Mega Lucario", 10, 100, 100, 55, 40, 80));
         pokemonTorneio.add(new NPCPokemon(TipoPokemon.AGUA, "Suicune", 10, 100, 105, 60, 40, 85));
         pokemonTorneio.add(new NPCPokemon(TipoPokemon.GELO, "Articuno", 10, 100, 110, 65, 45, 90));
-        pokemonTorneio.add(new NPCPokemon(TipoPokemon.PSIQUICO, "Mewtwo X", 10, 100, 120, 75, 60, 95));
+        pokemonTorneio.add(new NPCPokemon(TipoPokemon.PSIQUICO, "Mewtwo X", 10, 100, 160, 90, 90, 100));
         this.loja = new Loja();
     }
 
@@ -576,6 +576,7 @@ public class Game {
                 return;
             }
 
+            pokemon.adicionarMoedas(60);
             System.out.println("Aproveita para recuperar teu pokémon antes da próxima batalha...");
             menuIntervaloTorneio();
         }
@@ -590,8 +591,9 @@ public class Game {
         while (!continuarBatalha) {
             System.out.println("\n--- INTERVALO DO TORNEIO ---");
             System.out.println("1. Próxima Batalha");
-            System.out.println("2. Usar Item (Inventário)");
-            System.out.println("3. Ver Status");
+            System.out.println("2. Inventário");
+            System.out.println("3. Ir à Loja");
+            System.out.println("4. Ver Status do meu Pokémon");
             System.out.print("Escolha: ");
 
             int escolha = 0;
@@ -608,6 +610,9 @@ public class Game {
                     pokemon.inventarioTorneio();
                     break;
                 case 3:
+                    visitarLoja();
+                    break;
+                case 4:
                     pokemon.exibirDetalhesPoke();
                     break;
                 default:
@@ -643,22 +648,30 @@ public class Game {
             switch (escolha) {
                 case 1:
                     tipoEscolhido = TipoPokemon.AGUA;
+                    break;
                 case 2:
                     tipoEscolhido = TipoPokemon.FOGO;
+                    break;
                 case 3:
                     tipoEscolhido = TipoPokemon.TERRA;
+                    break;
                 case 4:
                     tipoEscolhido = TipoPokemon.ELETRICO;
+                    break;
                 case 5:
                     tipoEscolhido = TipoPokemon.PSIQUICO;
+                    break;
                 case 6:
                     tipoEscolhido = TipoPokemon.LUTA;
+                    break;
                 default:
                     System.out.println("⚠️ Tipo inválido!");
+                    return;
             }
         }
 
         int atkBasico, atkEspecial, defBasica, defEspecial;
+        String nomeNovo;
 
         do {
             System.out.println("\nDistribua os atributos (valores entre 10 e 60):");
@@ -674,6 +687,9 @@ public class Game {
             System.out.print("Defesa especial: ");
             defEspecial = jogador.nextInt();
 
+            System.out.print("\nNome do Pokémon: ");
+            nomeNovo = jogador.nextLine();
+
             if (atkBasico < 10 || atkBasico > 80 ||
                     atkEspecial < 10 || atkEspecial > 80 ||
                     defBasica < 10 || defBasica > 80 ||
@@ -688,9 +704,6 @@ public class Game {
                         || defBasica < 10 || defBasica > 60 ||
                         defEspecial < 10 || defEspecial > 60
         );
-
-        System.out.print("\nNome do Pokémon: ");
-        String nomeNovo = jogador.nextLine();
 
         FormaEvolutiva evolucao2 = new FormaEvolutiva(nomeNovo, atkBasico + 40, atkEspecial + 40, defBasica, defEspecial + 45, 8, tipoEscolhido, null);
         FormaEvolutiva evolucao1 = new FormaEvolutiva(nomeNovo, atkBasico + 10, atkEspecial +30, defBasica, defEspecial + 25, 4, tipoEscolhido, evolucao2);
