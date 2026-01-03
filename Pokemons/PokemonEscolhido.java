@@ -26,10 +26,6 @@ public class PokemonEscolhido extends Pokemon {
         return moedas;
     }
 
-    public FormaEvolutiva getFormaAtual() {
-        return formaAtual;
-    }
-
     /**
      * Função que exibe o status do meu pokemon: vida, ataque, defesa...
      */
@@ -174,6 +170,7 @@ public class PokemonEscolhido extends Pokemon {
         System.out.println("Seus atributos aumentaram drasticamente!");
         System.out.println("------------------------------------------------\n");
         imprimirArtePokemon();
+        String caminhoAudio = "AudioFiles/" + this.nome.toLowerCase() + ".wav";
     }
 
     /**

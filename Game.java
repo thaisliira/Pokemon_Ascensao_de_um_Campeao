@@ -570,6 +570,7 @@ public class Game {
             System.out.println("✅ Vitória contra " + adversario.getNome() + "!");
 
             if (i == pokemonTorneio.size() - 1) {
+                Audio.playMusic("AudioFiles/pokemon_theme.wav");
                 System.out.println("\n🏆 PARABÉNS! ÉS O NOVO CAMPEÃO DE AURORIUM!");
                 System.out.println("🏆 Como recompensa, podes ir ao laboratório criar um novo Pokémon!");
                 criarPokemon();
@@ -713,6 +714,7 @@ public class Game {
 
         System.out.println("\n✅ Pokémon " + nomeNovo + " criado com sucesso!");
         System.out.println("Uma nova jornada começa agora!");
+        Audio.stopMusic();
         menuPrincipal();
     }
 }
