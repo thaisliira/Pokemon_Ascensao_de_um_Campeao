@@ -13,7 +13,7 @@ Este projeto **não é afiliado ou patrocinado pela Nintendo ou The Pokémon Com
 
 ## 🎮 Sobre o Projeto
 
-**Pokémon: Ascensão de um Campeão** é um jogo de terminal desenvolvido em Java, inspirado em mecânicas clássicas de jogos de RPG e batalhas por turnos. O jogador escolhe um pokémon inicial, participa de batalhas sequenciais e por fim batalha em um torneio.
+**Pokémon: Ascensão de um Campeão** é um jogo de terminal desenvolvido em Java, inspirado em mecânicas clássicas de jogos de RPG e batalhas por turnos. O jogador escolhe um pokémon inicial, participa de batalhas sequenciais e por fim batalha em um torneio. O código está escrito em PT-BR.
 
 O foco principal do projeto é:
 
