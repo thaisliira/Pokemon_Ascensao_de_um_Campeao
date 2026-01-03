@@ -38,8 +38,15 @@ public class PokemonEscolhido extends Pokemon {
         System.out.println("Status: " + this.status);
     }
 
+    /**
+     * Função com menu de opção de ataque
+     * @param inimigo
+     * @return retorna se o inimigo foi derrotado ou não
+     * @throws FileNotFoundException
+     * @throws InterruptedException
+     */
     @Override
-    public boolean atacar(Pokemon inimigo) throws FileNotFoundException {
+    public boolean atacar(Pokemon inimigo) throws FileNotFoundException, InterruptedException {
         Scanner jogador = new Scanner(System.in);
         boolean roundEncerrado = false;
         boolean inimigoDerrotado = false;
@@ -102,12 +109,14 @@ public class PokemonEscolhido extends Pokemon {
      * @param dano subtrai do valor do HP
      */
     @Override
-    public void receberDano(int dano) {
+    public void receberDano(int dano) throws InterruptedException {
         // chama a função receber dano do super e aplica
         super.receberDano(dano);
         if (this.hpAtual <= 0) {
+            Audio.playMusic("AudioFiles/gameover.wav");
             System.out.println("☠️☠️☠️ Game over ☠️☠️☠️");
             System.out.println("Seu Pokémon não resistiu e morreu...⚰️");
+            Thread.sleep(3400);
             System.exit(0);
         } else if (this.hpAtual != 100){
             System.out.println("Você sobreviveu a esse round mas não baixe a guarda!");
@@ -169,8 +178,8 @@ public class PokemonEscolhido extends Pokemon {
         System.out.println("\n🌟 PARABÉNS! Seu Pokémon evoluiu para " + this.nome + "!");
         System.out.println("Seus atributos aumentaram drasticamente!");
         System.out.println("------------------------------------------------\n");
+        Audio.playMusic("AudioFiles/" + this.nome.toLowerCase() + ".wav");
         imprimirArtePokemon();
-        String caminhoAudio = "AudioFiles/" + this.nome.toLowerCase() + ".wav";
     }
 
     /**

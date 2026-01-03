@@ -80,13 +80,13 @@ public abstract class Pokemon {
         this.defesaEspecial = defesaEspecial;
     }
 
-    public abstract boolean atacar(Pokemon inimigo) throws FileNotFoundException;
+    public abstract boolean atacar(Pokemon inimigo) throws FileNotFoundException, InterruptedException;
 
     /**
      * Função comum para receber dano de ambos os pokemons (pokemon herói e inimigo)
      * @param dano subtrai do valor do HP
      */
-    public void receberDano(int dano) {
+    public void receberDano(int dano) throws InterruptedException {
         this.hpAtual -= dano;
         if (this.hpAtual < 0) {
             this.hpAtual = 0;
