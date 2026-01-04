@@ -271,7 +271,7 @@ public class Game {
                     return;
                 default:
                     System.out.println("⚠️ Esse local não existe no mapa! Tente de novo.");
-                    continue; // Volta para o início do loop
+                    continue; // Volta para o início do "loop"
             }
             System.out.println("\nViajando para " + mapaEscolhido.getNome() + "...");
             iniciarExploracao(mapaEscolhido);
@@ -279,7 +279,7 @@ public class Game {
     }
 
     /**
-     * Menu que de acordo com o mapa escolhido pode encontrar pokemons selvagens, pocoes ou nada acontece.
+     * Menu que conforme o mapa escolhido pode encontrar pokemons selvagens, pocoes ou nada acontece.
      * @param mapa escolhido no menu anterior
      * @throws FileNotFoundException
      */
@@ -321,7 +321,7 @@ public class Game {
                     break;
             }
 
-            NPCPokemon inimigo = new NPCPokemon(tipoDoLocal,nomeInimigo,nivelInimigo, hpBase,atkBase +(2*nivelInimigo),atkBase +2 + (2*nivelInimigo), defBase + (2*nivelInimigo), defBase + +2 + (2*nivelInimigo));
+            NPCPokemon inimigo = new NPCPokemon(tipoDoLocal,nomeInimigo,nivelInimigo, hpBase,atkBase +(2*nivelInimigo),atkBase +2 + (2*nivelInimigo), defBase + (2*nivelInimigo), defBase +2 + (2*nivelInimigo));
 
             System.out.println("\n⚔️ CUIDADO! Um " + ConsoleColors.YELLOW_BOLD + inimigo.getNome() + " (Nvl " + nivelInimigo + ")" + ConsoleColors.RESET + " apareceu!");
             System.out.println("HP: " + inimigo.getHpMax() + " | Atk: " + inimigo.getAtaque() + " | Def: " + inimigo.getDefesa());
@@ -357,7 +357,7 @@ public class Game {
                 }
             }
         } else if (encontrarInimigo < 90){
-            System.out.println("\n🍃 Você caminhou pelo " + mapa.getNome() + " e encontrou um item");
+            System.out.println("\n🍃 Você caminhou pelo " + mapa.getNome() + " e encontrou um item! \uD83E\uDDEA");
             Item pocaoEncontrada = new Item("Poção de cura" , Pokegotchi.Enum.TipoItem.CURA, 0.0, "Recupera 20 HP",20);
             System.out.println("Obteve: " + pocaoEncontrada.getNome());
             pokemon.adcItemInventario(pocaoEncontrada);
@@ -443,7 +443,6 @@ public class Game {
                 break;
             case 4:
                 parceiroTreino = "Psyduck";
-                tipoParceiro = TipoPokemon.PSIQUICO;
                 break;
             case 5:
                 menuPrincipal();
@@ -515,7 +514,7 @@ public class Game {
      */
     public void menuTorneio() throws FileNotFoundException, InterruptedException {
         System.out.println(ConsoleColors.WHITE_BRIGHT + """
-                Após jornadas árduas, treinamentos incansáveis e batalhas que moldaram seu espírito, 
+                Após jornadas árduas, treinamentos incansáveis e batalhas que moldaram seu espírito,
                 você finalmente alcança o ponto máximo de sua trajetória: o grande Torneio de Aurorium.
 
                 Treinadores de todos os cantos se reúnem, cada um trazendo sua própria história,
@@ -533,7 +532,7 @@ public class Game {
             System.out.println("\n1. Iniciar Torneio");
             System.out.println("2. Abrir inventário");
             System.out.println("3. Ver status do Pokémon");
-
+            System.out.println("Escolha uma opção: ");
             int escolha = jogador.nextInt();
 
             switch (escolha) {
@@ -563,7 +562,7 @@ public class Game {
         for (int i = 0; i < pokemonTorneio.size(); i++) {
             NPCPokemon adversario = pokemonTorneio.get(i);
 
-            System.out.println("\n⚔️ RODADA " + (i + 1) + ": Seu adversário é " + adversario.getNome());
+            System.out.println("\n⚔️ RODADA " + (i + 1) + ": Seu adversário é " + ConsoleColors.BLACK_BOLD_BRIGHT + adversario.getNome() + ConsoleColors.RESET);
 
             batalhar(adversario);
 
@@ -577,7 +576,7 @@ public class Game {
             if (i == pokemonTorneio.size() - 1) {
                 Audio.playMusic("AudioFiles/pokemon_theme.wav");
                 System.out.println("\n🏆 PARABÉNS! ÉS O NOVO" + ConsoleColors.YELLOW_BRIGHT + " CAMPEÃO DE AURORIUM!" + ConsoleColors.RESET);
-                System.out.println("🏆 Como recompensa, podes ir ao laboratório" + ConsoleColors.GREEN_BACKGROUND_BRIGHT + " criar um novo Pokémon!" + ConsoleColors.RESET);
+                System.out.println("🏆 Como recompensa, podes ir ao laboratório da Dra. Thaís " + ConsoleColors.GREEN_BACKGROUND_BRIGHT + " criar um novo Pokémon!" + ConsoleColors.RESET);
                 criarPokemon();
                 return;
             }
@@ -595,10 +594,10 @@ public class Game {
     private void menuIntervaloTorneio() throws FileNotFoundException {
         boolean continuarBatalha = false;
         while (!continuarBatalha) {
-            System.out.println("\n--- INTERVALO DO TORNEIO ---");
-            System.out.println("1. Próxima Batalha");
-            System.out.println("2. Inventário");
-            System.out.println("3. Ir à Loja");
+            System.out.println(ConsoleColors.CYAN_BOLD + "\n------ INTERVALO DO TORNEIO ------" + ConsoleColors.RESET);
+            System.out.println("1. Próxima Batalha ⚔️");
+            System.out.println("2. Inventário \uD83C\uDF92");
+            System.out.println("3. Ir à Loja \uD83D\uDECD\uFE0F");
             System.out.println("4. Ver Status do meu Pokémon");
             System.out.print("Escolha: ");
 
@@ -649,7 +648,11 @@ public class Game {
             System.out.print("Sua escolha: ");
 
             int escolha = 0;
-            escolha = jogador.nextInt();
+            if (jogador.hasNextInt()) {
+                escolha = jogador.nextInt();
+            } else {
+                jogador.next();
+            }
 
             switch (escolha) {
                 case 1:
@@ -672,12 +675,12 @@ public class Game {
                     break;
                 default:
                     System.out.println("⚠️ Tipo inválido!");
-                    return;
+                    break;
             }
         }
 
         int atkBasico, atkEspecial, defBasica, defEspecial;
-        String nomeNovo;
+        String nomeNovo="", evolucao1="", evolucao2="";
 
         do {
             System.out.println("\nDistribua os atributos (valores entre 10 e 60):");
@@ -693,16 +696,24 @@ public class Game {
             System.out.print("Defesa especial: ");
             defEspecial = jogador.nextInt();
 
-            System.out.print("\nNome do Pokémon: ");
             jogador.nextLine();
-            nomeNovo = jogador.nextLine();
 
             if (atkBasico < 10 || atkBasico > 80 ||
                     atkEspecial < 10 || atkEspecial > 80 ||
                     defBasica < 10 || defBasica > 80 ||
                     defEspecial < 10 || defEspecial > 80) {
-
                 System.out.println("⚠️ Todos os atributos devem estar entre 10 e 60.");
+            } else {
+
+                System.out.print("\nNome do Pokémon: ");
+                jogador.nextLine();
+                nomeNovo = jogador.nextLine();
+
+                System.out.print("\nNome da primeira evolução: ");
+                evolucao1 = jogador.nextLine();
+
+                System.out.print("\nNome da segunda evolução: ");
+                evolucao2 = jogador.nextLine();
             }
 
         } while (
@@ -712,9 +723,9 @@ public class Game {
                         defEspecial < 10 || defEspecial > 60
         );
 
-        FormaEvolutiva evolucao2 = new FormaEvolutiva(nomeNovo, atkBasico + 40, atkEspecial + 40, defBasica, defEspecial + 45, 8, tipoEscolhido, null);
-        FormaEvolutiva evolucao1 = new FormaEvolutiva(nomeNovo, atkBasico + 10, atkEspecial +30, defBasica, defEspecial + 25, 4, tipoEscolhido, evolucao2);
-        FormaEvolutiva formaInicial = new FormaEvolutiva( nomeNovo, atkBasico, atkEspecial, defBasica,defEspecial,1, tipoEscolhido,evolucao1);
+        FormaEvolutiva evolucao02 = new FormaEvolutiva(evolucao2, atkBasico + 40, atkEspecial + 50, defBasica + 40, defEspecial + 45, 8, tipoEscolhido, null);
+        FormaEvolutiva evolucao01 = new FormaEvolutiva(evolucao1, atkBasico + 20, atkEspecial +40, defBasica + 35, defEspecial + 30, 4, tipoEscolhido, evolucao02);
+        FormaEvolutiva formaInicial = new FormaEvolutiva( nomeNovo, atkBasico, atkEspecial, defBasica,defEspecial,1, tipoEscolhido,evolucao01);
 
         this.pokemon = new PokemonEscolhido(tipoEscolhido,nomeNovo,1,0,100,100,Status.FELIZ,formaInicial,100);
 

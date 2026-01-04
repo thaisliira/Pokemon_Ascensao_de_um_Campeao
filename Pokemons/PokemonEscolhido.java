@@ -4,6 +4,8 @@ import Pokegotchi.*;
 import Pokegotchi.Enum.Status;
 import Pokegotchi.Enum.TipoItem;
 import Pokegotchi.Enum.TipoPokemon;
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -165,8 +167,8 @@ public class PokemonEscolhido extends Pokemon {
 
         System.out.println("\n------------------------------------------------");
         System.out.println("✨ O quê? O que está acontecendo? " + this.nome + " está evoluindo!");
-        System.out.println("...... (luz brilhante) ......");
-        System.out.println("......... (forma mudando) .........");
+        System.out.println("...... \uD83C\uDF1F\uD83C\uDF1F\uD83C\uDF1F\uD83C\uDF1F ......");
+        System.out.println("......... \uD83C\uDF2B\uFE0F\uD83C\uDF2B\uFE0F\uD83C\uDF2B\uFE0F .........");
 
         this.formaAtual = novaForma;
         this.setNome(novaForma.getNome());
@@ -175,7 +177,7 @@ public class PokemonEscolhido extends Pokemon {
         this.setDefesa(novaForma.getDefesaBase());
         this.setDefesaEspecial(novaForma.getDefesaEspecial());
 
-        System.out.println("\n🌟 PARABÉNS! Seu Pokémon evoluiu para " + this.nome + "!");
+        System.out.println("\n🌟 PARABÉNS! Seu Pokémon evoluiu para " + ConsoleColors.PURPLE_BRIGHT +  this.nome + ConsoleColors.RESET + "!");
         System.out.println("Seus atributos aumentaram drasticamente!");
         System.out.println("------------------------------------------------\n");
         Audio.playMusic("AudioFiles/" + this.nome.toLowerCase() + ".wav");
@@ -188,6 +190,13 @@ public class PokemonEscolhido extends Pokemon {
      */
     public void imprimirArtePokemon() throws FileNotFoundException {
         String nomeArquivo = "Artes/" + this.nome.toLowerCase() + ".txt";
+        File arquivo = new File(nomeArquivo);
+
+        // condição para verificar se existe uma arte com o nome do pokemon para imprimir
+        if (!arquivo.exists()) {
+            return;
+        }
+
         System.out.println("\n");
         FileTools.printFile(nomeArquivo);
         System.out.println("\n");
@@ -245,10 +254,10 @@ public class PokemonEscolhido extends Pokemon {
             }
 
             System.out.println("\n" + ConsoleColors.CYAN_BOLD + "-------- INVENTÁRIO --------" + ConsoleColors.RESET);
-            System.out.println("\uD83E\uDE99 Quantidade de moedas: " + this.moedas);
+            System.out.println("\uD83E\uDE99 Quantidade de moedas: " + this.moedas + "$");
             int i = 1;
             for (Item item : this.Inventario) {
-                System.out.println(i + ". " + item.getNome() + item.getDescEfeito());
+                System.out.println(i + ". " + item.getNome() +": "+ item.getDescEfeito());
                 i++;
             }
             System.out.println("0. Voltar"); // porque não sei quantos itens o usuário vai ter
@@ -294,7 +303,7 @@ public class PokemonEscolhido extends Pokemon {
      * @param itemComprado na loja
      */
     public void comprarItem(Item itemComprado) {
-        if(this.moedas > itemComprado.getPreco()) {
+        if(this.moedas >= itemComprado.getPreco()) {
             this.moedas -= itemComprado.getPreco();
             System.out.println("Você comprou 1un do item " + itemComprado.getNome());
             this.Inventario.add(itemComprado);
