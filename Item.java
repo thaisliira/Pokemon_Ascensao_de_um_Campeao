@@ -1,6 +1,6 @@
-package Pokegotchi;
+package Pokemon_Ascensao;
 
-import Pokegotchi.Enum.TipoItem;
+import Pokemon_Ascensao.Enum.TipoItem;
 
 public class Item {
 

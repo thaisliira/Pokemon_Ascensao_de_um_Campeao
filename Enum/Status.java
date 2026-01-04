@@ -1,4 +1,4 @@
-package Pokegotchi.Enum;
+package Pokemon_Ascensao.Enum;
 
 /**
  * Enumeração com os tipos de estado que um pokemon se encontra

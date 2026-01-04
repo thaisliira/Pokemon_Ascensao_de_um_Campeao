@@ -1,10 +1,13 @@
-package Pokegotchi;
+package Pokemon_Ascensao;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.File;
 
+/**
+ * Classe que permite a execução de áudios no jogo
+ */
 public class Audio {
 
     private static Clip clip;

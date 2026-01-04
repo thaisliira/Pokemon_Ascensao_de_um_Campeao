@@ -1,7 +1,10 @@
-package Pokegotchi;
+package Pokemon_Ascensao;
 
-import Pokegotchi.Enum.TipoPokemon;
+import Pokemon_Ascensao.Enum.TipoPokemon;
 
+/**
+ * Classe que exibe a forma evolutiva do pokemon
+ */
 public class FormaEvolutiva {
 
     private final String nome;

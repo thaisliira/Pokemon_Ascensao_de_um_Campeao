@@ -1,7 +1,7 @@
-package Pokegotchi.Pokemons;
+package Pokemon_Ascensao.Pokemons;
 
-import Pokegotchi.Enum.Status;
-import Pokegotchi.Enum.TipoPokemon;
+import Pokemon_Ascensao.Enum.Status;
+import Pokemon_Ascensao.Enum.TipoPokemon;
 
 /**
  * Classe que adiciona atributos ao NPC pokémon

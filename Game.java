@@ -1,10 +1,10 @@
-package Pokegotchi;
+package Pokemon_Ascensao;
 
-import Pokegotchi.Enum.Mapa;
-import Pokegotchi.Pokemons.NPCPokemon;
-import Pokegotchi.Pokemons.PokemonEscolhido;
-import Pokegotchi.Enum.TipoPokemon;
-import Pokegotchi.Enum.Status;
+import Pokemon_Ascensao.Enum.Mapa;
+import Pokemon_Ascensao.Pokemons.NPCPokemon;
+import Pokemon_Ascensao.Pokemons.PokemonEscolhido;
+import Pokemon_Ascensao.Enum.TipoPokemon;
+import Pokemon_Ascensao.Enum.Status;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -380,7 +380,7 @@ public class Game {
             }
         } else if (encontrarInimigo < 90){
             System.out.println("\n🍃 Você caminhou pelo " + mapa.getNome() + " e encontrou um item! \uD83E\uDDEA");
-            Item pocaoEncontrada = new Item("Poção de cura" , Pokegotchi.Enum.TipoItem.CURA, 0.0, "Recupera 20 HP",20);
+            Item pocaoEncontrada = new Item("Poção de cura" , Pokemon_Ascensao.Enum.TipoItem.CURA, 0.0, "Recupera 20 HP",20);
             System.out.println("Obteve: " + pocaoEncontrada.getNome());
             pokemon.adcItemInventario(pocaoEncontrada);
         } else {

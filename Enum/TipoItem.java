@@ -1,4 +1,4 @@
-package Pokegotchi.Enum;
+package Pokemon_Ascensao.Enum;
 
 /**
  * Enumeração para os tipos de itens que existem na loja
