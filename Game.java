@@ -18,12 +18,12 @@ public class Game {
     private String nomeJogador;
     private PokemonEscolhido pokemon;
     private static ArrayList<NPCPokemon> pokemonTorneio;
-    private Scanner jogador;
+    private final Scanner jogador;
     private final Loja loja;
 
     public Game() {
         this.jogador = new Scanner(System.in);
-        this.pokemonTorneio = new ArrayList<>();
+        pokemonTorneio = new ArrayList<>();
         pokemonTorneio.add(new NPCPokemon(TipoPokemon.LUTA, "Mega Lucario", 10, 100, 100, 55, 40, 80));
         pokemonTorneio.add(new NPCPokemon(TipoPokemon.AGUA, "Suicune", 10, 100, 105, 60, 40, 85));
         pokemonTorneio.add(new NPCPokemon(TipoPokemon.GELO, "Articuno", 10, 100, 110, 65, 45, 90));
@@ -34,7 +34,7 @@ public class Game {
     /**
      * Função que tem o menu iniciar o jogo
      *
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException se não encontrar o arquivo
      */
     public void iniciar() throws FileNotFoundException, InterruptedException {
         Audio.playMusic("AudioFiles/pokemon_theme.wav");
@@ -87,7 +87,7 @@ public class Game {
     /**
      * Função com menu de escolha do nome do jogador e escolher pokemon
      *
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException se não encontrar o arquivo
      */
     public void iniciarJogo() throws FileNotFoundException, InterruptedException {
         System.out.println("\n--------------------------------");
@@ -125,8 +125,8 @@ public class Game {
     /**
      * Funcao que determina as caracteristicas do pokemon escolhido de acordo com o tipo
      *
-     * @param escolha
-     * @throws FileNotFoundException
+     * @param escolha do pokémon inicial pelo jogador
+     * @throws FileNotFoundException se não encontrar o arquivo
      */
     public void iniciarPokemon(int escolha) throws FileNotFoundException, InterruptedException {
         Audio.stopMusic();
@@ -185,9 +185,9 @@ public class Game {
     }
 
     /**
-     * Função com menu principal de açoes: explorar, treinar, loja ou sair
+     * Função com menu principal de ações: explorar, treinar, loja ou sair
      *
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException se não encontrar o arquivo
      */
     public void menuPrincipal() throws FileNotFoundException, InterruptedException {
         while (true) {
@@ -251,15 +251,15 @@ public class Game {
     /**
      * Funçao com menu de exploraçao para Floresta, Vulcão, Lago ou Usina
      *
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException se não encontrar o arquivo
      */
     public void menuExplorar() throws FileNotFoundException, InterruptedException {
         while (true) {
-            System.out.println(ConsoleColors.CYAN_BOLD + "\n------- MAPA DE EXPLORAÇÃO \uD83D\uDDFA\uFE0F -------" + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.CYAN_BOLD + "\n------- MAPA DE EXPLORAÇÃO \uD83D\uDDFA️ -------" + ConsoleColors.RESET);
             System.out.println("Para onde deseja viajar?");
             System.out.println("1. Floresta Viridian \uD83C\uDF33");
             System.out.println("2. Vulcão Cinnabar \uD83C\uDF0B");
-            System.out.println("3. Lago da Fúria \uD83C\uDFDE\uFE0F");
+            System.out.println("3. Lago da Fúria \uD83C\uDFDE️");
             System.out.println("4. Usina de Choque ⚡");
             System.out.println("5. Voltar");
             System.out.print("Escolha sua rota (1-5): ");
@@ -303,7 +303,7 @@ public class Game {
     /**
      * Menu que conforme o mapa escolhido pode encontrar pokemons selvagens, pocoes ou nada acontece.
      * @param mapa escolhido no menu anterior
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException se não encontrar o arquivo
      */
     public void iniciarExploracao(Mapa mapa) throws FileNotFoundException, InterruptedException {
 
@@ -427,7 +427,7 @@ public class Game {
 
     /**
      * Funçao que possibilita treinar com pokemons específicos e ganhar moedas se vencer
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException se não encontrar o arquivo
      */
     public void treinar() throws FileNotFoundException, InterruptedException {
         System.out.println("\n" + ConsoleColors.CYAN_BOLD + "-------- CAMPO DE TREINAMENTO --------" + ConsoleColors.RESET);
@@ -483,8 +483,8 @@ public class Game {
 
     /**
      * Função que determina 50% de probabilidade de escapar de uma batalha
-     * @param inimigo
-     * @throws FileNotFoundException
+     * @param inimigo que encontrou no "habitat"
+     * @throws FileNotFoundException se não encontrar o arquivo
      */
     public void tentarFugir(NPCPokemon inimigo) throws FileNotFoundException, InterruptedException {
         System.out.println("Tentando escapar...");
@@ -538,7 +538,7 @@ public class Game {
 
     /**
      * Função com menu pré-batalha no torneio
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException se não encontrar o arquivo
      */
     public void menuTorneio() throws FileNotFoundException, InterruptedException {
         System.out.println(ConsoleColors.WHITE_BRIGHT + """
@@ -593,7 +593,7 @@ public class Game {
 
     /**
      * Função que determina as rodadas e adversários do torneio
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException se não encontrar o arquivo
      */
     public void torneioPokemon() throws FileNotFoundException, InterruptedException {
 
@@ -627,7 +627,7 @@ public class Game {
 
     /**
      * Função com menu de intervalo entre as rodadas do torneio
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException se não encontrar o arquivo
      */
     private void menuIntervaloTorneio() throws FileNotFoundException {
         boolean continuarBatalha = false;
@@ -635,7 +635,7 @@ public class Game {
             System.out.println(ConsoleColors.CYAN_BOLD + "\n------ INTERVALO DO TORNEIO ------" + ConsoleColors.RESET);
             System.out.println("1. Próxima Batalha ⚔️");
             System.out.println("2. Inventário \uD83C\uDF92");
-            System.out.println("3. Ir à Loja \uD83D\uDECD\uFE0F");
+            System.out.println("3. Ir à Loja \uD83D\uDECD️");
             System.out.println("4. Ver Status do meu Pokémon");
             System.out.print("Escolha: ");
 
@@ -670,7 +670,7 @@ public class Game {
 
     /**
      * Função que possibilita a criação de pokemon a escolha do jogador e reiniciar o jogo com o pokemon novo
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException se não encontrar o arquivo
      */
     public void criarPokemon() throws FileNotFoundException, InterruptedException {
 
