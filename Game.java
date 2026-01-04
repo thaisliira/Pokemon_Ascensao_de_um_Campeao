@@ -33,7 +33,6 @@ public class Game {
 
     /**
      * Função que tem o menu iniciar o jogo
-     *
      * @throws FileNotFoundException se não encontrar o arquivo
      */
     public void iniciar() throws FileNotFoundException, InterruptedException {
@@ -124,7 +123,6 @@ public class Game {
 
     /**
      * Funcao que determina as caracteristicas do pokemon escolhido de acordo com o tipo
-     *
      * @param escolha do pokémon inicial pelo jogador
      * @throws FileNotFoundException se não encontrar o arquivo
      */
@@ -140,9 +138,9 @@ public class Game {
                 tipoEscolhido = TipoPokemon.AGUA;
                 nomePokemon = "Squirtle";
 
-                FormaEvolutiva blastoise = new FormaEvolutiva("Blastoise", 80, 90, 70, 96, 8, TipoPokemon.AGUA, null);
+                FormaEvolutiva blastoise = new FormaEvolutiva("Blastoise", 110, 115, 70, 96, 8, TipoPokemon.AGUA, null);
                 FormaEvolutiva wartortle = new FormaEvolutiva("Wartortle", 60, 90, 60, 80, 4, TipoPokemon.AGUA, blastoise);
-                formaInicial = new FormaEvolutiva("Squirtle", 40, 50, 30, 60, 1, TipoPokemon.AGUA, wartortle);
+                formaInicial = new FormaEvolutiva("Squirtle", 40, 55, 30, 60, 1, TipoPokemon.AGUA, wartortle);
                 break;
             case 2:
                 Audio.playMusic("AudioFiles/charmander.wav");
@@ -159,9 +157,9 @@ public class Game {
                 tipoEscolhido = TipoPokemon.PLANTA;
                 nomePokemon = "Bulbasaur";
 
-                FormaEvolutiva venusaur = new FormaEvolutiva("Venusaur", 90, 100, 60, 100, 8, TipoPokemon.PLANTA, null);
+                FormaEvolutiva venusaur = new FormaEvolutiva("Venusaur", 105, 110, 60, 100, 8, TipoPokemon.PLANTA, null);
                 FormaEvolutiva ivysaur = new FormaEvolutiva("Ivysaur", 60, 90, 50, 90, 4, TipoPokemon.PLANTA, venusaur);
-                formaInicial = new FormaEvolutiva("Bulbasaur", 35, 40, 30, 40, 1, TipoPokemon.PLANTA, ivysaur);
+                formaInicial = new FormaEvolutiva("Bulbasaur", 35, 50, 30, 55, 1, TipoPokemon.PLANTA, ivysaur);
                 break;
             default:
                 System.out.println("Ops, opção inválida! Eu escolho por você!");
@@ -186,7 +184,6 @@ public class Game {
 
     /**
      * Função com menu principal de ações: explorar, treinar, loja ou sair
-     *
      * @throws FileNotFoundException se não encontrar o arquivo
      */
     public void menuPrincipal() throws FileNotFoundException, InterruptedException {
@@ -249,8 +246,7 @@ public class Game {
     }
 
     /**
-     * Funçao com menu de exploraçao para Floresta, Vulcão, Lago ou Usina
-     *
+     * Função com menu de exploração para Floresta, Vulcão, Lago ou Usina
      * @throws FileNotFoundException se não encontrar o arquivo
      */
     public void menuExplorar() throws FileNotFoundException, InterruptedException {
@@ -560,6 +556,7 @@ public class Game {
             System.out.println("\n1. Iniciar Torneio");
             System.out.println("2. Abrir inventário");
             System.out.println("3. Ver status do Pokémon");
+            System.out.println("4. Ir à Loja");
             System.out.println("Escolha uma opção: ");
 
             int escolha = 0;
@@ -583,6 +580,9 @@ public class Game {
                     break;
                 case 3:
                     pokemon.exibirDetalhesPoke();
+                    break;
+                case 4:
+                    visitarLoja();
                     break;
                 default:
                     System.out.println("⚠️ Opção inválida!");
