@@ -30,12 +30,12 @@ public class PokemonEscolhido extends Pokemon {
      * Função que exibe o status do meu pokemon: vida, ataque, defesa...
      */
     public void exibirDetalhesPoke() {
-        System.out.println("\n--- " + this.nome.toUpperCase() + " (Lvl " + this.level + ") ---");
+        System.out.println("\n" + ConsoleColors.PURPLE_BACKGROUND  +" -------- " + this.nome.toUpperCase() + " (Lvl " + this.level + ") --------" + ConsoleColors.RESET);
         System.out.println("Experiência(XP): " + this.experiencia);
-        System.out.println("Vida(HP): " + this.hpAtual + "/" + this.hpMax);
-        System.out.println("Atk: " + this.ataque + " | Def: " + this.defesa);
-        System.out.println("Atk Sp: " + this.ataqueEspecial + " | Def Sp: " + this.defesaEspecial);
-        System.out.println("Status: " + this.status);
+        System.out.println("❤️ Vida(HP): " + this.hpAtual + "/" + this.hpMax);
+        System.out.println("\uD83D\uDC4A\uD83C\uDFFC Atk: " + this.ataque + " | \uD83D\uDEE1\uFE0F Def: " + this.defesa);
+        System.out.println("\uD83D\uDC4A\uD83C\uDFFC Atk Sp: " + this.ataqueEspecial + " | \uD83D\uDEE1\uFE0F Def Sp: " + this.defesaEspecial);
+        System.out.println("\uD83D\uDCDB Status: " + this.status);
     }
 
     /**
@@ -52,10 +52,10 @@ public class PokemonEscolhido extends Pokemon {
         boolean inimigoDerrotado = false;
 
         while (!roundEncerrado) {
-            System.out.println("\n------ SEU ROUND (" + this.nome + ") ------");
-            System.out.println("1. Ataque Físico");
-            System.out.println("2. Ataque Especial");
-            System.out.println("3. Inventário");
+            System.out.println(ConsoleColors.CYAN_BOLD + "\n-------- ROUND (" + this.nome + ") --------" + ConsoleColors.RESET);
+            System.out.println("1. Ataque Básico \uD83D\uDC4A\uD83C\uDFFC");
+            System.out.println("2. Ataque Especial ✨");
+            System.out.println("3. Inventário \uD83C\uDF92");
             System.out.println("4. Exibir Status do meu Pokemon");
             System.out.print("Escolha: ");
 
@@ -73,7 +73,7 @@ public class PokemonEscolhido extends Pokemon {
                     // condição se a defesa for maior que o ataque
                     if (dano <= 0) dano = 2;
 
-                    System.out.println("\n👊 " + this.nome + " usou um ataque físico!");
+                    System.out.println("\n👊 " + this.nome + " usou um Ataque Básico!");
                     System.out.println("💥 Causou " + dano + " de dano!");
                     inimigo.receberDano(dano);
                     roundEncerrado = true;
@@ -81,7 +81,7 @@ public class PokemonEscolhido extends Pokemon {
                 case 2:
                     dano = this.ataqueEspecial - inimigo.getDefesaEspecial();
                     if (dano <= 0) dano = 2;
-                    System.out.println("\n⚡ " + this.nome + " usou um Ataque Especial!");
+                    System.out.println("\n✨ " + this.nome + " usou um Ataque Especial!");
                     System.out.println("💥 Causou " + dano + " de dano!");
                     inimigo.receberDano(dano);
                     roundEncerrado = true;
@@ -110,7 +110,7 @@ public class PokemonEscolhido extends Pokemon {
      */
     @Override
     public void receberDano(int dano) throws InterruptedException {
-        // chama a função receber dano do super e aplica
+        // chama a função receber dano da classe super e aplica
         super.receberDano(dano);
         if (this.hpAtual <= 0) {
             Audio.playMusic("AudioFiles/gameover.wav");
@@ -132,7 +132,7 @@ public class PokemonEscolhido extends Pokemon {
      */
     public void ganharXP(int ganhoDeXP) throws FileNotFoundException {
         this.experiencia += ganhoDeXP;
-        System.out.println("\n✨ " + this.nome + " ganhou " + ganhoDeXP + " de experiência!");
+        System.out.println("\n \uD83E\uDD29 " + this.nome + " ganhou " + ganhoDeXP + " de experiência!");
 
         while (this.experiencia >= 50) {
             this.experiencia -= 50;
@@ -146,7 +146,7 @@ public class PokemonEscolhido extends Pokemon {
      */
     public void subirDeNivel() throws FileNotFoundException {
         this.level++;
-        System.out.println("🎉 LEVEL UP! " + this.nome + " subiu para o nível " + this.level + "!");
+        System.out.println("🎉 LEVEL UP! " + this.nome + " subiu para o " + ConsoleColors.BLUE_BOLD + "nível " +  this.level + ConsoleColors.RESET + "!");
 
         if (formaAtual.getProximaForma() != null && this.level >= formaAtual.getProximaForma().getLevelNecessario()) {
             evoluir();
@@ -205,11 +205,11 @@ public class PokemonEscolhido extends Pokemon {
                 return;
             }
 
-            System.out.println("\n======== SEU INVENTÁRIO ========");
-            System.out.println("Quantidade de moedas: " + this.moedas);
+            System.out.println("\n" + ConsoleColors.CYAN_BOLD + "-------- INVENTÁRIO --------" + ConsoleColors.RESET);
+            System.out.println("\uD83E\uDE99 Quantidade de moedas: " + this.moedas + "$");
             int i = 1;
             for (Item item : this.Inventario) {
-                System.out.println(i + ". " + item.getNome() + item.getDescEfeito());
+                System.out.println(i + ". " + item.getNome() +": "+ item.getDescEfeito());
                 i++;
             }
             System.out.println("0. Voltar"); // porque não sei quantos itens o usuário vai ter
@@ -232,6 +232,10 @@ public class PokemonEscolhido extends Pokemon {
         }
     }
 
+    /**
+     * Função individual com o inventário para o torneio
+     * @throws FileNotFoundException
+     */
     public void inventarioTorneio() throws FileNotFoundException {
         while (true) {
             if (this.Inventario.isEmpty()) {
@@ -240,8 +244,8 @@ public class PokemonEscolhido extends Pokemon {
                 return;
             }
 
-            System.out.println("\n======== SEU INVENTÁRIO ========");
-            System.out.println("Quantidade de moedas: " + this.moedas);
+            System.out.println("\n" + ConsoleColors.CYAN_BOLD + "-------- INVENTÁRIO --------" + ConsoleColors.RESET);
+            System.out.println("\uD83E\uDE99 Quantidade de moedas: " + this.moedas);
             int i = 1;
             for (Item item : this.Inventario) {
                 System.out.println(i + ". " + item.getNome() + item.getDescEfeito());
@@ -282,7 +286,7 @@ public class PokemonEscolhido extends Pokemon {
      */
     public void adicionarMoedas(int quantidade) {
         this.moedas += quantidade;
-        System.out.println("💰 Ganhou " + quantidade + " moedas! Saldo atual: " + this.moedas);
+        System.out.println("💰 Ganhou " + quantidade + " moedas! Saldo atual: " + this.moedas + "$");
     }
 
     /**
@@ -294,9 +298,9 @@ public class PokemonEscolhido extends Pokemon {
             this.moedas -= itemComprado.getPreco();
             System.out.println("Você comprou 1un do item " + itemComprado.getNome());
             this.Inventario.add(itemComprado);
-            System.out.println("Saldo restante: " + this.moedas);
+            System.out.println(" \uD83E\uDE99 Saldo restante: " + this.moedas + "$");
         } else {
-            System.out.println("Você não tem moedas suficientes para realizar a compra! Ganhe batalhas treinando e receba moedas!");
+            System.out.println("Você não tem moedas suficientes para realizar a compra! Ganhe batalhas treinando e receba \uD83D\uDCB0! ");
         }
     }
 

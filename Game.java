@@ -88,7 +88,7 @@ public class Game {
      */
     public void iniciarJogo() throws FileNotFoundException, InterruptedException {
         System.out.println("\n--------------------------------");
-        System.out.println(ConsoleColors.WHITE_BOLD + """
+        System.out.println(ConsoleColors.WHITE_BRIGHT + """
                 Bem-vindo ao mundo de Aurorium. Aqui, força e vínculo caminham lado a lado.
                 Você, um jovem iniciante que sempre sonhou em participar da Liga de Aurorium, finalmente chega ao laboratório local.\s
                 Seu objetivo inicial é simples: escolher o elemento que definirá sua rota de evolução — água, fogo ou terra.""" + ConsoleColors.RESET);
@@ -96,9 +96,9 @@ public class Game {
         this.nomeJogador = jogador.nextLine();
         System.out.println("Prazer em te conhecer, " + this.nomeJogador + "!" + "\n");
         System.out.println("Agora é a hora de escolher seu parceiro:");
-        System.out.println("1. Pokébola" + ConsoleColors.BLUE_BOLD + " (Elemento Água)" + ConsoleColors.RESET);
-        System.out.println("2. Pokébola" + ConsoleColors.RED_BOLD + " (Elemento Fogo)" + ConsoleColors.RESET);
-        System.out.println("3. Pokébola" + ConsoleColors.GREEN_BOLD + " (Elemento Terra)" + ConsoleColors.RESET);
+        System.out.println("1." + ConsoleColors.BLUE_BOLD + " Pokébola (Elemento Água)" + ConsoleColors.RESET);
+        System.out.println("2." + ConsoleColors.RED_BOLD + " Pokébola (Elemento Fogo)" + ConsoleColors.RESET);
+        System.out.println("3." + ConsoleColors.GREEN_BOLD + " Pokébola (Elemento Terra)" + ConsoleColors.RESET);
         System.out.print("Qual elemento você prefere? (1-3): ");
 
         int escolha = 0;
@@ -160,11 +160,11 @@ public class Game {
 
         this.pokemon = new PokemonEscolhido(tipoEscolhido, nomePokemon, 1, 0, 100, 100, Status.FELIZ, formaInicial, 100);
 
-        System.out.println("PARABÉNS!");
-        System.out.println("Você escolheu o " + nomePokemon + "!");
+        System.out.println("\nPARABÉNS!");
+        System.out.println("Você escolheu o " + ConsoleColors.BLUE + nomePokemon + "!" + ConsoleColors.RESET);
         this.pokemon.imprimirArtePokemon();
         this.pokemon.exibirDetalhesPoke();
-        System.out.println("Quantidade de moedas: " + this.pokemon.getMoedas());
+        System.out.println("\uD83E\uDE99 Quantidade de moedas: " + this.pokemon.getMoedas());
         System.out.println("Sua jornada começa agora...");
 
         menuPrincipal();
@@ -177,7 +177,7 @@ public class Game {
      */
     public void menuPrincipal() throws FileNotFoundException, InterruptedException {
         while (true) {
-            System.out.println(ConsoleColors.WHITE_BOLD + "\n-------- MENU PRINCIPAL --------" + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.CYAN_BOLD + "\n-------- MENU PRINCIPAL --------" + ConsoleColors.RESET);
             System.out.println("Por onde começamos?");
             System.out.println("1. Explorar");
             System.out.println("2. Treinar");
@@ -237,12 +237,12 @@ public class Game {
      */
     public void menuExplorar() throws FileNotFoundException, InterruptedException {
         while (true) {
-            System.out.println("\n------- MAPA DE EXPLORAÇÃO -------");
+            System.out.println(ConsoleColors.CYAN_BOLD + "\n------- MAPA DE EXPLORAÇÃO \uD83D\uDDFA\uFE0F -------" + ConsoleColors.RESET);
             System.out.println("Para onde deseja viajar?");
-            System.out.println("1. Floresta Viridian");
-            System.out.println("2. Vulcão Cinnabar");
-            System.out.println("3. Lago da Fúria");
-            System.out.println("4. Usina de Choque");
+            System.out.println("1. Floresta Viridian \uD83C\uDF33");
+            System.out.println("2. Vulcão Cinnabar \uD83C\uDF0B");
+            System.out.println("3. Lago da Fúria \uD83C\uDFDE\uFE0F");
+            System.out.println("4. Usina de Choque ⚡");
             System.out.println("5. Voltar");
             System.out.print("Escolha sua rota (1-5): ");
 
@@ -273,7 +273,7 @@ public class Game {
                     System.out.println("⚠️ Esse local não existe no mapa! Tente de novo.");
                     continue; // Volta para o início do loop
             }
-            System.out.println("Viajando para " + mapaEscolhido.getNome());
+            System.out.println("\nViajando para " + mapaEscolhido.getNome() + "...");
             iniciarExploracao(mapaEscolhido);
         }
     }
@@ -285,7 +285,7 @@ public class Game {
      */
     public void iniciarExploracao(Mapa mapa) throws FileNotFoundException, InterruptedException {
 
-        // Função de probalidade de encontro com pokemon selvagem
+        // Função de probabilidade de encontro com pokemon selvagem
         Random rd = new Random();
         int encontrarInimigo = rd.nextInt(100);
 
@@ -323,14 +323,14 @@ public class Game {
 
             NPCPokemon inimigo = new NPCPokemon(tipoDoLocal,nomeInimigo,nivelInimigo, hpBase,atkBase +(2*nivelInimigo),atkBase +2 + (2*nivelInimigo), defBase + (2*nivelInimigo), defBase + +2 + (2*nivelInimigo));
 
-            System.out.println("\n⚔️ CUIDADO! Um " + inimigo.getNome() + " (Nvl " + nivelInimigo + ") apareceu!");
+            System.out.println("\n⚔️ CUIDADO! Um " + ConsoleColors.YELLOW_BOLD + inimigo.getNome() + " (Nvl " + nivelInimigo + ")" + ConsoleColors.RESET + " apareceu!");
             System.out.println("HP: " + inimigo.getHpMax() + " | Atk: " + inimigo.getAtaque() + " | Def: " + inimigo.getDefesa());
 
             while (true) {
                 System.out.println("\nO que você vai fazer?");
-                System.out.println("1. Batalhar!");
-                System.out.println("2. Tentar Fugir");
-                System.out.println("3. Verificar Status do meu Pokemon");
+                System.out.println("1. ✊ Batalhar!");
+                System.out.println("2. 💨 Tentar Fugir");
+                System.out.println("3. \uD83D\uDCDB Verificar Status do meu Pokemon");
                 System.out.print("Faça sua escolha: ");
 
                 int decisao = 0;
@@ -351,7 +351,7 @@ public class Game {
                     pokemon.exibirDetalhesPoke();
                 }
                 else {
-                    System.out.println("Você ficou paralisado de medo... A batalha começou!");
+                    System.out.println("Você ficou paralisado de medo... \uD83D\uDE28 A batalha começou!");
                     batalhar(inimigo);
                     break;
                 }
@@ -388,7 +388,8 @@ public class Game {
             }
 
             if (inimigo.getHpAtual() > 0) {
-                System.out.println("\n🔻 " + inimigo.getNome() + " contra-ataca!");
+                System.out.println(ConsoleColors.CYAN_BOLD + "\n-------- ROUND (" + inimigo.getNome() + ") --------" + ConsoleColors.RESET);
+                System.out.println("🔻" + " contra-ataque do inimigo!");
 
                 int danoInimigo = inimigo.getAtaque() - pokemon.getDefesa();
 
@@ -407,7 +408,7 @@ public class Game {
      * @throws FileNotFoundException
      */
     public void treinar() throws FileNotFoundException, InterruptedException {
-        System.out.println("\n--- CAMPO DE TREINAMENTO ---");
+        System.out.println("\n" + ConsoleColors.CYAN_BOLD + "-------- CAMPO DE TREINAMENTO --------" + ConsoleColors.RESET);
         System.out.println("Escolha seu parceiro de treino");
         System.out.println("1. Cinderace");
         System.out.println("2. Lapras");
@@ -442,6 +443,7 @@ public class Game {
                 break;
             case 4:
                 parceiroTreino = "Psyduck";
+                tipoParceiro = TipoPokemon.PSIQUICO;
                 break;
             case 5:
                 menuPrincipal();
@@ -452,11 +454,10 @@ public class Game {
 
         System.out.println("Iniciando treino contra " + parceiroTreino + "...");
 
-        NPCPokemon poketreino = new NPCPokemon( tipoParceiro, parceiroTreino, nivelTreino, 100, 30 + (nivelTreino * 2), 40 + (nivelTreino * 2), 30, 35 + (nivelTreino * 2));
+        NPCPokemon poketreino = new NPCPokemon( tipoParceiro, parceiroTreino, nivelTreino, 100, 35 + (nivelTreino * 2), 45 + (nivelTreino * 2), 40, 45 + (nivelTreino * 2));
 
         batalhar(poketreino);
         pokemon.adicionarMoedas(35);
-        System.out.println("O treino acabou! Seu Pokémon ganhou mais experiencia(XP).");
     }
 
     /**
@@ -481,8 +482,8 @@ public class Game {
      * Função para ir à loja comprar itens
      */
     public void visitarLoja() {
-        System.out.println("\n--- BEM-VINDO À POKÉLOJA ---");
-        System.out.println("Saldo Atual: " + pokemon.getMoedas() + "$");
+        System.out.println("\n" + ConsoleColors.CYAN_BOLD + "-------- BEM-VINDO À POKÉLOJA \uD83D\uDECD\uFE0F --------" + ConsoleColors.RESET);
+        System.out.println("\uD83E\uDE99 Saldo Atual: " + pokemon.getMoedas() + "$");
 
         loja.exibirEstoque();
 
@@ -494,15 +495,17 @@ public class Game {
             escolha = jogador.nextInt();
         }
 
-        if (escolha > 0) {
-            Item itemDesejado = loja.getEstoque().get(escolha-1);
+        if (escolha > 0 && escolha <= loja.getEstoque().size()) {
+            Item itemDesejado = loja.getEstoque().get(escolha - 1);
             if (itemDesejado != null) {
                 pokemon.comprarItem(itemDesejado);
             } else {
                 System.out.println("Item não encontrado!");
             }
-        } else {
+        } else if (escolha == 0) {
             System.out.println("Saindo da loja...");
+        } else {
+            System.out.println("Opção inválida! Escolha um número da lista.");
         }
     }
 
@@ -511,7 +514,7 @@ public class Game {
      * @throws FileNotFoundException
      */
     public void menuTorneio() throws FileNotFoundException, InterruptedException {
-        System.out.println("""
+        System.out.println(ConsoleColors.WHITE_BRIGHT + """
                 Após jornadas árduas, treinamentos incansáveis e batalhas que moldaram seu espírito, 
                 você finalmente alcança o ponto máximo de sua trajetória: o grande Torneio de Aurorium.
 
@@ -521,7 +524,7 @@ public class Game {
                 Seja bem-vindo ao Torneio de Aurorium.
                 Que sua força brilhe mais do que qualquer cristal desta arena.
                 O mundo inteiro está prestes a ver do que você é capaz.
-                """);
+                """ + ConsoleColors.RESET);
 
         boolean iniciarTorneio = false;
 
