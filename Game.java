@@ -89,21 +89,32 @@ public class Game {
     public void iniciarJogo() throws FileNotFoundException, InterruptedException {
         System.out.println("\n--------------------------------");
         System.out.println(ConsoleColors.WHITE_BRIGHT + """
-                Bem-vindo ao mundo de Aurorium. Aqui, força e vínculo caminham lado a lado.
-                Você, um jovem iniciante que sempre sonhou em participar da Liga de Aurorium, finalmente chega ao laboratório local.\s
-                Seu objetivo inicial é simples: escolher o elemento que definirá sua rota de evolução — água, fogo ou terra.""" + ConsoleColors.RESET);
+            Bem-vindo ao mundo de Aurorium. Aqui, força e vínculo caminham lado a lado.
+            Você, um jovem iniciante que sempre sonhou em participar da Liga de Aurorium, finalmente chega ao laboratório local.
+            Seu objetivo inicial é simples: escolher o elemento que definirá sua rota de evolução — água, fogo ou terra.""" + ConsoleColors.RESET);
+
         System.out.print("Primeiro, me diz, qual é o seu nome? ");
         this.nomeJogador = jogador.nextLine();
-        System.out.println("Prazer em te conhecer, " + this.nomeJogador + "!" + "\n");
-        System.out.println("Agora é a hora de escolher seu parceiro:");
-        System.out.println("1." + ConsoleColors.BLUE_BOLD + " Pokébola (Elemento Água)" + ConsoleColors.RESET);
-        System.out.println("2." + ConsoleColors.RED_BOLD + " Pokébola (Elemento Fogo)" + ConsoleColors.RESET);
-        System.out.println("3." + ConsoleColors.GREEN_BOLD + " Pokébola (Elemento Terra)" + ConsoleColors.RESET);
-        System.out.print("Qual elemento você prefere? (1-3): ");
+
+        System.out.println("Prazer em te conhecer, " + this.nomeJogador + "!\n");
 
         int escolha = 0;
-        if (jogador.hasNextInt()) {
-            escolha = jogador.nextInt();
+        while (escolha < 1 || escolha > 3) {
+            System.out.println("Agora é a hora de escolher seu parceiro:");
+            System.out.println("1." + ConsoleColors.BLUE_BOLD + " Pokébola (Elemento Água)" + ConsoleColors.RESET);
+            System.out.println("2." + ConsoleColors.RED_BOLD + " Pokébola (Elemento Fogo)" + ConsoleColors.RESET);
+            System.out.println("3." + ConsoleColors.GREEN_BOLD + " Pokébola (Elemento Terra)" + ConsoleColors.RESET);
+            System.out.print("Qual elemento você prefere? (1-3): ");
+
+            if (jogador.hasNextInt()) {
+                escolha = jogador.nextInt();
+                if (escolha < 1 || escolha > 3) {
+                    System.out.println("⚠️ Opção inválida. Escolha entre 1 e 3.\n");
+                }
+            } else {
+                System.out.println("⚠️ Entrada inválida. Digite um número válido\n");
+                jogador.next();
+            }
         }
         iniciarPokemon(escolha);
     }
@@ -190,6 +201,10 @@ public class Game {
 
             if (jogador.hasNextInt()) {
                 escolha = jogador.nextInt();
+            } else {
+                System.out.println("⚠️ Entrada inválida. Digite um número entre 1 e 6.");
+                jogador.next();
+                continue;
             }
 
             switch (escolha) {
@@ -250,6 +265,10 @@ public class Game {
 
             if (jogador.hasNextInt()) {
                 escolha = jogador.nextInt();
+            } else {
+                System.out.println("⚠️ Entrada inválida. Digite um número entre 1 e 5.");
+                jogador.next();
+                continue;
             }
 
             Mapa mapaEscolhido = null;
@@ -562,7 +581,7 @@ public class Game {
         for (int i = 0; i < pokemonTorneio.size(); i++) {
             NPCPokemon adversario = pokemonTorneio.get(i);
 
-            System.out.println("\n⚔️ RODADA " + (i + 1) + ": Seu adversário é " + ConsoleColors.BLACK_BOLD_BRIGHT + adversario.getNome() + ConsoleColors.RESET);
+            System.out.println("\n⚔️ RODADA " + (i + 1) + ": Seu adversário é " + ConsoleColors.BLUE_BOLD_BRIGHT + adversario.getNome() + ConsoleColors.RESET);
 
             batalhar(adversario);
 
@@ -576,7 +595,7 @@ public class Game {
             if (i == pokemonTorneio.size() - 1) {
                 Audio.playMusic("AudioFiles/pokemon_theme.wav");
                 System.out.println("\n🏆 PARABÉNS! ÉS O NOVO" + ConsoleColors.YELLOW_BRIGHT + " CAMPEÃO DE AURORIUM!" + ConsoleColors.RESET);
-                System.out.println("🏆 Como recompensa, podes ir ao laboratório da Dra. Thaís " + ConsoleColors.GREEN_BACKGROUND_BRIGHT + " criar um novo Pokémon!" + ConsoleColors.RESET);
+                System.out.println("🏆 Como recompensa, podes ir ao laboratório da Dra. Thaís " + ConsoleColors.RED_BOLD_BRIGHT + " criar um novo Pokémon!" + ConsoleColors.RESET);
                 criarPokemon();
                 return;
             }
@@ -651,7 +670,9 @@ public class Game {
             if (jogador.hasNextInt()) {
                 escolha = jogador.nextInt();
             } else {
+                System.out.println("⚠️ Digite um número válido!");
                 jogador.next();
+                continue;
             }
 
             switch (escolha) {
