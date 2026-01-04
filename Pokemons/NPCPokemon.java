@@ -12,6 +12,11 @@ public class NPCPokemon extends Pokemon {
         super(tipo, nome, level, 0, hpMax, hpMax, ataque, ataqueEspecial, defesa, defesaEspecial, Status.NORMAL);
     }
 
+    @Override
+    public String getNome() {
+        return super.getNome();
+    }
+
     /**
      *
      * @param inimigo nesse caso é o pokémon do jogador

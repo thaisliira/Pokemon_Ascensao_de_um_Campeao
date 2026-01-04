@@ -20,6 +20,7 @@ public class Game {
     private static ArrayList<NPCPokemon> pokemonTorneio;
     private final Scanner jogador;
     private final Loja loja;
+    private boolean torneioIniciado;
 
     public Game() {
         this.jogador = new Scanner(System.in);
@@ -140,7 +141,7 @@ public class Game {
 
                 FormaEvolutiva blastoise = new FormaEvolutiva("Blastoise", 110, 115, 70, 96, 8, TipoPokemon.AGUA, null);
                 FormaEvolutiva wartortle = new FormaEvolutiva("Wartortle", 60, 90, 60, 80, 4, TipoPokemon.AGUA, blastoise);
-                formaInicial = new FormaEvolutiva("Squirtle", 40, 55, 30, 60, 1, TipoPokemon.AGUA, wartortle);
+                formaInicial = new FormaEvolutiva("Squirtle", 40, 55, 40, 60, 1, TipoPokemon.AGUA, wartortle);
                 break;
             case 2:
                 Audio.playMusic("AudioFiles/charmander.wav");
@@ -159,7 +160,7 @@ public class Game {
 
                 FormaEvolutiva venusaur = new FormaEvolutiva("Venusaur", 105, 110, 60, 100, 8, TipoPokemon.PLANTA, null);
                 FormaEvolutiva ivysaur = new FormaEvolutiva("Ivysaur", 60, 90, 50, 90, 4, TipoPokemon.PLANTA, venusaur);
-                formaInicial = new FormaEvolutiva("Bulbasaur", 35, 50, 30, 55, 1, TipoPokemon.PLANTA, ivysaur);
+                formaInicial = new FormaEvolutiva("Bulbasaur", 35, 50, 38, 55, 1, TipoPokemon.PLANTA, ivysaur);
                 break;
             default:
                 System.out.println("Ops, opção inválida! Eu escolho por você!");
@@ -399,7 +400,8 @@ public class Game {
                 System.out.println("🏆 Você venceu o " + inimigo.getNome() + "!");
                 pokemon.ganharXP(40);
 
-                if (pokemon.getLevel() == 9) {
+                if (pokemon.getLevel() == 9 && !torneioIniciado) {
+                    torneioIniciado = true;
                     System.out.println("\n🏟️ Você se qualificou para o Torneio!");
                     menuTorneio();
                 }
@@ -474,7 +476,7 @@ public class Game {
         NPCPokemon poketreino = new NPCPokemon( tipoParceiro, parceiroTreino, nivelTreino, 100, 35 + (nivelTreino * 2), 45 + (nivelTreino * 2), 40, 45 + (nivelTreino * 2));
 
         batalhar(poketreino);
-        pokemon.adicionarMoedas(35);
+        pokemon.adicionarMoedas(45);
     }
 
     /**
@@ -619,7 +621,7 @@ public class Game {
                 return;
             }
 
-            pokemon.adicionarMoedas(60);
+            pokemon.adicionarMoedas(80);
             System.out.println("Aproveita para recuperar teu pokémon antes da próxima batalha...");
             menuIntervaloTorneio();
         }
