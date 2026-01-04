@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * Classe para impressão da arte do pokémon inicial e após evoluções
+ */
 public class FileTools {
 
     public static void printFile(String path) throws FileNotFoundException {

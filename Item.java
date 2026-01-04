@@ -4,11 +4,11 @@ import Pokegotchi.Enum.TipoItem;
 
 public class Item {
 
-    private String nome;
-    private TipoItem item;
-    private Double preco;
-    private String descEfeito;
-    private int efeito;
+    private final String nome;
+    private final TipoItem item;
+    private final Double preco;
+    private final String descEfeito;
+    private final int efeito;
 
     public Item(String nome, TipoItem item, Double preco, String descEfeito, int efeito) {
         this.nome = nome;

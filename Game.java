@@ -10,13 +10,16 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Classe onde se passa praticamente quase todo o enredo do jogo
+ */
 public class Game {
 
     private String nomeJogador;
     private PokemonEscolhido pokemon;
     private static ArrayList<NPCPokemon> pokemonTorneio;
     private Scanner jogador;
-    private Loja loja;
+    private final Loja loja;
 
     public Game() {
         this.jogador = new Scanner(System.in);
@@ -103,7 +106,7 @@ public class Game {
             System.out.println("Agora é a hora de escolher seu parceiro:");
             System.out.println("1." + ConsoleColors.BLUE_BOLD + " Pokébola (Elemento Água)" + ConsoleColors.RESET);
             System.out.println("2." + ConsoleColors.RED_BOLD + " Pokébola (Elemento Fogo)" + ConsoleColors.RESET);
-            System.out.println("3." + ConsoleColors.GREEN_BOLD + " Pokébola (Elemento Terra)" + ConsoleColors.RESET);
+            System.out.println("3." + ConsoleColors.GREEN_BOLD + " Pokébola (Elemento Planta)" + ConsoleColors.RESET);
             System.out.print("Qual elemento você prefere? (1-3): ");
 
             if (jogador.hasNextInt()) {
@@ -153,12 +156,12 @@ public class Game {
                 break;
             case 3:
                 Audio.playMusic("AudioFiles/bulbasaur.wav");
-                tipoEscolhido = TipoPokemon.TERRA;
+                tipoEscolhido = TipoPokemon.PLANTA;
                 nomePokemon = "Bulbasaur";
 
-                FormaEvolutiva venusaur = new FormaEvolutiva("Venusaur", 90, 100, 60, 100, 8, TipoPokemon.TERRA, null);
-                FormaEvolutiva ivysaur = new FormaEvolutiva("Ivysaur", 60, 90, 50, 90, 4, TipoPokemon.TERRA, venusaur);
-                formaInicial = new FormaEvolutiva("Bulbasaur", 35, 40, 30, 40, 1, TipoPokemon.TERRA, ivysaur);
+                FormaEvolutiva venusaur = new FormaEvolutiva("Venusaur", 90, 100, 60, 100, 8, TipoPokemon.PLANTA, null);
+                FormaEvolutiva ivysaur = new FormaEvolutiva("Ivysaur", 60, 90, 50, 90, 4, TipoPokemon.PLANTA, venusaur);
+                formaInicial = new FormaEvolutiva("Bulbasaur", 35, 40, 30, 40, 1, TipoPokemon.PLANTA, ivysaur);
                 break;
             default:
                 System.out.println("Ops, opção inválida! Eu escolho por você!");
@@ -326,7 +329,7 @@ public class Game {
                     nomeInimigo = "Gyarados";
                     hpBase = 100; atkBase = 35; defBase = 25;
                     break;
-                case TERRA:
+                case PLANTA:
                     nomeInimigo = "Diglett";
                     hpBase = 100; atkBase = 35; defBase = 30;
                     break;
@@ -387,8 +390,8 @@ public class Game {
 
     /**
      * Funçao principal da batalha para verificar vitória ou derrota baseado no HP
-     * @param inimigo
-     * @throws FileNotFoundException
+     * @param inimigo com quem vai batalhar
+     * @throws FileNotFoundException se não encontrar o arquivo
      */
     public void batalhar(NPCPokemon inimigo) throws FileNotFoundException, InterruptedException {
 
@@ -703,7 +706,7 @@ public class Game {
                     tipoEscolhido = TipoPokemon.FOGO;
                     break;
                 case 3:
-                    tipoEscolhido = TipoPokemon.TERRA;
+                    tipoEscolhido = TipoPokemon.PLANTA;
                     break;
                 case 4:
                     tipoEscolhido = TipoPokemon.ELETRICO;

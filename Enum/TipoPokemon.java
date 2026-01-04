@@ -1,5 +1,8 @@
 package Pokegotchi.Enum;
 
+/**
+ * Enumeração para os tipos de pokemons existentes
+ */
 public enum TipoPokemon {
-    AGUA, FOGO, TERRA, ELETRICO, NORMAL, PSIQUICO, LUTA, GELO
+    AGUA, FOGO, PLANTA, ELETRICO, NORMAL, PSIQUICO, LUTA, GELO
 }

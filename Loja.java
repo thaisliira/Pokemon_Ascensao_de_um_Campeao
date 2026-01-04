@@ -1,12 +1,14 @@
 package Pokegotchi;
 
 import Pokegotchi.Enum.TipoItem;
-
 import java.util.ArrayList;
 
+/**
+ * Classe com os itens existentes na loja para venda
+ */
 public class Loja {
 
-    private ArrayList<Item> estoque;
+    private final ArrayList<Item> estoque;
 
     public Loja() {
         this.estoque = new ArrayList<>();

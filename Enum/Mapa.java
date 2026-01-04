@@ -1,14 +1,17 @@
 package Pokegotchi.Enum;
 
+/**
+ * Enumeração com as opções de habitats que existem no jogo
+ */
 public enum Mapa {
 
-    FLORESTA("Floresta Viridian", TipoPokemon.TERRA),
+    FLORESTA("Floresta Viridian", TipoPokemon.PLANTA),
     VULCAO("Parque do Vulcão Cinnabar", TipoPokemon.FOGO),
     LAGO("Lago da Fúria", TipoPokemon.AGUA),
     USINA("Usina de Choque", TipoPokemon.ELETRICO);
 
-    private String nome;
-    private TipoPokemon tipoInimigo;
+    private final String nome;
+    private final TipoPokemon tipoInimigo;
 
     Mapa(String nome, TipoPokemon tipoInimigo) {
         this.nome = nome;

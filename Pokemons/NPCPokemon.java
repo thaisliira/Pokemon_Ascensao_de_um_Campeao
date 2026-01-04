@@ -3,16 +3,22 @@ package Pokegotchi.Pokemons;
 import Pokegotchi.Enum.Status;
 import Pokegotchi.Enum.TipoPokemon;
 
-import java.io.FileNotFoundException;
-
+/**
+ * Classe que adiciona atributos ao NPC pokémon
+ */
 public class NPCPokemon extends Pokemon {
 
     public NPCPokemon(TipoPokemon tipo, String nome, int level, int hpMax, int ataque, int ataqueEspecial, int defesa, int defesaEspecial) {
         super(tipo, nome, level, 0, hpMax, hpMax, ataque, ataqueEspecial, defesa, defesaEspecial, Status.NORMAL);
     }
 
+    /**
+     *
+     * @param inimigo nesse caso é o pokémon do jogador
+     * @return retorno após o ataque
+     */
     @Override
-    public boolean atacar(Pokemon inimigo) throws FileNotFoundException {
+    public boolean atacar(Pokemon inimigo) {
         return false;
     }
 }

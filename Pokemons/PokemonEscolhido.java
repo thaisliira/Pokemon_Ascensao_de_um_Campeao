@@ -4,7 +4,6 @@ import Pokegotchi.*;
 import Pokegotchi.Enum.Status;
 import Pokegotchi.Enum.TipoItem;
 import Pokegotchi.Enum.TipoPokemon;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ public class PokemonEscolhido extends Pokemon {
 
     private FormaEvolutiva formaAtual;
     private int moedas;
-    private ArrayList<Item> Inventario;
+    private final ArrayList<Item> Inventario;
 
     public PokemonEscolhido(TipoPokemon tipo, String nome, int level, int experiencia, int hpAtual, int hpMax, Status status, FormaEvolutiva formaAtual, int moedas) {
         super(tipo,nome,level,experiencia,hpAtual,hpMax,formaAtual.getAtaqueBase(),formaAtual.getAtaqueEspecial(),formaAtual.getDefesaBase(),formaAtual.getDefesaEspecial(), status);
@@ -35,17 +34,17 @@ public class PokemonEscolhido extends Pokemon {
         System.out.println("\n" + ConsoleColors.PURPLE_BACKGROUND  +" -------- " + this.nome.toUpperCase() + " (Lvl " + this.level + ") --------" + ConsoleColors.RESET);
         System.out.println("Experiência(XP): " + this.experiencia);
         System.out.println("❤️ Vida(HP): " + this.hpAtual + "/" + this.hpMax);
-        System.out.println("\uD83D\uDC4A\uD83C\uDFFC Atk: " + this.ataque + " | \uD83D\uDEE1\uFE0F Def: " + this.defesa);
-        System.out.println("\uD83D\uDC4A\uD83C\uDFFC Atk Sp: " + this.ataqueEspecial + " | \uD83D\uDEE1\uFE0F Def Sp: " + this.defesaEspecial);
+        System.out.println("\uD83D\uDC4A\uD83C\uDFFC Atk: " + this.ataque + " | \uD83D\uDEE1️ Def: " + this.defesa);
+        System.out.println("\uD83D\uDC4A\uD83C\uDFFC Atk Sp: " + this.ataqueEspecial + " | \uD83D\uDEE1️ Def Sp: " + this.defesaEspecial);
         System.out.println("\uD83D\uDCDB Status: " + this.status);
     }
 
     /**
      * Função com menu de opção de ataque
-     * @param inimigo
+     * @param inimigo inimigo que o pokémon está a batalhar
      * @return retorna se o inimigo foi derrotado ou não
-     * @throws FileNotFoundException
-     * @throws InterruptedException
+     * @throws FileNotFoundException se o arquivo não existir
+     * @throws InterruptedException se a execução do programa for interrompida enquanto espera
      */
     @Override
     public boolean atacar(Pokemon inimigo) throws FileNotFoundException, InterruptedException {
@@ -61,7 +60,7 @@ public class PokemonEscolhido extends Pokemon {
             System.out.println("4. Exibir Status do meu Pokemon");
             System.out.print("Escolha: ");
 
-            int escolha = 0;
+            int escolha;
 
             if (jogador.hasNextInt()) {
                 escolha = jogador.nextInt();
@@ -72,7 +71,7 @@ public class PokemonEscolhido extends Pokemon {
                 continue;
             }
 
-            int dano = 0;
+            int dano;
 
             switch (escolha) {
                 case 1:
@@ -112,7 +111,7 @@ public class PokemonEscolhido extends Pokemon {
     }
 
     /**
-     * Funçao que herda do elemento pai, mas imprime uma mensagem específica
+     * Função que herda do elemento pai, mas imprime uma mensagem específica
      * @param dano subtrai do valor do HP
      */
     @Override
@@ -134,8 +133,7 @@ public class PokemonEscolhido extends Pokemon {
     /**
      * Função que adiciona ganho de experiência ao Pokemon após cada batalha
      * @param ganhoDeXP após batalha
-     * @return se o pokemon ganhou experiencia suficiente e atingiu o nivel 10, está pronto para o torneio
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException se o arquivo não existir
      */
     public void ganharXP(int ganhoDeXP) throws FileNotFoundException {
         this.experiencia += ganhoDeXP;
@@ -149,7 +147,7 @@ public class PokemonEscolhido extends Pokemon {
 
     /**
      * Função que permite o pokemon subir de nível conforme o XP e dependendo do nivel pode ou não evoluir
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException se o arquivo não existir
      */
     public void subirDeNivel() throws FileNotFoundException {
         this.level++;
@@ -165,7 +163,7 @@ public class PokemonEscolhido extends Pokemon {
 
     /**
      * Função que permiete evolução do pokemon e imprime a arte correspondente
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException se o arquivo não existir
      */
     public void evoluir() throws FileNotFoundException {
         FormaEvolutiva novaForma = formaAtual.getProximaForma();
@@ -173,7 +171,7 @@ public class PokemonEscolhido extends Pokemon {
         System.out.println("\n------------------------------------------------");
         System.out.println("✨ O quê? O que está acontecendo? " + this.nome + " está evoluindo!");
         System.out.println("...... \uD83C\uDF1F\uD83C\uDF1F\uD83C\uDF1F\uD83C\uDF1F ......");
-        System.out.println("......... \uD83C\uDF2B\uFE0F\uD83C\uDF2B\uFE0F\uD83C\uDF2B\uFE0F .........");
+        System.out.println("......... \uD83C\uDF2B️\uD83C\uDF2B️\uD83C\uDF2B️ .........");
 
         this.formaAtual = novaForma;
         this.setNome(novaForma.getNome());
@@ -191,7 +189,7 @@ public class PokemonEscolhido extends Pokemon {
 
     /**
      * Imprime arquivo .txt do pokemon
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException se o arquivo não existir
      */
     public void imprimirArtePokemon() throws FileNotFoundException {
         String nomeArquivo = "Artes/" + this.nome.toLowerCase() + ".txt";
@@ -209,7 +207,7 @@ public class PokemonEscolhido extends Pokemon {
 
     /**
      * Lista os itens presentes no inventário do jogador
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException se o arquivo não existir
      */
     public void listarItens() throws FileNotFoundException {
         while (true) {
@@ -248,7 +246,7 @@ public class PokemonEscolhido extends Pokemon {
 
     /**
      * Função individual com o inventário para o torneio
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException se o arquivo não existir
      */
     public void inventarioTorneio() throws FileNotFoundException {
         while (true) {
@@ -286,8 +284,8 @@ public class PokemonEscolhido extends Pokemon {
     }
 
     /**
-     * Função para adicionar item ao inventário
-     * @param item comprado na loja ou item encontrado no mapa
+     * Função para adicionar ‘item’ ao inventário
+     * @param item comprado na loja ou ‘item’ encontrado no mapa
      */
     public void adcItemInventario(Item item) {
         Inventario.add(item);
@@ -295,8 +293,8 @@ public class PokemonEscolhido extends Pokemon {
     }
 
     /**
-     * Função para adicionar moedas após o treinamento
-     * @param quantidade
+     * Função para adicionar moedas após o treino
+     * @param quantidade ganha após vencer a batalha
      */
     public void adicionarMoedas(int quantidade) {
         this.moedas += quantidade;
@@ -319,9 +317,9 @@ public class PokemonEscolhido extends Pokemon {
     }
 
     /**
-     * Função que permite utilizar um item e remove-lo do inventário após o uso
+     * Função que permite utilizar um ‘item’ e removê-lo do inventário após o uso
      * @param itemUsado disponível no inventário
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException se o arquivo não existir
      */
     public void usarItem(Item itemUsado) throws FileNotFoundException {
 

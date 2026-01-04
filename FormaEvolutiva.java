@@ -4,14 +4,13 @@ import Pokegotchi.Enum.TipoPokemon;
 
 public class FormaEvolutiva {
 
-    private String nome;
-    private int ataqueBase;
-    private int defesaBase;
-    private int ataqueEspecial;
-    private int defesaEspecial;
-    private int levelNecessario;
-    private TipoPokemon tipo;
-    private FormaEvolutiva proximaForma;
+    private final String nome;
+    private final int ataqueBase;
+    private final int defesaBase;
+    private final int ataqueEspecial;
+    private final int defesaEspecial;
+    private final int levelNecessario;
+    private final FormaEvolutiva proximaForma;
 
     public FormaEvolutiva(String nome, int ataqueBase, int ataqueEspecial, int defesaBase, int defesaEspecial, int levelNecessario, TipoPokemon tipo, FormaEvolutiva proximaForma) {
         this.nome = nome;
@@ -20,7 +19,6 @@ public class FormaEvolutiva {
         this.defesaBase = defesaBase;
         this.defesaEspecial = defesaEspecial;
         this.levelNecessario = levelNecessario;
-        this.tipo = tipo;
         this.proximaForma = proximaForma;
     }
 
