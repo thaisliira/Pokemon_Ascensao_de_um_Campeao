@@ -500,30 +500,36 @@ public class Game {
      * Função para ir à loja comprar itens
      */
     public void visitarLoja() {
-        System.out.println("\n" + ConsoleColors.CYAN_BOLD + "-------- BEM-VINDO À POKÉLOJA \uD83D\uDECD\uFE0F --------" + ConsoleColors.RESET);
-        System.out.println("\uD83E\uDE99 Saldo Atual: " + pokemon.getMoedas() + "$");
+        while (true) {
+            System.out.println("\n" + ConsoleColors.CYAN_BOLD + "-------- BEM-VINDO À POKÉLOJA 🛍️ --------" + ConsoleColors.RESET);
+            System.out.println("💰 Saldo Atual: " + pokemon.getMoedas() + "$\n");
 
-        loja.exibirEstoque();
+            loja.exibirEstoque();
 
-        System.out.println("0. Sair da Loja");
-        System.out.print("Digite o número do item que quer comprar: ");
+            System.out.println("0. Sair da Loja");
+            System.out.print("Digite o número do item que quer comprar: ");
 
-        int escolha = -1;
-        if (jogador.hasNextInt()) {
-            escolha = jogador.nextInt();
-        }
+            int escolha;
 
-        if (escolha > 0 && escolha <= loja.getEstoque().size()) {
-            Item itemDesejado = loja.getEstoque().get(escolha - 1);
-            if (itemDesejado != null) {
-                pokemon.comprarItem(itemDesejado);
-            } else {
-                System.out.println("Item não encontrado!");
+            if (!jogador.hasNextInt()) {
+                System.out.println("⚠️ Entrada inválida. Digite um número.");
+                jogador.next();
+                continue;
             }
-        } else if (escolha == 0) {
-            System.out.println("Saindo da loja...");
-        } else {
-            System.out.println("Opção inválida! Escolha um número da lista.");
+
+            escolha = jogador.nextInt();
+
+            if (escolha == 0) {
+                System.out.println("Saindo da loja...");
+                return;
+            }
+
+            if (escolha < 1 || escolha > loja.getEstoque().size()) {
+                System.out.println("⚠️ Opção inválida! Escolha um item da lista.");
+                continue;
+            }
+            Item itemDesejado = loja.getEstoque().get(escolha - 1);
+            pokemon.comprarItem(itemDesejado);
         }
     }
 
@@ -552,7 +558,17 @@ public class Game {
             System.out.println("2. Abrir inventário");
             System.out.println("3. Ver status do Pokémon");
             System.out.println("Escolha uma opção: ");
-            int escolha = jogador.nextInt();
+
+            int escolha = 0;
+
+            if (jogador.hasNextInt()) {
+                escolha = jogador.nextInt();
+                jogador.nextLine();
+            } else {
+                System.out.println("⚠️ Entrada inválida. Digite um número.");
+                jogador.nextLine();
+                continue;
+            }
 
             switch (escolha) {
                 case 1:
@@ -624,6 +640,10 @@ public class Game {
             if (jogador.hasNextInt()) {
                 escolha = jogador.nextInt();
                 jogador.nextLine();
+            }else {
+                System.out.println("⚠️ Entrada inválida. Digite um número.");
+                jogador.nextLine();
+                continue;
             }
 
             switch (escolha) {
@@ -705,44 +725,63 @@ public class Game {
 
         do {
             System.out.println("\nDistribua os atributos (valores entre 10 e 60):");
+
             System.out.print("Ataque básico: ");
+            if (!jogador.hasNextInt()) {
+                System.out.println("⚠️ Digite apenas números.");
+                jogador.nextLine();
+                continue;
+            }
             atkBasico = jogador.nextInt();
 
             System.out.print("Ataque especial: ");
+            if (!jogador.hasNextInt()) {
+                System.out.println("⚠️ Digite apenas números.");
+                jogador.nextLine();
+                continue;
+            }
             atkEspecial = jogador.nextInt();
 
             System.out.print("Defesa básica: ");
+            if (!jogador.hasNextInt()) {
+                System.out.println("⚠️ Digite apenas números.");
+                jogador.nextLine();
+                continue;
+            }
             defBasica = jogador.nextInt();
 
             System.out.print("Defesa especial: ");
+            if (!jogador.hasNextInt()) {
+                System.out.println("⚠️ Digite apenas números.");
+                jogador.nextLine();
+                continue;
+            }
             defEspecial = jogador.nextInt();
 
-            jogador.nextLine();
+            jogador.nextLine(); // limpa buffer UMA VEZ
 
-            if (atkBasico < 10 || atkBasico > 80 ||
-                    atkEspecial < 10 || atkEspecial > 80 ||
-                    defBasica < 10 || defBasica > 80 ||
-                    defEspecial < 10 || defEspecial > 80) {
+            if (atkBasico < 10 || atkBasico > 60 ||
+                    atkEspecial < 10 || atkEspecial > 60 ||
+                    defBasica < 10 || defBasica > 60 ||
+                    defEspecial < 10 || defEspecial > 60) {
+
                 System.out.println("⚠️ Todos os atributos devem estar entre 10 e 60.");
-            } else {
-
-                System.out.print("\nNome do Pokémon: ");
-                jogador.nextLine();
-                nomeNovo = jogador.nextLine();
-
-                System.out.print("\nNome da primeira evolução: ");
-                evolucao1 = jogador.nextLine();
-
-                System.out.print("\nNome da segunda evolução: ");
-                evolucao2 = jogador.nextLine();
+                continue;
             }
 
-        } while (
-                atkBasico < 10 || atkBasico > 60
-                        || atkEspecial < 10 || atkEspecial > 60
-                        || defBasica < 10 || defBasica > 60 ||
-                        defEspecial < 10 || defEspecial > 60
-        );
+            System.out.print("\nNome do Pokémon: ");
+            nomeNovo = jogador.nextLine();
+
+            System.out.print("Nome da primeira evolução: ");
+            evolucao1 = jogador.nextLine();
+
+            System.out.print("Nome da segunda evolução: ");
+            evolucao2 = jogador.nextLine();
+
+            break;
+
+        } while (true);
+
 
         FormaEvolutiva evolucao02 = new FormaEvolutiva(evolucao2, atkBasico + 40, atkEspecial + 50, defBasica + 40, defEspecial + 45, 8, tipoEscolhido, null);
         FormaEvolutiva evolucao01 = new FormaEvolutiva(evolucao1, atkBasico + 20, atkEspecial +40, defBasica + 35, defEspecial + 30, 4, tipoEscolhido, evolucao02);

@@ -63,8 +63,13 @@ public class PokemonEscolhido extends Pokemon {
 
             int escolha = 0;
 
-            if(jogador.hasNextInt()) {
+            if (jogador.hasNextInt()) {
                 escolha = jogador.nextInt();
+                jogador.nextLine();
+            } else {
+                System.out.println("⚠️ Entrada inválida. Digite um número.");
+                jogador.nextLine();
+                continue;
             }
 
             int dano = 0;
