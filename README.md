@@ -34,6 +34,11 @@ O foco principal do projeto é:
 
 ---
 
+## 🎥 Video Demo
+<img src="screenshot/pokemon.gif">
+
+---
+
 ## 🛠️ Tecnologias Utilizadas
 
 * **Java** 
