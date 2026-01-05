@@ -35,7 +35,10 @@ O foco principal do projeto é:
 ---
 
 ## 🎥 Video Demo
+
+<div align="left">
 <img src="screenshot/pokemon.gif">
+</div>
 
 ---
 
