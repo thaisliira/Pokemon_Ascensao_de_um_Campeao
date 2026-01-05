@@ -102,7 +102,7 @@ public class Game {
         System.out.println("Prazer em te conhecer, " + this.nomeJogador + "!\n");
 
         int dificuldade = 0;
-        System.out.println("Escolhe o nível de dificuldade?");
+        System.out.println("Escolhe o nível de dificuldade:");
         System.out.println("1. Fácil");
         System.out.println("2. Difícil");
 
@@ -119,7 +119,7 @@ public class Game {
 
         int escolha = 0;
         while (escolha < 1 || escolha > 3) {
-            System.out.println("Agora é a hora de escolher seu parceiro:");
+            System.out.println("\nAgora é a hora de escolher seu parceiro:");
             System.out.println("1." + ConsoleColors.BLUE_BOLD + " Pokébola (Elemento Água)" + ConsoleColors.RESET);
             System.out.println("2." + ConsoleColors.RED_BOLD + " Pokébola (Elemento Fogo)" + ConsoleColors.RESET);
             System.out.println("3." + ConsoleColors.GREEN_BOLD + " Pokébola (Elemento Planta)" + ConsoleColors.RESET);
@@ -145,7 +145,7 @@ public class Game {
 
 
     /**
-     * Funcao que determina as caracteristicas do pokemon escolhido de acordo com o tipo
+     * Funcao que determina as caracteristicas do pokemon escolhido de acordo com o tipo e a dificuldade fácil
      * @param escolha do pokémon inicial pelo jogador
      * @throws FileNotFoundException se não encontrar o arquivo
      */
@@ -206,7 +206,7 @@ public class Game {
     }
 
     /**
-     * Funcao que determina as caracteristicas do pokemon escolhido de acordo com o tipo
+     * Funcao que determina as caracteristicas do pokemon escolhido de acordo com o tipo e a dificuldade dificil
      * @param escolha do pokémon inicial pelo jogador
      * @throws FileNotFoundException se não encontrar o arquivo
      */
@@ -223,7 +223,7 @@ public class Game {
                 nomePokemon = "Squirtle";
 
                 FormaEvolutiva blastoise = new FormaEvolutiva("Blastoise", 95, 100, 60, 85, 8, TipoPokemon.AGUA, null);
-                FormaEvolutiva wartortle = new FormaEvolutiva("Wartortle", 60, 90, 60, 80, 4, TipoPokemon.AGUA, blastoise);
+                FormaEvolutiva wartortle = new FormaEvolutiva("Wartortle", 60, 80, 50, 65, 4, TipoPokemon.AGUA, blastoise);
                 formaInicial = new FormaEvolutiva("Squirtle", 40, 55, 40, 60, 1, TipoPokemon.AGUA, wartortle);
                 break;
             case 2:
@@ -231,18 +231,18 @@ public class Game {
                 tipoEscolhido = TipoPokemon.FOGO;
                 nomePokemon = "Charmander";
 
-                FormaEvolutiva megaCharizard = new FormaEvolutiva("Mega Charizard Y", 120, 130, 70, 100, 10, TipoPokemon.FOGO, null);
-                FormaEvolutiva charizard = new FormaEvolutiva("Charizard", 80, 110, 50, 90, 8, TipoPokemon.FOGO, megaCharizard);
+                FormaEvolutiva megaCharizard = new FormaEvolutiva("Mega Charizard Y", 100, 110, 60, 85, 10, TipoPokemon.FOGO, null);
+                FormaEvolutiva charizard = new FormaEvolutiva("Charizard", 70, 95, 50, 80, 8, TipoPokemon.FOGO, megaCharizard);
                 FormaEvolutiva charmeleon = new FormaEvolutiva("Charmeleon", 50, 90, 40, 70, 4, TipoPokemon.FOGO, charizard);
-                formaInicial = new FormaEvolutiva("Charmander", 45, 60, 25, 50, 1, TipoPokemon.FOGO, charmeleon);
+                formaInicial = new FormaEvolutiva("Charmander", 35, 50, 25, 40, 1, TipoPokemon.FOGO, charmeleon);
                 break;
             case 3:
                 Audio.playMusic("AudioFiles/bulbasaur.wav");
                 tipoEscolhido = TipoPokemon.PLANTA;
                 nomePokemon = "Bulbasaur";
 
-                FormaEvolutiva venusaur = new FormaEvolutiva("Venusaur", 105, 110, 60, 100, 8, TipoPokemon.PLANTA, null);
-                FormaEvolutiva ivysaur = new FormaEvolutiva("Ivysaur", 60, 90, 50, 90, 4, TipoPokemon.PLANTA, venusaur);
+                FormaEvolutiva venusaur = new FormaEvolutiva("Venusaur", 95, 90, 50, 80, 8, TipoPokemon.PLANTA, null);
+                FormaEvolutiva ivysaur = new FormaEvolutiva("Ivysaur", 50, 80, 60, 80, 4, TipoPokemon.PLANTA, venusaur);
                 formaInicial = new FormaEvolutiva("Bulbasaur", 35, 50, 38, 55, 1, TipoPokemon.PLANTA, ivysaur);
                 break;
             default:
