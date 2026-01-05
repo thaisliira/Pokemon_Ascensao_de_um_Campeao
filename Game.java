@@ -103,8 +103,8 @@ public class Game {
 
         int dificuldade = 0;
         System.out.println("Escolhe o nível de dificuldade:");
-        System.out.println("1. Fácil");
-        System.out.println("2. Difícil");
+        System.out.println("1. Fácil \uD83D\uDE07");
+        System.out.println("2. Difícil \uD83D\uDE08");
 
         if (jogador.hasNextInt()) {
             dificuldade = jogador.nextInt();
@@ -142,7 +142,6 @@ public class Game {
             iniciarPokemonDificil(escolha);
         }
     }
-
 
     /**
      * Funcao que determina as caracteristicas do pokemon escolhido de acordo com o tipo e a dificuldade fácil
@@ -224,7 +223,7 @@ public class Game {
 
                 FormaEvolutiva blastoise = new FormaEvolutiva("Blastoise", 95, 100, 60, 85, 8, TipoPokemon.AGUA, null);
                 FormaEvolutiva wartortle = new FormaEvolutiva("Wartortle", 60, 80, 50, 65, 4, TipoPokemon.AGUA, blastoise);
-                formaInicial = new FormaEvolutiva("Squirtle", 40, 55, 40, 60, 1, TipoPokemon.AGUA, wartortle);
+                formaInicial = new FormaEvolutiva("Squirtle", 35, 40, 35, 50, 1, TipoPokemon.AGUA, wartortle);
                 break;
             case 2:
                 Audio.playMusic("AudioFiles/charmander.wav");
@@ -233,8 +232,8 @@ public class Game {
 
                 FormaEvolutiva megaCharizard = new FormaEvolutiva("Mega Charizard Y", 100, 110, 60, 85, 10, TipoPokemon.FOGO, null);
                 FormaEvolutiva charizard = new FormaEvolutiva("Charizard", 70, 95, 50, 80, 8, TipoPokemon.FOGO, megaCharizard);
-                FormaEvolutiva charmeleon = new FormaEvolutiva("Charmeleon", 50, 90, 40, 70, 4, TipoPokemon.FOGO, charizard);
-                formaInicial = new FormaEvolutiva("Charmander", 35, 50, 25, 40, 1, TipoPokemon.FOGO, charmeleon);
+                FormaEvolutiva charmeleon = new FormaEvolutiva("Charmeleon", 50, 85, 40, 60, 4, TipoPokemon.FOGO, charizard);
+                formaInicial = new FormaEvolutiva("Charmander", 40, 45, 25, 40, 1, TipoPokemon.FOGO, charmeleon);
                 break;
             case 3:
                 Audio.playMusic("AudioFiles/bulbasaur.wav");
@@ -242,15 +241,15 @@ public class Game {
                 nomePokemon = "Bulbasaur";
 
                 FormaEvolutiva venusaur = new FormaEvolutiva("Venusaur", 95, 90, 50, 80, 8, TipoPokemon.PLANTA, null);
-                FormaEvolutiva ivysaur = new FormaEvolutiva("Ivysaur", 50, 80, 60, 80, 4, TipoPokemon.PLANTA, venusaur);
-                formaInicial = new FormaEvolutiva("Bulbasaur", 35, 50, 38, 55, 1, TipoPokemon.PLANTA, ivysaur);
+                FormaEvolutiva ivysaur = new FormaEvolutiva("Ivysaur", 50, 80, 45, 55, 4, TipoPokemon.PLANTA, venusaur);
+                formaInicial = new FormaEvolutiva("Bulbasaur", 35, 50, 30, 45, 1, TipoPokemon.PLANTA, ivysaur);
                 break;
             default:
                 System.out.println("Ops, opção inválida! Eu escolho por você!");
                 Audio.playMusic("AudioFiles/ditto.wav");
                 tipoEscolhido = TipoPokemon.NORMAL;
                 nomePokemon = "Ditto";
-                formaInicial = new FormaEvolutiva("Ditto", 20, 25, 10, 15, 1, TipoPokemon.NORMAL, null);
+                formaInicial = new FormaEvolutiva("Ditto", 30, 35, 20, 25, 1, TipoPokemon.NORMAL, null);
                 break;
         }
 
@@ -808,11 +807,11 @@ public class Game {
             }
         }
 
-        int atkBasico, atkEspecial, defBasica, defEspecial, pontosDisponiveis=300;
+        int atkBasico, atkEspecial, defBasica, defEspecial, pontosDisponiveis=240;
         String nomeNovo="", evolucao1="", evolucao2="";
 
         do {
-            System.out.println("\nDistribua 300 pontos entre os atributos:");
+            System.out.println("\nDistribua 240 pontos entre os atributos:");
 
             System.out.print("Ataque básico: ");
             if (!jogador.hasNextInt()) {
@@ -873,8 +872,8 @@ public class Game {
             jogador.nextLine();
 
             int soma = atkBasico + atkEspecial + defBasica + defEspecial;
-            if (soma != 300) {
-                System.out.println("⚠️ A soma dos atributos deve ser EXATAMENTE 300.");
+            if (soma != 240) {
+                System.out.println("⚠️ A soma dos atributos deve ser EXATAMENTE 240.");
                 System.out.println("Soma atual: " + soma);
                 continue;
             }

@@ -2,6 +2,9 @@ package Pokemon_Ascensao;
 
 import Pokemon_Ascensao.Enum.TipoItem;
 
+/**
+ * Classe que adiciona atributos aos itens que estão na loja ou inventário
+ */
 public class Item {
 
     private final String nome;
