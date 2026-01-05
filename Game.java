@@ -101,6 +101,22 @@ public class Game {
 
         System.out.println("Prazer em te conhecer, " + this.nomeJogador + "!\n");
 
+        int dificuldade = 0;
+        System.out.println("Escolhe o nível de dificuldade?");
+        System.out.println("1. Fácil");
+        System.out.println("2. Difícil");
+
+        if (jogador.hasNextInt()) {
+            dificuldade = jogador.nextInt();
+            if (dificuldade < 1 || dificuldade > 2) {
+                System.out.println("⚠️ Opção inválida.\n");
+            }
+        } else {
+            System.out.println("⚠️ Entrada inválida. Digite um número válido\n");
+            jogador.next();
+        }
+
+
         int escolha = 0;
         while (escolha < 1 || escolha > 3) {
             System.out.println("Agora é a hora de escolher seu parceiro:");
@@ -119,15 +135,21 @@ public class Game {
                 jogador.next();
             }
         }
-        iniciarPokemon(escolha);
+
+        if (dificuldade == 1) {
+            iniciarPokemonFacil(escolha);
+        } else if (dificuldade == 2) {
+            iniciarPokemonDificil(escolha);
+        }
     }
+
 
     /**
      * Funcao que determina as caracteristicas do pokemon escolhido de acordo com o tipo
      * @param escolha do pokémon inicial pelo jogador
      * @throws FileNotFoundException se não encontrar o arquivo
      */
-    public void iniciarPokemon(int escolha) throws FileNotFoundException, InterruptedException {
+    public void iniciarPokemonFacil(int escolha) throws FileNotFoundException, InterruptedException {
         Audio.stopMusic();
         TipoPokemon tipoEscolhido = null;
         String nomePokemon = "";
@@ -140,6 +162,67 @@ public class Game {
                 nomePokemon = "Squirtle";
 
                 FormaEvolutiva blastoise = new FormaEvolutiva("Blastoise", 110, 115, 70, 96, 8, TipoPokemon.AGUA, null);
+                FormaEvolutiva wartortle = new FormaEvolutiva("Wartortle", 60, 90, 60, 80, 4, TipoPokemon.AGUA, blastoise);
+                formaInicial = new FormaEvolutiva("Squirtle", 40, 55, 40, 60, 1, TipoPokemon.AGUA, wartortle);
+                break;
+            case 2:
+                Audio.playMusic("AudioFiles/charmander.wav");
+                tipoEscolhido = TipoPokemon.FOGO;
+                nomePokemon = "Charmander";
+
+                FormaEvolutiva megaCharizard = new FormaEvolutiva("Mega Charizard Y", 120, 130, 70, 100, 10, TipoPokemon.FOGO, null);
+                FormaEvolutiva charizard = new FormaEvolutiva("Charizard", 80, 110, 50, 90, 8, TipoPokemon.FOGO, megaCharizard);
+                FormaEvolutiva charmeleon = new FormaEvolutiva("Charmeleon", 50, 90, 40, 70, 4, TipoPokemon.FOGO, charizard);
+                formaInicial = new FormaEvolutiva("Charmander", 45, 60, 25, 50, 1, TipoPokemon.FOGO, charmeleon);
+                break;
+            case 3:
+                Audio.playMusic("AudioFiles/bulbasaur.wav");
+                tipoEscolhido = TipoPokemon.PLANTA;
+                nomePokemon = "Bulbasaur";
+
+                FormaEvolutiva venusaur = new FormaEvolutiva("Venusaur", 105, 110, 60, 100, 8, TipoPokemon.PLANTA, null);
+                FormaEvolutiva ivysaur = new FormaEvolutiva("Ivysaur", 60, 90, 50, 90, 4, TipoPokemon.PLANTA, venusaur);
+                formaInicial = new FormaEvolutiva("Bulbasaur", 35, 50, 38, 55, 1, TipoPokemon.PLANTA, ivysaur);
+                break;
+            default:
+                System.out.println("Ops, opção inválida! Eu escolho por você!");
+                Audio.playMusic("AudioFiles/ditto.wav");
+                tipoEscolhido = TipoPokemon.NORMAL;
+                nomePokemon = "Ditto";
+                formaInicial = new FormaEvolutiva("Ditto", 20, 25, 10, 15, 1, TipoPokemon.NORMAL, null);
+                break;
+        }
+
+        this.pokemon = new PokemonEscolhido(tipoEscolhido, nomePokemon, 1, 0, 100, 100, Status.FELIZ, formaInicial, 100);
+
+        System.out.println("\nPARABÉNS!");
+        System.out.println("Você escolheu o " + ConsoleColors.BLUE + nomePokemon + "!" + ConsoleColors.RESET);
+        this.pokemon.imprimirArtePokemon();
+        this.pokemon.exibirDetalhesPoke();
+        System.out.println("\uD83E\uDE99 Quantidade de moedas: " + this.pokemon.getMoedas());
+        System.out.println("Sua jornada começa agora...");
+
+        menuPrincipal();
+    }
+
+    /**
+     * Funcao que determina as caracteristicas do pokemon escolhido de acordo com o tipo
+     * @param escolha do pokémon inicial pelo jogador
+     * @throws FileNotFoundException se não encontrar o arquivo
+     */
+    public void iniciarPokemonDificil(int escolha) throws FileNotFoundException, InterruptedException {
+        Audio.stopMusic();
+        TipoPokemon tipoEscolhido = null;
+        String nomePokemon = "";
+        FormaEvolutiva formaInicial = null;
+
+        switch (escolha) {
+            case 1:
+                Audio.playMusic("AudioFiles/squirtle.wav");
+                tipoEscolhido = TipoPokemon.AGUA;
+                nomePokemon = "Squirtle";
+
+                FormaEvolutiva blastoise = new FormaEvolutiva("Blastoise", 95, 100, 60, 85, 8, TipoPokemon.AGUA, null);
                 FormaEvolutiva wartortle = new FormaEvolutiva("Wartortle", 60, 90, 60, 80, 4, TipoPokemon.AGUA, blastoise);
                 formaInicial = new FormaEvolutiva("Squirtle", 40, 55, 40, 60, 1, TipoPokemon.AGUA, wartortle);
                 break;
@@ -725,11 +808,11 @@ public class Game {
             }
         }
 
-        int atkBasico, atkEspecial, defBasica, defEspecial;
+        int atkBasico, atkEspecial, defBasica, defEspecial, pontosDisponiveis=300;
         String nomeNovo="", evolucao1="", evolucao2="";
 
         do {
-            System.out.println("\nDistribua os atributos (valores entre 10 e 60):");
+            System.out.println("\nDistribua 300 pontos entre os atributos:");
 
             System.out.print("Ataque básico: ");
             if (!jogador.hasNextInt()) {
@@ -738,15 +821,28 @@ public class Game {
                 continue;
             }
             atkBasico = jogador.nextInt();
+            if (atkBasico < 0 || atkBasico > pontosDisponiveis) {
+                System.out.println("⚠️ Valor inválido.");
+                continue;
+            }
+            int pontosAtuais = pontosDisponiveis - atkBasico;
 
+            System.out.println("Pontos restantes: " + pontosAtuais);
             System.out.print("Ataque especial: ");
             if (!jogador.hasNextInt()) {
-                System.out.println("⚠️ Digite apenas números.");
+                System.out.println("⚠️  Digite apenas números.");
                 jogador.nextLine();
                 continue;
             }
-            atkEspecial = jogador.nextInt();
 
+            atkEspecial = jogador.nextInt();
+            if (atkEspecial < 0 || atkEspecial > pontosAtuais) {
+                System.out.println("⚠️ Valor inválido.");
+                continue;
+            }
+            pontosAtuais = pontosAtuais - atkEspecial;
+
+            System.out.println("Pontos restantes: " + pontosAtuais);
             System.out.print("Defesa básica: ");
             if (!jogador.hasNextInt()) {
                 System.out.println("⚠️ Digite apenas números.");
@@ -754,23 +850,32 @@ public class Game {
                 continue;
             }
             defBasica = jogador.nextInt();
+            if (defBasica < 0 || defBasica > pontosAtuais) {
+                System.out.println("⚠️ Valor inválido.");
+                continue;
+            }
+            pontosAtuais = pontosAtuais - defBasica;
 
+            System.out.println("Pontos restantes: " + pontosAtuais);
             System.out.print("Defesa especial: ");
             if (!jogador.hasNextInt()) {
                 System.out.println("⚠️ Digite apenas números.");
                 jogador.nextLine();
                 continue;
             }
+
             defEspecial = jogador.nextInt();
+            if (defEspecial < 0 || defEspecial > pontosAtuais) {
+                System.out.println("⚠️ Valor inválido.");
+                continue;
+            }
 
-            jogador.nextLine(); // limpa buffer UMA VEZ
+            jogador.nextLine();
 
-            if (atkBasico < 10 || atkBasico > 60 ||
-                    atkEspecial < 10 || atkEspecial > 60 ||
-                    defBasica < 10 || defBasica > 60 ||
-                    defEspecial < 10 || defEspecial > 60) {
-
-                System.out.println("⚠️ Todos os atributos devem estar entre 10 e 60.");
+            int soma = atkBasico + atkEspecial + defBasica + defEspecial;
+            if (soma != 300) {
+                System.out.println("⚠️ A soma dos atributos deve ser EXATAMENTE 300.");
+                System.out.println("Soma atual: " + soma);
                 continue;
             }
 
