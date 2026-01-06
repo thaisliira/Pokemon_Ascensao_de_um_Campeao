@@ -1,4 +1,4 @@
-package Pokemon_Ascensao;
+package Pokemon_Ascensao.Assets;
 
 /**
  * Classe com opções de cores para estilizar o terminal

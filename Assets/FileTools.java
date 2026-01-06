@@ -1,4 +1,4 @@
-package Pokemon_Ascensao;
+package Pokemon_Ascensao.Assets;
 
 import java.io.File;
 import java.io.FileNotFoundException;

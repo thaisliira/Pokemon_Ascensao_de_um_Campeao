@@ -1,9 +1,13 @@
-package Pokemon_Ascensao.Pokemons;
+package Pokemon_Ascensao.Entities;
 
-import Pokemon_Ascensao.*;
+import Pokemon_Ascensao.Assets.Audio;
+import Pokemon_Ascensao.Assets.ConsoleColors;
+import Pokemon_Ascensao.Assets.FileTools;
 import Pokemon_Ascensao.Enum.Status;
 import Pokemon_Ascensao.Enum.TipoItem;
 import Pokemon_Ascensao.Enum.TipoPokemon;
+import Pokemon_Ascensao.Item.Item;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -294,7 +298,7 @@ public class PokemonEscolhido extends Pokemon {
 
     /**
      * Função para adicionar moedas após o treino
-     * @param quantidade ganha após vencer a batalha
+     * @param quantidade ganha após vencer a batalha no treino ou torneio
      */
     public void adicionarMoedas(int quantidade) {
         this.moedas += quantidade;

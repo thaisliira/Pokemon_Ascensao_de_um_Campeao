@@ -1,4 +1,4 @@
-package Pokemon_Ascensao;
+package Pokemon_Ascensao.Assets;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;

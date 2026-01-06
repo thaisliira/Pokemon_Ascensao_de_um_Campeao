@@ -1,10 +1,16 @@
-package Pokemon_Ascensao;
+package Pokemon_Ascensao.Game;
 
+import Pokemon_Ascensao.Assets.Audio;
+import Pokemon_Ascensao.Assets.ConsoleColors;
+import Pokemon_Ascensao.Entities.FormaEvolutiva;
+import Pokemon_Ascensao.Item.Loja;
 import Pokemon_Ascensao.Enum.Mapa;
-import Pokemon_Ascensao.Pokemons.NPCPokemon;
-import Pokemon_Ascensao.Pokemons.PokemonEscolhido;
+import Pokemon_Ascensao.Entities.NPCPokemon;
+import Pokemon_Ascensao.Entities.PokemonEscolhido;
 import Pokemon_Ascensao.Enum.TipoPokemon;
 import Pokemon_Ascensao.Enum.Status;
+import Pokemon_Ascensao.Item.Item;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
