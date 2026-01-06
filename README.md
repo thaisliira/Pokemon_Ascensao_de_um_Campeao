@@ -51,6 +51,13 @@ O foco principal do projeto é:
 
 ---
 
+## ⟲ Melhorias (em desenvolvimento)
+
+* **Interface gráfica** 
+* Captura de Pokémon
+
+---
+
 ## 📚 Objetivo Educacional
 
 Este projeto foi criado como parte de estudos durante o meu percurso no Cesae Digital como Software Developer e **não possui qualquer intenção de distribuição comercial**. Ele serve como estudo prático para:
