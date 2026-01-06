@@ -1,7 +1,5 @@
 package Pokemon_Ascensao;
 
-import Pokemon_Ascensao.Game.Game;
-
 import java.io.FileNotFoundException;
 
 /**

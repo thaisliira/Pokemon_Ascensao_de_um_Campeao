@@ -1,4 +1,4 @@
-package Pokemon_Ascensao.Entities;
+package Pokemon_Ascensao;
 
 import Pokemon_Ascensao.Enum.TipoPokemon;
 
