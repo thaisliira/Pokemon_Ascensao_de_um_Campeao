@@ -13,6 +13,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Classe filha que mostra os atributos individuais e vindos da superclasse
+ */
 public class PokemonEscolhido extends Pokemon {
 
     private FormaEvolutiva formaAtual;

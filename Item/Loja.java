@@ -12,6 +12,9 @@ public class Loja {
 
     private final ArrayList<Item> estoque;
 
+    /**
+     * Array com todos os produtos existentes na loja
+     */
     public Loja() {
         this.estoque = new ArrayList<>();
 

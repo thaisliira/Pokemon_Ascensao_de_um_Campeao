@@ -4,6 +4,9 @@ import Pokemon_Ascensao.Enum.Status;
 import Pokemon_Ascensao.Enum.TipoPokemon;
 import java.io.FileNotFoundException;
 
+/**
+ * Superclasse de Pokémon (classe mãe)
+ */
 public abstract class Pokemon {
 
     protected TipoPokemon tipo;
