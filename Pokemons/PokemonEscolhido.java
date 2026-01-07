@@ -1,9 +1,13 @@
 package Pokemon_Ascensao.Pokemons;
 
-import Pokemon_Ascensao.*;
+import Pokemon_Ascensao.Assets.Audio;
+import Pokemon_Ascensao.Assets.ConsoleColors;
+import Pokemon_Ascensao.Assets.FileTools;
 import Pokemon_Ascensao.Enum.Status;
 import Pokemon_Ascensao.Enum.TipoItem;
 import Pokemon_Ascensao.Enum.TipoPokemon;
+import Pokemon_Ascensao.Item.Item;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

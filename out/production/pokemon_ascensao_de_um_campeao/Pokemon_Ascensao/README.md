@@ -34,12 +34,27 @@ O foco principal do projeto é:
 
 ---
 
+## 🎥 Video Demo
+
+<div align="left">
+<img src="Screenshot/pokemon.gif">
+</div>
+
+---
+
 ## 🛠️ Tecnologias Utilizadas
 
 * **Java** 
 * Execução via terminal
 * Java JDK 21 (GraalVM recomendado)
 * IntelliJ IDEA (ou qualquer IDE que suporte Java 21)
+
+---
+
+## ⟲ Melhorias (em desenvolvimento)
+
+* **Interface gráfica** 
+* Captura de Pokémon
 
 ---
 
