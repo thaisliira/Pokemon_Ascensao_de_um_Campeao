@@ -15,17 +15,17 @@
 
 ## 📑 Table of Contents
 
-- [Preview](#-preview)
-- [Description](#-description)
-- [Technical Focus](#-technical-focus)
-- [Architecture](#-architecture)
-- [Getting Started](#-getting-started)
-- [Roadmap](#-roadmap)
-- [Author](#-author)
+- [Preview](#preview)
+- [Description](#description)
+- [Technical Focus](#technical-focus)
+- [Architecture](#architecture)
+- [Getting Started](#getting-started)
+- [Roadmap](#roadmap)
+- [Author](#author)
 
 ---
 
-## 📽 Preview
+## <a id="preview"></a>📽 Preview
 
 <div align="center">
   <img src="Screenshot/pokemon.gif" alt="Game Demo" width="80%" />
@@ -33,7 +33,7 @@
 
 ---
 
-## 🎮 Description
+## <a id="description"></a>🎮 Description
 
 **Pokémon: Ascensão de um Campeão** (Ascension of a Champion) is a terminal-based game inspired by classic RPG mechanics and turn-based battles. 
 
@@ -48,7 +48,7 @@ Players start by choosing their initial Pokémon, navigate through a sequence of
 
 ---
 
-## ⚙️ Technical Focus
+## <a id="technical-focus"></a>⚙️ Technical Focus
 
 This project was built during my Software Development studies at **Cesae Digital**. It serves as a practical application of core software engineering concepts rather than a commercial product.
 
@@ -61,7 +61,7 @@ This project was built during my Software Development studies at **Cesae Digital
 
 ---
 
-## 🏗 Architecture
+## <a id="architecture"></a>🏗 Architecture
 
 The codebase is organized by feature and responsibility, making it easy to navigate and scale:
 
@@ -81,7 +81,7 @@ Pokemon_Ascensao_de_um_Campeao/
 
 ---
 
-## 🚀 Getting Started
+## <a id="getting-started"></a>🚀 Getting Started
 
 ### Prerequisites
 * **Java JDK 21** (GraalVM recommended)
@@ -111,7 +111,7 @@ java Main
 
 ---
 
-## 🗺️ Roadmap
+## <a id="roadmap"></a>🗺️ Roadmap
 
 Future updates currently in development to expand the project:
 
@@ -121,7 +121,7 @@ Future updates currently in development to expand the project:
 
 ---
 
-## 👩‍💻 Author
+## <a id="author"></a>👩‍💻 Author
 
 <table>
   <tr>
