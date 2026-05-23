@@ -1,8 +1,9 @@
 <div align="center">
-  <h1>🏆 Pokémon: Ascensão de um Campeão</h1>
-  <p><i>An educational turn-based battle game developed in Java.</i></p>
+  <img src="Screenshot/banner_pikachu.png" alt="Pikachu Tech Banner" width="100%" />
+</div>
 
   <!-- Badges -->
+  <div align="center">
   <img src="https://img.shields.io/badge/Java_21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java" />
   <img src="https://img.shields.io/badge/Terminal_Game-4D4D4D?style=for-the-badge&logo=windows-terminal&logoColor=white" alt="Terminal" />
 </div>
