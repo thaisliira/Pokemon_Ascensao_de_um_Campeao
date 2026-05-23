@@ -99,7 +99,7 @@ Since the Java files are located in the root directory (no `src` folder), you ca
 **Option 2: Using the Terminal**
 ```bash
 # 1. Clone the repository
-git clone [https://github.com/thaisliira/Pokemon_Ascensao_de_um_Campeao.git](https://github.com/thaisliira/Pokemon_Ascensao_de_um_Campeao.git)
+git clone https://github.com/thaisliira/Pokemon_Ascensao_de_um_Campeao.git Pokemon_Ascensao_de_um_Campeao
 cd Pokemon_Ascensao_de_um_Campeao
 
 # 2. Compile the Java files
